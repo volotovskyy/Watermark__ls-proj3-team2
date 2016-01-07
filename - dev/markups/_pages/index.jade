@@ -1,0 +1,65 @@
+extends ../main
+
+block title
+	| Watermark project. Team 2
+
+block content
+	article.content-wrapper.container
+		.work
+			.work__title
+				h1.work__header Генератор водяных знаков
+			.work__workplace
+				.work__img
+				
+		.control
+			.control__title
+				h3.control__header Настройки
+			
+			form.form#form
+				input(type="hidden" id="fileurl" name="fileurl" class="fileurl")
+				input(type="hidden" name="watermark")
+				input(type="hidden" name="opacity")
+				input(type="hidden" name="mode")
+				.form__group
+					.form__group-wrap
+						label.form__title Исходное изображение
+						.file-box
+							input(type="text" id="main_img_name" class="input-img main-img__img-name" name="filename" placeholder="  Image.png" readonly)
+							label.box-btn
+								input(type="file" class="fileupload" name="fileupload")
+								
+						label.form__title Водяной знак
+						.file-box
+							input(type="text" id="filename" class="input-img watermark__img-name" name="filename" placeholder="  Image.png" readonly)
+							label.box-btn
+								input(type="file" class="fileupload" name="fileupload")
+						.next-arrow
+					.form__group-wrap.position
+						.position__title
+							label.form__title Положение	
+						.position__map
+							- for (var i = 0; i < 9; i++)
+								.position__point
+						.position__custom
+							.position__select
+								label.position__axis X
+								input(type="number" class="move moveX" id="moveX")
+								.move-btn.up-x
+								.move-btn.down-x
+							.position__select
+								label.position__axis Y
+								input(type="number" class="move moveY" id="moveY")
+								.move-btn.up-y
+								.move-btn.up-x
+						.next-arrow
+
+					.form__group-wrap
+						.opacity__title
+							label.form__title Прозрачность
+						.opacity__slider
+							.slider
+							
+					.btn-box
+						button.btn.btn__reset#reset(type="reset") Сброс
+						button.btn.btn__download#submit(type="submit") Скачать
+				

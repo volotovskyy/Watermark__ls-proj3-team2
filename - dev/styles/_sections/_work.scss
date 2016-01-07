@@ -1,0 +1,34 @@
+.content-wrapper{
+	min-height: 670px;
+}
+.work{
+	float: left;
+	width: 700px;
+	max-width: 700px;
+	background-color: rgba(46, 54, 65, 0.64);
+	padding: 25px 23px;
+	box-sizing: border-box;
+	
+	&__title{
+		margin-bottom: 55px;
+	}
+	
+	&__header{
+		color: #ffffff;
+		font-size: 36px;
+		line-height: 36px;
+		font-family: 'Segoe UI';
+		margin: 0;
+		background: url(img/next-arrow.png);
+		
+	}
+	&__workplace{
+		height: 534px;
+		width: 651px;
+		background: #ffffff;
+		padding: 0 !important;
+		box-sizing: border-box;
+	}
+
+	
+}

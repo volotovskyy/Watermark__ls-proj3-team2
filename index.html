@@ -1,0 +1,124 @@
+<!DOCTYPE html><!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<title>Watermark project. Team 2</title>
+		<!-- SEO-->
+		<meta name="description" content="Watermark generator">
+		<meta name="keywords" content="">
+		<meta name="author" content="">
+		<meta name="viewport" content="width=device-width">
+		<!--styles-->
+		<link rel="stylesheet" type="text/css" href="css/main.css" media="screen, projection, print">
+		<!-- modernizr-->
+		<script src="/js/_vendors/modernizr-2.6.2-respond-1.1.0.min.js"></script>
+	</head>
+	<body>
+		<!--[if lt IE 8]>
+		<p class="chromeframe">Похоже, что ты используешь устаревший браузер, друг. Пожалуйста, <a href="http://browsehappy.com/">скачай новый браузер абсолютно бесплатно</a> или <a href="http://www.google.com/chromeframe/?redirect=true">активируй Google Chrome Frame</a></p>
+		<![endif]-->
+		<div class="wrapper">
+			<div class="maincontent">
+				<article class="content-wrapper container">
+					<div class="work">
+						<div class="work__title">
+							<h1 class="work__header">Генератор водяных знаков</h1>
+						</div>
+						<div class="work__workplace">
+							<div class="work__img"></div>
+						</div>
+					</div>
+					<div class="control">
+						<div class="control__title">
+							<h3 class="control__header">Настройки</h3>
+						</div>
+						<form id="form" class="form">
+							<input type="hidden" id="fileurl" name="fileurl" class="fileurl">
+							<input type="hidden" name="watermark">
+							<input type="hidden" name="opacity">
+							<input type="hidden" name="mode">
+							<div class="form__group">
+								<div class="form__group-wrap">
+									<label class="form__title">Исходное изображение</label>
+									<div class="file-box">
+										<input type="text" id="main_img_name" name="filename" placeholder="  Image.png" readonly class="input-img main-img__img-name">
+										<label class="box-btn">
+											<input type="file" name="fileupload" class="fileupload">
+										</label>
+									</div>
+									<label class="form__title">Водяной знак</label>
+									<div class="file-box">
+										<input type="text" id="filename" name="filename" placeholder="  Image.png" readonly class="input-img watermark__img-name">
+										<label class="box-btn">
+											<input type="file" name="fileupload" class="fileupload">
+										</label>
+									</div>
+									<div class="next-arrow"></div>
+								</div>
+								<div class="form__group-wrap position">
+									<div class="position__title">
+										<label class="form__title">Положение	</label>
+									</div>
+									<div class="position__map">
+										<div class="position__point"></div>
+										<div class="position__point"></div>
+										<div class="position__point"></div>
+										<div class="position__point"></div>
+										<div class="position__point"></div>
+										<div class="position__point"></div>
+										<div class="position__point"></div>
+										<div class="position__point"></div>
+										<div class="position__point"></div>
+									</div>
+									<div class="position__custom">
+										<div class="position__select">
+											<label class="position__axis">X</label>
+											<input type="number" id="moveX" class="move moveX">
+											<div class="move-btn up-x"></div>
+											<div class="move-btn down-x"></div>
+										</div>
+										<div class="position__select">
+											<label class="position__axis">Y</label>
+											<input type="number" id="moveY" class="move moveY">
+											<div class="move-btn up-y"></div>
+											<div class="move-btn up-x"></div>
+										</div>
+									</div>
+									<div class="next-arrow"></div>
+								</div>
+								<div class="form__group-wrap">
+									<div class="opacity__title">
+										<label class="form__title">Прозрачность</label>
+									</div>
+									<div class="opacity__slider">
+										<div class="slider"></div>
+									</div>
+								</div>
+								<div class="btn-box">
+									<button id="reset" type="reset" class="btn btn__reset">Сброс</button>
+									<button id="submit" type="submit" class="btn btn__download">Скачать</button>
+								</div>
+							</div>
+						</form>
+					</div>
+				</article>
+			</div>
+		</div>
+		<footer class="footer">
+			<div class="footer__wrap">
+				<div class="footer__text">&copy; 2015 год. Это сайт нашей команды, пожалуйста, не воруйте и не копируйте его</div>
+			</div>
+		</footer>
+		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js" defer></script>
+		<script>
+			window.jQuery || document.write('<script src="/js/_vendors/jquery-1.11.3.min.js"><\/script>');
+			
+		</script>
+		<script src="js/plugins.min.js" defer></script>
+		<script src="js/main.min.js" defer></script>
+	</body>
+</html>

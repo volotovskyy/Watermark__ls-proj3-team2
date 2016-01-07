@@ -1,0 +1,22 @@
+.footer{
+	position: absolute;
+    min-width: 990px;
+    height: 70px;
+    width: 100%;
+    bottom: 0;
+	@include clearfix;
+}
+.footer__wrap{
+	color: #ffffff;
+	font-size: 12px;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	height: 40px;
+	position: absolute;
+	text-align: center;
+	margin-top: 5px;
+}
+.footer__copyright{
+	margin: 0 auto;
+}

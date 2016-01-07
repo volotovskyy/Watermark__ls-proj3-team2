@@ -1,0 +1,160 @@
+.control{
+	height: 100%;
+	
+	box-sizing: border-box;
+	width: 260px;
+	padding: 25px 20px;
+	background-color: #f1f1f5;
+	float: right;
+	
+	&__title{
+		text-align: center;
+		margin-bottom: 35px;
+	}
+	&__header{
+		color: #2e3641;
+		font-family: $rob-light;
+		font-size: 26px;
+		margin: 0;
+	}
+}
+
+.form{
+	&__group-wrap{
+		margin-bottom: 18px;
+		@include clearfix;
+	}
+	
+	&__title{
+		font-size: 14px;
+		font-family: $rob-med;
+		color: #2e3641;
+		margin-bottom: 8px;
+		display: inline-block;
+	}	
+}
+
+
+.file-box{
+	width: 220px;
+	position: relative;
+	overflow: hidden;
+
+}
+
+/* Styles for placeholders */
+::-webkit-input-placeholder {color:#a4b7c4;font-size: 12px; font-family: $rob-light;}
+::-moz-placeholder          {color:#a4b7c4;font-size: 12px; font-family: $rob-light;}/* Firefox 19+ */
+:-moz-placeholder           {color:#a4b7c4;font-size: 12px; font-family: $rob-light;}/* Firefox 18- */
+:-ms-input-placeholder      {color:#a4b7c4;font-size: 12px; font-family: $rob-light;}
+
+
+.input-img{
+	height: 27px;
+	width: 220px;
+	padding: 0;
+	box-sizing: border-box;
+	border-radius: 3px;
+	outline: none;
+    border: 1px solid #9eb2c0;
+	margin-bottom: 25px;
+}
+.box-btn{
+    padding: 0;
+    margin: 0;
+    position: absolute;
+    top: -1px;
+    right: 0;
+    display: block;
+    height: 29px;
+    width: 39px;
+	box-sizing: border-box;
+	border-radius: 0px 5px 5px 0;
+	border: 1px solid #d6d5d3;
+	background: url(/img/icons/download.png);
+	background-repeat: no-repeat;
+	cursor: pointer;
+}
+.fileupload {
+	border: none;
+	clip: rect(0 0 0 0);
+	height: 0;
+	margin: -1px;
+	overflow: hidden;
+	padding: 0;
+	position: absolute;
+	width: 0;
+}
+.next-arrow{
+    background: url("/img/next-arrow.png") no-repeat;
+    display: block;
+    position: absolute;
+    height: 10px;
+    background-size: 100%;
+    width: 262px;
+    right: 0;
+}
+
+
+.position{
+	@include clearfix;
+	&__map{
+		
+		display: inline-block;
+		box-sizing: border-box;
+		height: 102px;
+		width: 105px;
+		font-size: 0;
+		letter-spacing: 0;
+		word-spacing: 0;
+		border-radius: 3px;
+		overflow: hidden;
+	}
+	&__point{
+		
+		background-color: rgba(193,207,217,0.46);
+		width: 32px;
+		height: 32px;
+		display: inline-block;
+		border-color: #9eb2c0;
+		border-style: solid;
+		border-width: 1px 1px 1px 1px;
+		box-sizing: border-box;
+		cursor: pointer;
+		&:hover{
+			background-color: #f97e76;
+			cursor: pointer;
+		}
+	}
+	
+	&__custom{
+		float: right;
+		width: 80px;
+		height: 100px;
+		display: inline-block;
+	}
+	&__select{
+		margin-bottom: 12px;
+	}
+	&__axis{
+		color: #2e3641;
+		font-size: 16px;
+		font-family: $rob-light;
+		border-radius: 2px;
+		color: #444a53;
+		
+	}
+}
+
+.move{
+	width: 40px;
+    font-size: 24px;
+    line-height: 38px;
+    text-align: center;
+    border-radius: 4px;
+    border: 1px solid #9eb2c0;
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;}
+input[type='number'] {-moz-appearance: textfield;}

@@ -1,0 +1,21 @@
+{
+  "name": "Watermark-site",
+  "version": "1.0.0",
+  "description": "Loftschool. Team 2. Hw 3",
+  "main": "gulpfile.js",
+  "repository" : "",
+  "author": "Leo Verkhovtsev",
+  "license": "ISC",
+  "devDependencies": {
+    "browser-sync": "^2.9.7",
+    "gulp": "^3.9.0",
+    "gulp-browserify": "^0.5.1",
+    "gulp-compass": "^2.1.0",
+    "gulp-concat": "^2.6.0",
+    "gulp-jade": "^1.1.0",
+    "gulp-plumber": "^1.0.1",
+    "gulp-rename": "^1.2.2",
+    "gulp-uglify": "^1.4.1",
+    "gulp-util": "^3.0.6"
+  }
+}
