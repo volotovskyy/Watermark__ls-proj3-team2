@@ -6,17 +6,15 @@
     bottom: 0;
 	@include clearfix;
 }
-.footer__wrap{
+
+.footer__text{
+	margin: 0 auto;
 	color: #ffffff;
 	font-size: 12px;
 	bottom: 0;
 	left: 0;
 	right: 0;
 	height: 40px;
-	position: absolute;
 	text-align: center;
-	margin-top: 5px;
-}
-.footer__copyright{
-	margin: 0 auto;
+	margin-top: 40px;
 }

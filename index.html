@@ -44,17 +44,17 @@
 							<div class="form__group">
 								<div class="form__group-wrap">
 									<label class="form__title">Исходное изображение</label>
-									<div class="file-box">
-										<input type="text" id="main_img_name" name="filename" placeholder="  Image.png" readonly class="input-img main-img__img-name">
-										<label class="box-btn">
-											<input type="file" name="fileupload" class="fileupload">
+									<div class="form__file-box">
+										<input type="text" id="main_img_name" name="filename" placeholder="  Image.png" readonly class="form__input-img form__input-img-main">
+										<label class="form__box-btn">
+											<input type="file" id="main_img" name="fileupload" class="form__fileupload">
 										</label>
 									</div>
 									<label class="form__title">Водяной знак</label>
-									<div class="file-box">
-										<input type="text" id="filename" name="filename" placeholder="  Image.png" readonly class="input-img watermark__img-name">
-										<label class="box-btn">
-											<input type="file" name="fileupload" class="fileupload">
+									<div class="form__file-box">
+										<input type="text" id="watermark-name" name="filename" placeholder="  Image.png" readonly class="form__input-img form__input-img-watermark">
+										<label class="form__box-btn">
+											<input type="file" id="watermark" name="fileupload" class="form__fileupload">
 										</label>
 									</div>
 									<div class="next-arrow"></div>
@@ -77,48 +77,51 @@
 									<div class="position__custom">
 										<div class="position__select">
 											<label class="position__axis">X</label>
-											<input type="number" id="moveX" class="move moveX">
-											<div class="move-btn up-x"></div>
-											<div class="move-btn down-x"></div>
+											<input type="number" id="moveX" class="position__move moveX">
+											<div class="position__move-btn-wrap">
+												<div id="upX" class="position__move-btn position__move-btn-up"></div>
+												<div id="downX" class="position__move-btn position__move-btn-down"></div>
+											</div>
 										</div>
 										<div class="position__select">
 											<label class="position__axis">Y</label>
-											<input type="number" id="moveY" class="move moveY">
-											<div class="move-btn up-y"></div>
-											<div class="move-btn up-x"></div>
+											<input type="number" id="moveY" class="position__move moveY">
+											<div class="position__move-btn-wrap">
+												<div id="upY" class="position__move-btn position__move-btn-up"></div>
+												<div id="downY" class="position__move-btn position__move-btn-down"></div>
+											</div>
 										</div>
 									</div>
 									<div class="next-arrow"></div>
 								</div>
-								<div class="form__group-wrap">
+								<div class="form__group-wrap opacity-wrap">
 									<div class="opacity__title">
 										<label class="form__title">Прозрачность</label>
 									</div>
-									<div class="opacity__slider">
-										<div class="slider"></div>
+									<div class="opacity__slider-wrap">
+										<div class="opacity__slider"></div>
 									</div>
+									<div class="next-arrow"></div>
 								</div>
-								<div class="btn-box">
-									<button id="reset" type="reset" class="btn btn__reset">Сброс</button>
-									<button id="submit" type="submit" class="btn btn__download">Скачать</button>
+								<div class="form__btn-wrap">
+									<button id="reset" type="reset" class="form__btn form__btn-reset">Сброс</button>
+									<button id="submit" type="submit" class="form__btn form__btn-download">Скачать</button>
 								</div>
 							</div>
 						</form>
 					</div>
 				</article>
 			</div>
-		</div>
-		<footer class="footer">
-			<div class="footer__wrap">
+			<footer class="footer">
 				<div class="footer__text">&copy; 2015 год. Это сайт нашей команды, пожалуйста, не воруйте и не копируйте его</div>
-			</div>
-		</footer>
+			</footer>
+		</div>
 		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js" defer></script>
 		<script>
 			window.jQuery || document.write('<script src="/js/_vendors/jquery-1.11.3.min.js"><\/script>');
 			
 		</script>
 		<script src="js/plugins.min.js" defer></script>
-		<script src="js/main.min.js" defer></script>
+		<script src="js/main.min.js"></script>
 	</body>
 </html>

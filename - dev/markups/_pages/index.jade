@@ -23,16 +23,16 @@ block content
 				.form__group
 					.form__group-wrap
 						label.form__title Исходное изображение
-						.file-box
-							input(type="text" id="main_img_name" class="input-img main-img__img-name" name="filename" placeholder="  Image.png" readonly)
-							label.box-btn
-								input(type="file" class="fileupload" name="fileupload")
+						.form__file-box
+							input(type="text" id="main_img_name" class="form__input-img form__input-img-main" name="filename" placeholder="  Image.png" readonly)
+							label.form__box-btn
+								input(type="file" class="form__fileupload" id="main_img" name="fileupload")
 								
 						label.form__title Водяной знак
-						.file-box
-							input(type="text" id="filename" class="input-img watermark__img-name" name="filename" placeholder="  Image.png" readonly)
-							label.box-btn
-								input(type="file" class="fileupload" name="fileupload")
+						.form__file-box
+							input(type="text" id="watermark-name" class="form__input-img form__input-img-watermark" name="filename" placeholder="  Image.png" readonly)
+							label.form__box-btn
+								input(type="file" class="form__fileupload" id="watermark" name="fileupload")
 						.next-arrow
 					.form__group-wrap.position
 						.position__title
@@ -40,26 +40,30 @@ block content
 						.position__map
 							- for (var i = 0; i < 9; i++)
 								.position__point
+								
 						.position__custom
 							.position__select
 								label.position__axis X
-								input(type="number" class="move moveX" id="moveX")
-								.move-btn.up-x
-								.move-btn.down-x
+								input(type="number" class="position__move moveX" id="moveX")
+								.position__move-btn-wrap
+									.position__move-btn.position__move-btn-up#upX
+									.position__move-btn.position__move-btn-down#downX
 							.position__select
 								label.position__axis Y
-								input(type="number" class="move moveY" id="moveY")
-								.move-btn.up-y
-								.move-btn.up-x
+								input(type="number" class="position__move moveY" id="moveY")
+								.position__move-btn-wrap
+									.position__move-btn.position__move-btn-up#upY
+									.position__move-btn.position__move-btn-down#downY
 						.next-arrow
 
-					.form__group-wrap
+					.form__group-wrap.opacity-wrap
 						.opacity__title
 							label.form__title Прозрачность
-						.opacity__slider
-							.slider
-							
-					.btn-box
-						button.btn.btn__reset#reset(type="reset") Сброс
-						button.btn.btn__download#submit(type="submit") Скачать
+						.opacity__slider-wrap
+							.opacity__slider
+						.next-arrow
+						
+					.form__btn-wrap
+						button.form__btn.form__btn-reset#reset(type="reset") Сброс
+						button.form__btn.form__btn-download#submit(type="submit") Скачать
 				

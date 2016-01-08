@@ -85,6 +85,16 @@
 	position: absolute;
 }
 
+/* Styles for placeholders */
+::-webkit-input-placeholder {color:#a4b7c4;font-size: 12px; font-family: $rob-light;}
+::-moz-placeholder          {color:#a4b7c4;font-size: 12px; font-family: $rob-light;}/* Firefox 19+ */
+:-moz-placeholder           {color:#a4b7c4;font-size: 12px; font-family: $rob-light;}/* Firefox 18- */
+:-ms-input-placeholder      {color:#a4b7c4;font-size: 12px; font-family: $rob-light;}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;}
+input[type='number'] {-moz-appearance: textfield;}
+
 /* --------- compass sprites --------- */
 
 @mixin get-sprite($map, $sprite, $repeat: no-repeat, $height: true, $width: true) {
