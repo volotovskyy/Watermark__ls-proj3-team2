@@ -51,5 +51,7 @@ $(function() {
       }
     });
 
+    Base.init();
+
   });
 

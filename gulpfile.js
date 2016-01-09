@@ -34,7 +34,7 @@ var
 		},
 
 		js : {
-			location    : '- dev/scripts/main.js',
+			location    : ['- dev/scripts/parameters.js', '- dev/scripts/_modules/*.js', '- dev/scripts/main.js'],
 			plugins     : '- dev/scripts/_plugins/*.js',
 			destination : 'js'
 		},
@@ -93,9 +93,9 @@ gulp.task('plugins', function() {
 
 gulp.task('scripts', function() {
 	return gulp.src(paths.js.location)
+		.pipe(concat('main.min.js'))
 		.pipe(plumber())
-		.pipe(uglify())
-		.pipe(rename('main.min.js'))
+		//.pipe(uglify())
 		.pipe(gulp.dest(paths.js.destination));
 });
 
