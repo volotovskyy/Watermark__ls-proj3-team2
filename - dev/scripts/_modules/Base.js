@@ -3,8 +3,6 @@ var Base = (function () {
     var _initModules = function () {
         LoadImages.init();
         ControlPanel.init();
-        Spiners.init();
-        Inputs.init();
     };
 
     var _setDefault = function () {
@@ -19,6 +17,18 @@ var Base = (function () {
     var _loadWaterMark = function () {
         Scale.watermark();
         _transparency();
+        _addDragAndDrop();
+    };
+
+    var _addDragAndDrop = function(){
+        $('.watermark-image').draggable({
+            stop: function(){
+                var position = Position.get(),
+                    pos = [position.left,position.top];
+
+                Base.trigger('position:set',pos);
+            }
+        });
     };
 
     var _inputWatermarkEnable = function () {
