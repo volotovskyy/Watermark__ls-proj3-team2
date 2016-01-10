@@ -30,43 +30,55 @@ var Position = (function () {
         return [x, y];
     };
 
-
     return {
         setDefault: function () {
             this.set(defPosition[0], defPosition[1]);
         },
 
-        set: function (x, y) {
-            var $image = $(imageClass),
-                x = parseInt(x) || $image.position().left,
-                y = parseInt(y) || $image.position().top,
+        set: function (pos) {
+            var
+                $image = $(imageClass),
+                x = pos[0],
+                y = pos[1],
+                position = $image.position();
+
+            if (position === undefined) return;
+
+            var
+                y = parseInt(y),
+                x = parseInt(x),
                 pos = _validPosition([x, y]);
 
             $image.css('left', pos[0]);
             $image.css('top', pos[1]);
 
-            Base.trigger('position:change');
+            Base.trigger('position:change',pos);
         },
 
-        addLeft: function (add) {
+        add: function (pos) {
             var
                 $image = $(imageClass),
-                x = parseInt($image.position().left) || 0;
+                addX = pos[0],
+                addY = pos[1],
+                position = $image.position();
 
-            x += add;
+            if (position === undefined) return;
 
-            this.set(x);
+            var
+                x = parseInt(position.left),
+                y = parseInt(position.top);
+
+            if (addX)x += addX;
+            if (addY)y += addY;
+
+            this.set([x, y]);
         },
 
-        addTop: function (add) {
+        get: function(){
             var
-                $image = $(imageClass),
-                y = parseInt($image.position().top) || 0;
+                $image = $(imageClass);
 
-            y += add;
-
-            this.set(undefined, y);
-
+            return $image.position();
         }
     }
 }());

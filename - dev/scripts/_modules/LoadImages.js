@@ -3,11 +3,16 @@ var LoadImages = (function () {
         $image = globalParameters.mainImageInput,
         $imageName = globalParameters.mainImageInputWrapper,
         $watermark = globalParameters.watermarkImageInput,
-        $watermarkName = globalParameters.watermarkImageInputWrapper;
+        $watermarkName = globalParameters.watermarkImageInputWrapper,
+        $inputImage1 = globalParameters.mainImageInput,
+        $inputImage2 = globalParameters.watermarkImageInput;
 
     var _eventListener = function () {
         $image.on('change', _changeFileUploadImage);
         $watermark.on('change', _changeFileUploadWatermark);
+
+        $inputImage1.on('change', _loadMainImage);
+        $inputImage2.on('change', _loadWatermark);
     };
 
     var _changeFileUploadImage = function () {
@@ -83,18 +88,19 @@ var LoadImages = (function () {
 
     };
 
-    return {
-        loadMainImage: function (e) {
-            _loadImg(e, function (e) {
-                var $container = globalParameters.mainContainer,
-                    class_ = globalParameters.classMainImage,
-                    image = e.target.result;
+    var _loadMainImage = function (e) {
+        _loadImg(e, function (e) {
+            var $container = globalParameters.mainContainer,
+                class_ = globalParameters.classMainImage,
+                image = e.target.result;
 
-                _setBackGround(image, $container, class_);
-            });
+            _setBackGround(image, $container, class_);
+        });
 
-        },
-        loadWatermark: function (e) {
+    };
+
+    var
+        _loadWatermark = function (e) {
             _loadImg(e, function (e) {
                 var $container = globalParameters.watermarkContainer,
                     class_ = globalParameters.classWatermarkImage,
@@ -102,7 +108,10 @@ var LoadImages = (function () {
 
                 _setImage(image, $container, class_);
             });
-        },
+        };
+
+    return {
+
         init: function () {
             _eventListener();
         }

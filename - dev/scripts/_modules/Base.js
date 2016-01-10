@@ -1,28 +1,15 @@
 var Base = (function () {
-    var _data = {
-            mainImage: {
-                width: 0,
-                height: 0
-            }
-        },
-        $inputImage1 = globalParameters.mainImageInput,
-        $inputImage2 = globalParameters.watermarkImageInput
-        ;
-
-    var _eventListener = function () {
-        $inputImage1.on('change', LoadImages.loadMainImage);
-        $inputImage2.on('change', LoadImages.loadWatermark);
-    };
 
     var _initModules = function () {
         LoadImages.init();
         ControlPanel.init();
+        Spiners.init();
+        Inputs.init();
     };
 
     var _setDefault = function () {
         //TODO set default
     };
-
 
     var _loadMainImage = function () {
         _inputWatermarkEnable();
@@ -48,12 +35,20 @@ var Base = (function () {
     };
 
     var _position = function (pos) {
-        Position.set(pos[0], pos[1]);
+        Position.set(pos);
+    };
+
+    var _positionAdd = function (pos) {
+        Position.add(pos);
+    };
+
+    var _positionChange = function (pos) {
+        var position = pos || Position.get();
+        Inputs.set(position);
     };
 
     return {
         init: function () {
-            _eventListener();
             _initModules();
             _setDefault();
         },
@@ -72,8 +67,11 @@ var Base = (function () {
                 case 'position:set':
                     _position(params);
                     break;
+                case 'position:add':
+                    _positionAdd(params);
+                    break;
                 case 'position:change':
-                    //_position(params);
+                    _positionChange(params);
                     //TODO inputs change
                     break;
             }
