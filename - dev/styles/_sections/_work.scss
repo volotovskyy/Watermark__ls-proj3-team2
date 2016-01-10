@@ -10,14 +10,14 @@
 	box-sizing: border-box;
 	
 	&__title{
-		margin-bottom: 55px;
+		margin-bottom: 63px;
 	}
 	
 	&__header{
 		color: #ffffff;
-		font-size: 36px;
-		line-height: 36px;
-		font-family: 'Segoe UI';
+    	font-size: 32px;
+    	line-height: 27px;;
+		font-family: $rob-light;
 		margin: 0;
 		background: url(img/next-arrow.png);
 		

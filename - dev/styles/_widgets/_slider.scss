@@ -1,0 +1,35 @@
+.ui-slider-horizontal {
+    height: 3px;
+	@include border-radius(0);
+	border: 0 none;
+	margin-bottom: 33px;
+	background: #dbe1e8;
+	position: relative;
+	*{
+		outline: none !important;
+	}
+	
+	.ui-slider-range{
+		background-color: #9eb2c0;
+		height: 3px;
+	}
+	
+	.ui-slider-handle{
+		@include get-sprite($common-sprite, slider);
+		@include border-radius(0);
+		border: 0 none;
+		margin-left: -4px;
+		margin-top: -13px;
+		cursor: pointer;
+		position: absolute;
+		
+		&:hover{
+			@include get-sprite($common-sprite, slider-hover);
+			margin-top: -13px;
+		}
+	}
+}
+
+
+
+
