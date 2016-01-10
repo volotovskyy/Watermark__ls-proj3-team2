@@ -8,13 +8,19 @@
   max-height: 100%;
 }
 
+.watermark-image{
+  position: relative;
+}
+
 .work__workplace{
   background-repeat: no-repeat;
   background-size: contain;
   background-position: center;
+  overflow: hidden;
 }
 .work__img{
   position: relative;
+  overflow: hidden;
 }
 
 .main-image{

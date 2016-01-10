@@ -11,7 +11,6 @@ var LoadImages = (function () {
     };
 
     var _changeFileUploadImage = function () {
-        console.log('change');
         var filepath = $image.val();
 
         filepath = filepath.replace(/c:\\fakepath\\/gmi, "");

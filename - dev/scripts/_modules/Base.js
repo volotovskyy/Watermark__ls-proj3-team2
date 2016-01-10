@@ -20,6 +20,7 @@ var Base = (function () {
     };
 
     var _setDefault = function () {
+        //TODO set default
     };
 
 
@@ -42,16 +43,12 @@ var Base = (function () {
         wrapper.prop('disabled', false);
     };
 
-    var _scale = function () {
-        Scale.go();
-    };
-
     var _transparency = function (percent) {
         Transparency.set(percent);
     };
 
-    var _position = function (params) {
-
+    var _position = function (pos) {
+        Position.set(pos[0], pos[1]);
     };
 
     return {
@@ -69,14 +66,15 @@ var Base = (function () {
                 case 'loadWatermark':
                     _loadWaterMark();
                     break;
-                case 'scale':
-                    _scale();
-                    break;
                 case 'transparency':
                     _transparency(params);
                     break;
-                case 'position':
+                case 'position:set':
                     _position(params);
+                    break;
+                case 'position:change':
+                    //_position(params);
+                    //TODO inputs change
                     break;
             }
         }

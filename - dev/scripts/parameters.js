@@ -2,7 +2,7 @@ var globalParameters = {
     mainContainer:              $('.work__workplace'),
     watermarkContainer:         $('.work__img'),
     mainImageInput:             $('#main_img'),
-    mainImageInputWrapper:             $('#main_img_name'),
+    mainImageInputWrapper:      $('#main_img_name'),
     watermarkImageInput:        $('#watermark'),
     watermarkImageInputWrapper: $('#watermark-name'),
 
@@ -10,6 +10,7 @@ var globalParameters = {
     classWatermarkImage:        'watermark-image',
 
     defaults:   {
-        transparency: 50        // persents
+        transparency: 50,        // persents
+        position:     [100,10]
     }
 };
