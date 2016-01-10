@@ -29,6 +29,20 @@
 		padding: 0 !important;
 		box-sizing: border-box;
 	}
-
+	&__img-block{
+		position: relative;
+	}
+	&__watermark-block{
+		position: relative;
+	}
+	&__main-img{
+		position: relative;
+		width: auto;
+		height: auto;
+		background: url("../img/PixPerf.png");
+	}
+	&__watermark{
+		position: relative;
+	}
 	
 }
