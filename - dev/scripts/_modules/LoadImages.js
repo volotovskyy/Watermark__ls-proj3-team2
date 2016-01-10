@@ -1,4 +1,30 @@
 var LoadImages = (function () {
+    var
+        $image = globalParameters.mainImageInput,
+        $imageName = globalParameters.mainImageInputWrapper,
+        $watermark = globalParameters.watermarkImageInput,
+        $watermarkName = globalParameters.watermarkImageInputWrapper;
+
+    var _eventListener = function () {
+        $image.on('change', _changeFileUploadImage);
+        $watermark.on('change', _changeFileUploadWatermark);
+    };
+
+    var _changeFileUploadImage = function () {
+        console.log('change');
+        var filepath = $image.val();
+
+        filepath = filepath.replace(/c:\\fakepath\\/gmi, "");
+        $imageName.val(filepath);
+    };
+
+    var _changeFileUploadWatermark = function () {
+        var filepath = $watermark.val();
+
+        filepath = filepath.replace(/c:\\fakepath\\/gmi, "");
+        $watermarkName.val(filepath)
+    };
+
     var _loadImg = function (e, func) {
         if (window.File && window.FileReader && window.FileList && window.Blob) {
             var file = e.target.files[0];
@@ -22,26 +48,6 @@ var LoadImages = (function () {
         }
     };
 
-    var _loadMainImg = function (e) {
-        _loadImg(e, function (e) {
-            var $container = globalParameters.mainContainer,
-                class_ = globalParameters.classMainImage,
-                image = e.target.result;
-
-            _setBackGround(image, $container, class_);
-        });
-
-    };
-
-    var _loadWaterImg = function (e) {
-        _loadImg(e, function (e) {
-            var $container = globalParameters.watermarkContainer,
-                class_ = globalParameters.classWatermarkImage,
-                image = e.target.result;
-
-            _setImage(image, $container, class_);
-        });
-    };
 
     var _setBackGround = function (image, $contaitener, class_) {
         var img = document.createElement('img'),
@@ -79,7 +85,27 @@ var LoadImages = (function () {
     };
 
     return {
-        loadMainImage: _loadMainImg,
-        loadWatermark: _loadWaterImg
+        loadMainImage: function (e) {
+            _loadImg(e, function (e) {
+                var $container = globalParameters.mainContainer,
+                    class_ = globalParameters.classMainImage,
+                    image = e.target.result;
+
+                _setBackGround(image, $container, class_);
+            });
+
+        },
+        loadWatermark: function (e) {
+            _loadImg(e, function (e) {
+                var $container = globalParameters.watermarkContainer,
+                    class_ = globalParameters.classWatermarkImage,
+                    image = e.target.result;
+
+                _setImage(image, $container, class_);
+            });
+        },
+        init: function () {
+            _eventListener();
+        }
     }
 }());
