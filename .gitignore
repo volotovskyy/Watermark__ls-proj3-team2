@@ -40,3 +40,6 @@ Thumbs.db
 /node_modules
 /- dev/bower
 /.idea
+/img/watermark
+/composer/vendor
+/composer/composer.phar
