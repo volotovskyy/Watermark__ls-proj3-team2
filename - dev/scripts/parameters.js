@@ -11,6 +11,8 @@ var globalParameters = {
     classMainImage:             'main-image',
     classWatermarkImage:        'watermark-image',
 
+    buttonReset:                $('#reset'),
+    buttonSubmit:                $('#submit'),
 
     controlPanel:{
 
@@ -30,5 +32,7 @@ var globalParameters = {
     defaults:   {
         transparency: 50,        // persents
         position:     [10,10]
-    }
+    },
+
+    url : 'php/test.php'
 };

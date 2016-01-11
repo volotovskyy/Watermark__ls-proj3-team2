@@ -84,9 +84,10 @@ var Position = (function () {
 
         get: function () {
             var
-                $image = $(imageClass);
+                $image = $(imageClass),
+                position = $image.position();
 
-            return $image.position();
+            return [position.left,position.top];
         }
     }
 }());

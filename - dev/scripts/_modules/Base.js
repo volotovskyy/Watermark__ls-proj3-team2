@@ -1,6 +1,6 @@
 var Base = (function () {
     var _initModules = function () {
-        LoadImages.init();
+        Images.init();
         ControlPanel.init();
     };
 
@@ -22,8 +22,7 @@ var Base = (function () {
     var _addDragAndDrop = function(){
         $('.watermark-image').draggable({
             stop: function(){
-                var position = Position.get(),
-                    pos = [position.left,position.top];
+                var pos = Position.get();
 
                 Base.trigger('position:set',pos);
             }

@@ -93,8 +93,8 @@ gulp.task('plugins', function() {
 
 gulp.task('scripts', function() {
 	return gulp.src(paths.js.location)
-		.pipe(concat('main.min.js'))
 		.pipe(plumber())
+		.pipe(concat('main.min.js'))
 		//.pipe(uglify())
 		.pipe(gulp.dest(paths.js.destination));
 });

@@ -27,6 +27,10 @@ var Slider = (function () {
 
         set: function (val) {
             $slider.slider('value', val);
+        },
+
+        get: function(){
+            return $slider.slider('value');
         }
     }
 }());

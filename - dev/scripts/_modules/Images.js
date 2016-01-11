@@ -1,11 +1,15 @@
-var LoadImages = (function () {
+var Images = (function () {
     var
         $image = globalParameters.mainImageInput,
         $imageName = globalParameters.mainImageInputWrapper,
+
         $watermark = globalParameters.watermarkImageInput,
         $watermarkName = globalParameters.watermarkImageInputWrapper,
+
         $inputImage1 = globalParameters.mainImageInput,
-        $inputImage2 = globalParameters.watermarkImageInput;
+        $inputImage2 = globalParameters.watermarkImageInput,
+
+        $submit = globalParameters.buttonSubmit;
 
     var _eventListener = function () {
         $image.on('change', _changeFileUploadImage);
@@ -13,6 +17,8 @@ var LoadImages = (function () {
 
         $inputImage1.on('change', _loadMainImage);
         $inputImage2.on('change', _loadWatermark);
+
+        $submit.on('click', _save);
     };
 
     var _changeFileUploadImage = function () {
@@ -110,10 +116,47 @@ var LoadImages = (function () {
             });
         };
 
+    var _save = function (e) {
+        e.preventDefault();
+        var fd = new FormData,
+            url = globalParameters.url,
+            opacity = Slider.get(),
+            position = Position.get();
+
+        if ($inputImage1.prop('files').length === 0 || $inputImage2.prop('files').length === 0) {
+            alert('Сначала выберите изображение');
+            //TODO print message
+            return;
+        }
+
+        fd.append('img1', $inputImage1.prop('files')[0]);
+        fd.append('img2', $inputImage2.prop('files')[0]);
+        fd.append('opacity', opacity);
+        fd.append('positionX', position[0]);
+        fd.append('positionY', position[1]);
+
+        $.ajax({
+            url: url,
+            data: fd,
+            processData: false,
+            contentType: false,
+            type: 'POST',
+            success: function (data) {
+                console.log('success');
+                console.log(data);
+            },
+            error: function (e) {
+                console.log('error');
+                console.log(e);
+            }
+        })
+    };
+
     return {
 
         init: function () {
             _eventListener();
         }
+
     }
 }());

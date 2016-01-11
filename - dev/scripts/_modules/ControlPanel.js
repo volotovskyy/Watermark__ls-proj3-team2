@@ -1,4 +1,6 @@
 var ControlPanel = (function () {
+    var $reset = globalParameters.buttonReset;
+
     var _initModules = function () {
         Slider.init();
         Spiners.init();
@@ -6,7 +8,7 @@ var ControlPanel = (function () {
     };
 
     var _eventListener = function () {
-        $('#reset').on('click', _setDefault);
+        $reset.on('click', _setDefault);
     };
 
     var _setDefault = function (e) {
