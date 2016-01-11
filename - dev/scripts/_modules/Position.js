@@ -22,10 +22,17 @@ var Position = (function () {
             x = pos[0],
             y = pos[1];
 
-        x = x > borders[0] ? borders[0] : x;
-        y = y > borders[1] ? borders[1] : y;
-        x = x > 0 ? x : 0;
-        y = y > 0 ? y : 0;
+        if (x !== undefined){
+            x = parseInt(x);
+            x = x > borders[0] ? borders[0] : x;
+            x = x > 0 ? x : 0;
+        }
+
+        if (y !== undefined){
+            y = parseInt(y);
+            y = y > borders[1] ? borders[1] : y;
+            y = y > 0 ? y : 0;
+        }
 
         return [x, y];
     };
@@ -38,21 +45,22 @@ var Position = (function () {
         set: function (pos) {
             var
                 $image = $(imageClass),
-                x = pos[0],
-                y = pos[1],
                 position = $image.position();
 
             if (position === undefined) return;
 
-            var
-                y = parseInt(y),
-                x = parseInt(x),
-                pos = _validPosition([x, y]);
+            pos = _validPosition(pos);
+            var x = pos[0],
+                y = pos[1];
 
-            $image.css('left', pos[0]);
-            $image.css('top', pos[1]);
+            if (x !== undefined){
+                $image.css('left', x);
+            }
+            if (y !== undefined){
+                $image.css('top', y);
+            }
 
-            Base.trigger('position:change',pos);
+            Base.trigger('position:change', pos);
         },
 
         add: function (pos) {
@@ -74,7 +82,7 @@ var Position = (function () {
             this.set([x, y]);
         },
 
-        get: function(){
+        get: function () {
             var
                 $image = $(imageClass);
 

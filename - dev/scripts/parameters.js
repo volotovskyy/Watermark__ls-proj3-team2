@@ -29,6 +29,6 @@ var globalParameters = {
 
     defaults:   {
         transparency: 50,        // persents
-        position:     [100,10]
+        position:     [10,10]
     }
 };

@@ -1,5 +1,4 @@
 var Base = (function () {
-
     var _initModules = function () {
         LoadImages.init();
         ControlPanel.init();

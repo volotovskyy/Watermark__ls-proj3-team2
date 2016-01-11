@@ -25,8 +25,8 @@ var Inputs = (function () {
         },
 
         set: function (position) {
-            $x.val(position[0]);
-            $y.val(position[1]);
+            if(position[0] !== undefined)$x.val(position[0]);
+            if(position[1] !== undefined)$y.val(position[1]);
         }
 
     }
