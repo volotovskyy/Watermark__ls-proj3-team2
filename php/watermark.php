@@ -14,18 +14,50 @@ $pos_x = $_POST['positionX'];
 $pos_y = $_POST['positionY'];
 $opacity = $_POST['opacity'];
 
-//Получаем тип файла
-$main_image_type = getTypeOfFile($main_image['type']);
-$watermark_type = getTypeOfFile($watermark['type']);
-
-//Задаем индекс файла
-$img_index = date("U") . "-" . mt_rand(0, 1000);
-
 //Ограничения
-$max_resolution = 4000; //px
-$formats = array('jpeg', 'png', 'bmp');
+$max_file_size = 5 * 1024 * 1024; //Максимальный размер файла в байтах
+$max_resolution = 4000; //Максимальный размер файла в пикселях
+$formats = array('jpeg', 'png', 'bmp'); //Разрешенные форматы изображений
+
+//Получаем размер файлов в байтах
+$main_image_size = $main_image['size'];
+$watermark_image_size = $watermark['size'];
+
+$data['size'] = $main_image_size;
+$data['size1'] = $watermark_image_size;
+$data['size2'] = $max_file_size;
 
 //Проверки
+//Проверка размера файла
+$main_image_valid = $main_image_size === 0 || $main_image_size > $max_file_size;
+$watermark_image_valid = $watermark_image_size === 0 || $watermark_image_size > $max_file_size;
+
+if ($main_image_valid && $watermark_image_valid) {
+    $data['status'] = 'error';
+    $data['message'] = 'Изображения не выбраны или превышают допустимый размер!';
+
+    header('Content-Type: application/json');
+    echo json_encode($data);
+    exit;
+} elseif ($watermark_image_valid) {
+    $data['status'] = 'error';
+    $data['message'] = 'Водяной знак не выбран или превышает допустимый размер!';
+
+    header('Content-Type: application/json');
+    echo json_encode($data);
+    exit;
+} elseif ($main_image_valid) {
+    $data['status'] = 'error';
+    $data['message'] = 'Главное изображение не выбрано или превышает допустимый размер!';
+
+    header('Content-Type: application/json');
+    echo json_encode($data);
+    exit;
+} else {
+    //Получаем тип файла
+    $main_image_type = getTypeOfFile($main_image['type']);
+    $watermark_type = getTypeOfFile($watermark['type']);
+}
 
 //Проверка типа
 if ($main_image_type !== 'image' && $watermark_type !== 'image') {
@@ -81,14 +113,14 @@ if ($main_image_valid === false && $watermark_valid === false) {
     echo json_encode($data);
     exit;
 } else {
-    //Получаем размер изображений
-    $main_image_size = getimagesize($main_image['tmp_name']);
-    $watermark_size = getimagesize($watermark['tmp_name']);
+    //Получаем размер изображений в пикселях
+    $main_image_resolution = getimagesize($main_image['tmp_name']);
+    $watermark_resolution = getimagesize($watermark['tmp_name']);
 }
 
 //Проверка размера фзображения
-$main_image_valid = $main_image_size[0] > $max_resolution || $main_image_size[1] > $max_resolution;
-$watermark_valid = $watermark_size[0] > $max_resolution || $watermark_size[1] > $max_resolution;
+$main_image_valid = $main_image_resolution[0] > $max_resolution || $main_image_resolution[1] > $max_resolution;
+$watermark_valid = $watermark_resolution[0] > $max_resolution || $watermark_resolution[1] > $max_resolution;
 
 if ($main_image_valid && $watermark_valid) {
     $data['status'] = 'error';
@@ -111,27 +143,38 @@ if ($main_image_valid && $watermark_valid) {
     header('Content-Type: application/json');
     echo json_encode($data);
     exit;
+} else {
+    //Задаем индекс файла
+    $img_index = date("U") . "-" . mt_rand(0, 1000);
 }
 
 if ($data['status'] == 'ok') {
+    //Путь записи результтата
+    $result_dir_loc = 'img/watermark/';
+    $result_name = 'result-' . $img_index . '.jpg';
+    $result_src_loc = $result_dir_loc . $result_name;
+    $result_dir = __DIR__ . '/../' . $result_dir_loc;
+    $result_src = __DIR__ . '/../' . $result_src_loc;
+
+    //Проверяем наличие папки
+    if(!file_exists($result_dir)){
+        mkdir($result_dir, 755); //Создание папки
+    }
+
     //Переименование и перемещение изображений
     $main_image_format = getExtension($main_image['name'], '.');
     $main_image_name = 'main_image-' . $img_index . '.' . $main_image_format;
-    $main_image_src_loc = 'img/watermark/' . $main_image_name;
+    $main_image_src_loc = $result_dir_loc . $main_image_name;
     $main_image_src = __DIR__ . '/../' . $main_image_src_loc;
 
     move_uploaded_file($main_image['tmp_name'], $main_image_src);
 
     $watermark_format = getExtension($watermark['name'], '.');
     $watermark_name = 'watermark-' . $img_index . '.' . $watermark_format;
-    $watermark_src_loc = 'img/watermark/' . $watermark_name;
+    $watermark_src_loc = $result_dir_loc . $watermark_name;
     $watermark_src = __DIR__ . '/../' . $watermark_src_loc;
 
     move_uploaded_file($watermark['tmp_name'], $watermark_src);
-
-    //Путь записи результтата
-    $result_src_loc = 'img/watermark/result-' . $img_index . '.jpg';
-    $result_src = __DIR__ . '/../' . $result_src_loc;
 
     //Заись пути для ответа
     $data['result'] = $result_src_loc;
