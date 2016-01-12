@@ -10,9 +10,8 @@ var Base = (function () {
 
     var _loadMainImage = function () {
         _inputWatermarkEnable();
-        console.log('_loadMainImage');
         Scale.mainImage();
-        _positionAdd([0,0]);
+        _positionAdd([0,0]); // обновляем позицию watermark
     };
 
     var _loadWaterMark = function () {

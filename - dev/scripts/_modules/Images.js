@@ -157,6 +157,22 @@ var Images = (function () {
 
         init: function () {
             _eventListener();
+        },
+
+        getSizeMainImage: function () {
+            var $image = $('.' + globalParameters.classMainImage);
+            return {
+                width: $image.width(),
+                height: $image.height()
+            }
+        },
+
+        getSizeWatermark: function(){
+            var $image = $('.' + globalParameters.classWatermarkImage);
+            return {
+                width: $image.width(),
+                height: $image.height()
+            }
         }
 
     }

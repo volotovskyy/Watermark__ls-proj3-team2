@@ -12,10 +12,7 @@
 }
 
 .work__workplace{
-    background-repeat: no-repeat;
-    background-size: contain;
-    background-position: center;
-    overflow: hidden;
+
 }
 .work__img{
     position: relative;
@@ -24,4 +21,14 @@
 
 .main-image{
     display: none;
+}
+
+.work__img-block {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    overflow: hidden;
 }

@@ -5,6 +5,7 @@ var ControlPanel = (function () {
         Slider.init();
         Spiners.init();
         Inputs.init();
+        Grid.init();
     };
 
     var _eventListener = function () {

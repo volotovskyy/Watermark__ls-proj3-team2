@@ -1,5 +1,5 @@
 var globalParameters = {
-    mainContainer:              $('.work__workplace'),
+    mainContainer:              $('.work__img-block'),
     watermarkContainer:         $('.work__watermark-block'),
 
 
@@ -14,6 +14,8 @@ var globalParameters = {
 
     buttonReset:                $('#reset'),
     buttonSubmit:                $('#submit'),
+
+    gridClass:                  '.position__point',
 
     controlPanel:{
 

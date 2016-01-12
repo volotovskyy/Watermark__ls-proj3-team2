@@ -1,12 +1,6 @@
 var Scale = (function () {
-    var mainImage = {
-        width: 0,
-        height: 0,
-        left: 0,
-        top: 0
-    };
 
-    var _setScaleWaterMark = function () {
+    var setScaleWaterMark = function () {
         var $container = globalParameters.watermarkContainer,
             $image = $('.' + globalParameters.classWatermarkImage);
 
@@ -15,7 +9,7 @@ var Scale = (function () {
         //    .css('left', paddingLeft);
     };
 
-    var _setScaleMainImage = function () {
+    var setScaleMainImage = function () {
 
         var $container = globalParameters.mainContainer,
             $watermarkContainer = globalParameters.watermarkContainer,
@@ -37,7 +31,7 @@ var Scale = (function () {
     };
 
     return {
-        mainImage: _setScaleMainImage,
-        watermark: _setScaleWaterMark
+        mainImage: setScaleMainImage,
+        watermark: setScaleWaterMark
     }
 }());
