@@ -1,58 +1,70 @@
 extends ../main
+
 block title
-    | Watermark project. Team 2
+	| Watermark project. Team 2
+
 block content
-    article.content-wrapper.container
-        .work
-            .work__title
-                h1.work__header Генератор водяных знаков
-            .work__workplace
-                .work__img
-        .control
-            .control__title
-                h3.control__header Настройки
-            form.form#form
-                input(type="hidden" id="fileurl" name="fileurl" class="fileurl")
-                input(type="hidden" name="watermark")
-                input(type="hidden" name="opacity")
-                input(type="hidden" name="mode")
-                .form__group
-                    .form__group-wrap
-                        label.form__title Исходное изображение
-                        .file-box
-                            input(type="text" id="main_img_name" class="input-img main-img__img-name" name="filename" placeholder="  Image.png" readonly)
-                            label.box-btn
-                                input(type="file" class="fileupload" name="fileupload")
-                        label.form__title Водяной знак
-                        .file-box
-                            input(type="text" id="filename" class="input-img watermark__img-name" name="filename" placeholder="  Image.png" readonly)
-                            label.box-btn
-                                input(type="file" class="fileupload" name="fileupload")
-                        .next-arrow
-                    .form__group-wrap.position
-                        .position__title
-                            label.form__title Положение	
-                        .position__map
-                            - for (var i = 0; i < 9; i++)
-                            .position__point
-                        .position__custom
-                            .position__select
-                                label.position__axis X
-                                input(type="number" class="move moveX" id="moveX")
-                                .move-btn.up-x
-                                .move-btn.down-x
-                            .position__select
-                                label.position__axis Y
-                                input(type="number" class="move moveY" id="moveY")
-                                .move-btn.up-y
-                                .move-btn.up-x
-                        .next-arrow
-                    .form__group-wrap
-                        .opacity__title
-                            label.form__title Прозрачность
-                        .opacity__slider
-                            .slider
-                    .btn-box
-                        button.btn.btn__reset#reset(type="reset") Сброс
-                        button.btn.btn__download#submit(type="submit") Скачать
-                
+	article.content-wrapper.container
+		.work
+			.work__title
+				h1.work__header Генератор водяных знаков
+			.work__workplace
+				.work__img-block
+					.work__watermark-block
+				
+		.control
+			.control__title
+				h3.control__header Настройки
+			
+			form.form#form
+				input(type="hidden" id="fileurl" name="fileurl" class="fileurl")
+				input(type="hidden" name="watermark")
+				input(type="hidden" name="opacity" id="opacity__input")
+				input(type="hidden" name="mode")
+				.form__group
+					.form__group-wrap
+						label.form__title Исходное изображение
+						.form__file-box
+							input(type="text" id="main_img_name" class="form__input-img form__input-img-main" name="filename" placeholder="  Image.png" readonly)
+							label.form__box-btn
+								input(type="file" class="form__fileupload" id="main_img" name="fileupload")
+								
+						label.form__title Водяной знак
+						.form__file-box
+							input(type="text" id="watermark-name" class="form__input-img form__input-img-watermark" name="filename" placeholder="  Image.png" readonly)
+							label.form__box-btn
+								input(type="file" class="form__fileupload" id="watermark" name="fileupload")
+						.next-arrow
+					.form__group-wrap.position
+						.position__title
+							label.form__title Положение	
+						.position__map
+							- for (var i = 0; i < 9; i++)
+								.position__point
+								
+						.position__custom
+							.position__select
+								label.position__axis X
+								input(type="number" class="position__move moveX" id="moveX")
+								.position__move-btn-wrap
+									.position__move-btn.position__move-btn-up#upX
+									.position__move-btn.position__move-btn-down#downX
+							.position__select
+								label.position__axis Y
+								input(type="number" class="position__move moveY" id="moveY")
+								.position__move-btn-wrap
+									.position__move-btn.position__move-btn-up#upY
+									.position__move-btn.position__move-btn-down#downY
+						.next-arrow
+
+					.form__group-wrap.opacity-wrap
+						.opacity__title
+							label.form__title Прозрачность
+						.opacity__slider-wrap
+							.opacity__slider
+						.next-arrow
+						
+					.form__btn-wrap
+						button.form__btn.form__btn-reset#reset(type="reset") Сброс
+						button.form__btn.form__btn-download#submit(type="submit") Скачать
+				

@@ -1,6 +1,7 @@
+$common-sprite: sprite-map("../img/icons/*.png", $spacing: 70px);
 .control{
 	height: 100%;
-	
+	min-height: 675px;
 	box-sizing: border-box;
 	width: 260px;
 	padding: 25px 20px;
@@ -9,7 +10,7 @@
 	
 	&__title{
 		text-align: center;
-		margin-bottom: 35px;
+		margin-bottom: 29px;
 	}
 	&__header{
 		color: #2e3641;
@@ -21,7 +22,7 @@
 
 .form{
 	&__group-wrap{
-		margin-bottom: 18px;
+		margin-bottom: 26px;
 		@include clearfix;
 	}
 	
@@ -31,60 +32,57 @@
 		color: #2e3641;
 		margin-bottom: 8px;
 		display: inline-block;
-	}	
+	}
+	&__file-box{
+		width: 220px;
+		position: relative;
+		overflow: hidden;
+		margin-bottom: 20px;
+	}
+	
+	&__input-img{
+		height: 27px;
+		width: 220px;
+		padding: 0;
+		box-sizing: border-box;
+		border-radius: 3px;
+		outline: none;
+		border: 1px solid #9eb2c0;
+		color:#a4b7c4;
+		font-size: 12px;
+		font-family: $rob-light;
+	}
+	&__box-btn{
+		padding: 0;
+		margin: 0;
+		position: absolute;
+		top: -1px;
+		right: 0;
+		display: block;
+		height: 29px;
+		width: 39px;
+		box-sizing: border-box;
+		border-radius: 0px 5px 5px 0;
+		border: 1px solid #d6d5d3;
+		background: url(/img/icons/download.png);
+		background-repeat: no-repeat;
+		cursor: pointer;
+	}
+	
+	&__fileupload {
+		border: none;
+		clip: rect(0 0 0 0);
+		height: 0px;
+		margin: -1px;
+		overflow: hidden;
+		padding: 0;
+		position: absolute;
+		width: 0px;
+	}
 }
 
 
-.file-box{
-	width: 220px;
-	position: relative;
-	overflow: hidden;
 
-}
-
-/* Styles for placeholders */
-::-webkit-input-placeholder {color:#a4b7c4;font-size: 12px; font-family: $rob-light;}
-::-moz-placeholder          {color:#a4b7c4;font-size: 12px; font-family: $rob-light;}/* Firefox 19+ */
-:-moz-placeholder           {color:#a4b7c4;font-size: 12px; font-family: $rob-light;}/* Firefox 18- */
-:-ms-input-placeholder      {color:#a4b7c4;font-size: 12px; font-family: $rob-light;}
-
-
-.input-img{
-	height: 27px;
-	width: 220px;
-	padding: 0;
-	box-sizing: border-box;
-	border-radius: 3px;
-	outline: none;
-    border: 1px solid #9eb2c0;
-	margin-bottom: 25px;
-}
-.box-btn{
-    padding: 0;
-    margin: 0;
-    position: absolute;
-    top: -1px;
-    right: 0;
-    display: block;
-    height: 29px;
-    width: 39px;
-	box-sizing: border-box;
-	border-radius: 0px 5px 5px 0;
-	border: 1px solid #d6d5d3;
-	background: url(/img/icons/download.png);
-	background-repeat: no-repeat;
-	cursor: pointer;
-}
-.fileupload {
-	border: none;
-	clip: rect(0 0 0 0);
-	height: 0;
-	margin: -1px;
-	overflow: hidden;
-	padding: 0;
-	position: absolute;
-	width: 0;
-}
 .next-arrow{
     background: url("/img/next-arrow.png") no-repeat;
     display: block;
@@ -93,13 +91,18 @@
     background-size: 100%;
     width: 262px;
     right: 0;
+	margin-top: 10px; //?????????????????????
 }
 
 
 .position{
 	@include clearfix;
+	margin-bottom: 32px;
+	&__title{
+		margin-bottom: 24px;
+	}
 	&__map{
-		
+		margin-bottom: 19px;
 		display: inline-block;
 		box-sizing: border-box;
 		height: 102px;
@@ -113,8 +116,8 @@
 	&__point{
 		
 		background-color: rgba(193,207,217,0.46);
-		width: 32px;
-		height: 32px;
+		width: 34px;
+		height: 34px;
 		display: inline-block;
 		border-color: #9eb2c0;
 		border-style: solid;
@@ -135,6 +138,7 @@
 	}
 	&__select{
 		margin-bottom: 12px;
+		vertical-align: middle;
 	}
 	&__axis{
 		color: #2e3641;
@@ -144,17 +148,100 @@
 		color: #444a53;
 		
 	}
+	&__move{
+		width: 40px;
+		font-size: 24px;
+		line-height: 38px;
+		text-align: center;
+		border-radius: 4px;
+		border: 1px solid #9eb2c0;
+	}
+	
+	&__move-btn{
+		position: relative;
+		display: inline-block;
+		
+		&-wrap{
+			position: relative;
+			display: inline-block;
+			width: 13px;
+			top: 7px;
+		}
+		&-up{
+			vertical-align: top;
+			height: 17px;
+    		width: 13px;
+			@include get-sprite($common-sprite, up);
+			cursor: pointer;
+			
+			&:hover{
+				@include get-sprite($common-sprite, up-hover);
+				cursor: pointer;
+			}
+		}
+		&-down{
+			vertical-align: bottom;
+			@include get-sprite($common-sprite, down);
+			cursor: pointer;
+			
+			&:hover{
+				@include get-sprite($common-sprite, down-hover);
+				cursor: pointer;
+			}
+		}
+	}
+}
+.opacity{
+	&-wrap{
+		margin-bottom: 60px;
+	}
+	&__title{
+		margin-bottom: 15px;
+	}
 }
 
-.move{
-	width: 40px;
-    font-size: 24px;
-    line-height: 38px;
-    text-align: center;
-    border-radius: 4px;
-    border: 1px solid #9eb2c0;
+.form{
+	
+	&__btn-wrap{
+		height: 40px;
+		width: 220px;
+	}
+	&__btn{
+		width: 99px;
+		height: 42px;
+		border-radius: 3px;
+		color: #f1f1f5;
+		font-size: 18px;
+		font-family: $rob-med;
+		border: 0;
+		outline: none;
+		
+		
+		&-reset{
+			background: #c1cfd9;
+			float: left;
+			margin-left: -11px;
+
+			
+			&:hover{
+				background: linear-gradient(0deg, #c1cfd9 0%, #a0acb5 5%, #9eaab3 100%);
+				border: 1px solid #a6b2bb;
+			}
+		}
+		&-download{
+			background: #f97e76;
+			float: right;
+			margin-right: -8px;
+			&:hover{
+				background: linear-gradient(0deg, #f97e76 0%, #e4746c 94%, #e3736c 100%);
+				border: 1px solid #e3736c;
+			}
+		}
+		
+		
+	}
 }
-input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
-    -webkit-appearance: none;}
-input[type='number'] {-moz-appearance: textfield;}
+
+
+
+	
