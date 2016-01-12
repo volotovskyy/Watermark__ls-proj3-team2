@@ -14,21 +14,21 @@ $img_index = date("U") . "-" . mt_rand(0, 1000);
 
 //Переименование и перемещение изображений
 $main_image_type = getExtension($main_image['name']);
-$main_image_name = 'main_image-' . $img_index . "." . $main_image_type;
+$main_image_name = 'main_image-' . $img_index . '.' . $main_image_type;
 $main_image_src_loc = 'img/watermark/' . $main_image_name;
 $main_image_src = __DIR__ . '/../' . $main_image_src_loc;
 
 move_uploaded_file($main_image['tmp_name'], $main_image_src);
 
 $watermark_type = getExtension($watermark['name']);
-$watermark_name = 'watermark-' . $img_index . "." . $watermark_type;
+$watermark_name = 'watermark-' . $img_index . '.' . $watermark_type;
 $watermark_src_loc = 'img/watermark/' . $watermark_name;
 $watermark_src = __DIR__ . '/../' . $watermark_src_loc;
 
 move_uploaded_file($watermark['tmp_name'], $watermark_src);
 
 //Путь записи результтата
-$result_src_loc = 'img/watermark/result-' . $img_index . ".jpg";
+$result_src_loc = 'img/watermark/result-' . $img_index . '.jpg';
 $result_src = __DIR__ . '/../'.$result_src_loc;
 
 //Заись пути для ответа
