@@ -75,6 +75,7 @@ var Images = (function () {
             })
             .attr('src', image)
             .addClass(class_);
+
     };
 
     var _setImage = function (image, $contaitener, class_) {
