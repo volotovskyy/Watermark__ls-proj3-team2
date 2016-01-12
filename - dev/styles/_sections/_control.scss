@@ -10,7 +10,7 @@ $common-sprite: sprite-map("../img/icons/*.png", $spacing: 70px);
 	
 	&__title{
 		text-align: center;
-		margin-bottom: 35px;
+		margin-bottom: 29px;
 	}
 	&__header{
 		color: #2e3641;
@@ -22,7 +22,7 @@ $common-sprite: sprite-map("../img/icons/*.png", $spacing: 70px);
 
 .form{
 	&__group-wrap{
-		margin-bottom: 18px;
+		margin-bottom: 26px;
 		@include clearfix;
 	}
 	
@@ -37,6 +37,7 @@ $common-sprite: sprite-map("../img/icons/*.png", $spacing: 70px);
 		width: 220px;
 		position: relative;
 		overflow: hidden;
+		margin-bottom: 20px;
 	}
 	
 	&__input-img{
@@ -47,7 +48,6 @@ $common-sprite: sprite-map("../img/icons/*.png", $spacing: 70px);
 		border-radius: 3px;
 		outline: none;
 		border: 1px solid #9eb2c0;
-		margin-bottom: 25px;
 		color:#a4b7c4;
 		font-size: 12px;
 		font-family: $rob-light;
@@ -82,6 +82,7 @@ $common-sprite: sprite-map("../img/icons/*.png", $spacing: 70px);
 }
 
 
+
 .next-arrow{
     background: url("/img/next-arrow.png") no-repeat;
     display: block;
@@ -90,11 +91,13 @@ $common-sprite: sprite-map("../img/icons/*.png", $spacing: 70px);
     background-size: 100%;
     width: 262px;
     right: 0;
+	margin-top: 10px; //?????????????????????
 }
 
 
 .position{
 	@include clearfix;
+	margin-bottom: 32px;
 	&__title{
 		margin-bottom: 24px;
 	}
@@ -190,7 +193,7 @@ $common-sprite: sprite-map("../img/icons/*.png", $spacing: 70px);
 }
 .opacity{
 	&-wrap{
-		margin-bottom: 71px;
+		margin-bottom: 60px;
 	}
 	&__title{
 		margin-bottom: 15px;
@@ -217,6 +220,8 @@ $common-sprite: sprite-map("../img/icons/*.png", $spacing: 70px);
 		&-reset{
 			background: #c1cfd9;
 			float: left;
+			margin-left: -11px;
+
 			
 			&:hover{
 				background: linear-gradient(0deg, #c1cfd9 0%, #a0acb5 5%, #9eaab3 100%);
@@ -226,6 +231,7 @@ $common-sprite: sprite-map("../img/icons/*.png", $spacing: 70px);
 		&-download{
 			background: #f97e76;
 			float: right;
+			margin-right: -8px;
 			&:hover{
 				background: linear-gradient(0deg, #f97e76 0%, #e4746c 94%, #e3736c 100%);
 				border: 1px solid #e3736c;

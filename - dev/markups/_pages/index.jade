@@ -9,7 +9,8 @@ block content
 			.work__title
 				h1.work__header Генератор водяных знаков
 			.work__workplace
-				.work__img
+				.work__img-block
+					.work__watermark-block
 				
 		.control
 			.control__title
@@ -18,7 +19,7 @@ block content
 			form.form#form
 				input(type="hidden" id="fileurl" name="fileurl" class="fileurl")
 				input(type="hidden" name="watermark")
-				input(type="hidden" name="opacity")
+				input(type="hidden" name="opacity" id="opacity__input")
 				input(type="hidden" name="mode")
 				.form__group
 					.form__group-wrap

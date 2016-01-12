@@ -2,31 +2,31 @@
 
 /* --------- normalize --------- */
 
-@import "_misc/_normalize";
+@import "_misc/normalize";
 
 /* --------- fonts --------- */
 
-@import "_misc/_fonts";
+@import "_misc/_fonts.scss";
 
 /* --------- mixins --------- */
 
-@import "_misc/_mixins";
+@import "_misc/mixins";
 
 /* --------- adjustment --------- */
 
-@import "_misc/_adjustment";
+@import "_misc/adjustment";
 
 
 /* --------- sections --------- */
 
-@import "_sections/_common";
+@import "_sections/_common.scss";
 
-@import "_sections/_work";
+@import "_sections/_work.scss";
 
-@import "_sections/_control";
+@import "_sections/_control.scss";
 
-@import "_sections/_footer";
+@import "_sections/_footer.scss";
 
 /* --------- widgets --------- */
 
-@import "_widgets/_slider";
+@import "_widgets/_slider.scss";
