@@ -13,6 +13,7 @@ $watermark = $_FILES['img2'];
 $pos_x = $_POST['positionX'];
 $pos_y = $_POST['positionY'];
 $opacity = $_POST['opacity'];
+$watermark_type = $_POST['$watermark-type'];
 
 //Ограничения
 $max_file_size = 5 * 1024 * 1024; //Максимальный размер файла в байтах
@@ -22,10 +23,6 @@ $formats = array('jpeg', 'png', 'bmp'); //Разрешенные форматы 
 //Получаем размер файлов в байтах
 $main_image_size = $main_image['size'];
 $watermark_image_size = $watermark['size'];
-
-$data['size'] = $main_image_size;
-$data['size1'] = $watermark_image_size;
-$data['size2'] = $max_file_size;
 
 //Проверки
 //Проверка размера файла
@@ -199,7 +196,7 @@ if ($data['status'] == 'ok') {
     }
 
     //Замощение ватермарка
-    if ($type == 'tile') {
+    if ($watermark_type == 'tile') {
         $margin_x = $_POST['$margin_x'];
         $margin_y = $_POST['$margin_y'];
 
