@@ -1,6 +1,6 @@
 # Watermark
 'Watermark' is JS powered HTML5 watermark generator.
->The main purpose of the program provides  ability to overlay watermark on user image.
+>The main purpose of the program provides  ability to overlay watermark on users' image.
 
 ### Tech
 
