@@ -59,36 +59,25 @@ var Images = (function () {
     };
 
 
-    var _setBackGround = function (image, $contaitener, class_) {
-        var img = document.createElement('img'),
-            url = 'url(' + image + ')';
+    var _setBackGround = function (image, $container) {
+        var url = 'url(' + image + ')';
 
-        $contaitener
-            .css('background-image', url)
-            .append(img)
-            .find('.' + class_)
-            .remove();
+        $container.css('background-image', url);
 
-        $(img)
-            .one('load', function () {
-                Base.trigger('loadMainImage');
-            })
-            .attr('src', image)
-            .addClass(class_);
-
+        Base.trigger('loadMainImage',image);
     };
 
-    var _setImage = function (image, $contaitener, class_) {
+    var _setImage = function (image, $container, class_) {
         var img = document.createElement('img');
 
-        $contaitener
+        $container
             .append(img)
             .find('.' + class_)
-            .remove();
+            .remove(); // удаляем предыдущие watermark
 
         $(img)
             .one('load', function () {
-                Base.trigger('loadWatermark');
+                Base.trigger('loadWatermark',image);
             })
             .attr('src', image)
             .addClass(class_);
@@ -98,10 +87,9 @@ var Images = (function () {
     var _loadMainImage = function (e) {
         _loadImg(e, function (e) {
             var $container = globalParameters.mainContainer,
-                class_ = globalParameters.classMainImage,
                 image = e.target.result;
 
-            _setBackGround(image, $container, class_);
+            _setBackGround(image, $container);
         });
 
     };
@@ -164,11 +152,7 @@ var Images = (function () {
         },
 
         getSizeMainImage: function () {
-            var $image = $('.' + globalParameters.classMainImage);
-            return {
-                width: $image.width(),
-                height: $image.height()
-            }
+            return Scale.getSizeMainImage();
         },
 
         getSizeWatermark: function(){
