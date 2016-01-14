@@ -1,4 +1,8 @@
 <?php
-function getExtension($filename) {
-    return substr(strrchr($filename, '.'), 1);
+function getExtension($filename, $point) {
+    return substr(strrchr($filename, $point), 1);
+}
+
+function getTypeOfFile($filename) {
+    return substr($filename, 0, strrpos($filename, '/'));
 }

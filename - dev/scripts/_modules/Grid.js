@@ -18,9 +18,7 @@ var Grid = (function () {
         var index = $(this).index(),
             centerBlockPosition = _getCenterPositionBlockByIndex(index),
             pos = _watermarkCenterByPosition(centerBlockPosition);
-
         Base.trigger('position:set',pos);
-
     };
 
     var _getCenterPositionBlockByIndex = function (index) {
@@ -31,7 +29,6 @@ var Grid = (function () {
             },
             hCountBlock = index / sizeGrid.col >> 0, // номер блока в столбце
             wCountBlock = index % sizeGrid.col;      // номер блока в строке
-
         return [
             block.width / 2 + block.width * wCountBlock,
             block.height / 2 + block.height * hCountBlock

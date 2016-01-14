@@ -46,11 +46,9 @@ var Position = (function () {
             var
                 $image = $(imageClass),
                 position = $image.position();
-
             if (position === undefined) return;
 
             pos = _validPosition(pos);
-
             var x = pos[0],
                 y = pos[1];
 
@@ -60,7 +58,6 @@ var Position = (function () {
             if (y !== undefined){
                 $image.css('top', y);
             }
-
             Base.trigger('position:change', pos);
         },
 
