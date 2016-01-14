@@ -59,41 +59,49 @@ var Images = (function () {
     };
 
 
-    var _setBackGround = function (image, $container) {
-        var url = 'url(' + image + ')';
-
-        $container.css('background-image', url);
-
-        Base.trigger('loadMainImage',image);
-    };
-
-    var _setImage = function (image, $container, class_) {
+    var _setBackGround = function (image, $contaitener, class_) {
         var img = document.createElement('img'),
-            noDisplay = globalParameters.classNoDisplay;
+            url = 'url(' + image + ')';
+
+        $contaitener
+            .css('background-image', url)
+            .append(img)
+            .find('.' + class_)
+            .remove();
 
         $(img)
-            .addClass(class_)
-            .css('opacity',0)
             .one('load', function () {
-                Base.trigger('loadWatermark',image);
+                Base.trigger('loadMainImage');
             })
             .attr('src', image)
-        ;
+            .addClass(class_);
 
-        $container
+    };
+
+    var _setImage = function (image, $contaitener, class_) {
+        var img = document.createElement('img');
+
+        $contaitener
+            .append(img)
             .find('.' + class_)
-            .remove(); // удаляем предыдущие watermark
+            .remove();
 
-        $container.append(img);
+        $(img)
+            .one('load', function () {
+                Base.trigger('loadWatermark');
+            })
+            .attr('src', image)
+            .addClass(class_);
 
     };
 
     var _loadMainImage = function (e) {
         _loadImg(e, function (e) {
             var $container = globalParameters.mainContainer,
+                class_ = globalParameters.classMainImage,
                 image = e.target.result;
 
-            _setBackGround(image, $container);
+            _setBackGround(image, $container, class_);
         });
 
     };
@@ -137,10 +145,6 @@ var Images = (function () {
             success: function (data) {
                 console.log('success');
                 console.log(data);
-
-                if(data.status === 'error'){
-                    alert(data.message);
-                }
             },
             error: function (e) {
                 console.log('error');
@@ -156,7 +160,11 @@ var Images = (function () {
         },
 
         getSizeMainImage: function () {
-            return Scale.getSizeMainImage();
+            var $image = $('.' + globalParameters.classMainImage);
+            return {
+                width: $image.width(),
+                height: $image.height()
+            }
         },
 
         getSizeWatermark: function(){

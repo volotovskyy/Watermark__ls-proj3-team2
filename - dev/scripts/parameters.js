@@ -37,7 +37,5 @@ var globalParameters = {
         position:     [10,10]
     },
 
-    url : 'php/watermark.php',
-
-    classNoDisplay:             'nodisplay'
+    url : 'php/test.php'
 };

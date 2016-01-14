@@ -1,6 +1,4 @@
 var Base = (function () {
-    var watermakImage;
-
     var _initModules = function () {
         Images.init();
         ControlPanel.init();
@@ -10,26 +8,16 @@ var Base = (function () {
         //TODO set default
     };
 
-    var _loadMainImage = function (image) {
-        _hide(); //  скрываем watermark для плавности
+    var _loadMainImage = function () {
         _inputWatermarkEnable();
-        Scale.mainImage(image, function(){
-            //_positionAdd([0,0]); // обновляем позицию watermark
-        });
-        if(watermakImage){
-            var pos = Position.get();
-            Scale.watermark(watermakImage,function(){
-                _position(pos);
-                _transparency();
-            });
-        }
+        Scale.mainImage();
+        _positionAdd([0,0]); // обновляем позицию watermark
     };
 
-    var _loadWaterMark = function (image) {
-        _addDragAndDrop();
-        Scale.watermark(image);
-        watermakImage = image;
+    var _loadWaterMark = function () {
+        Scale.watermark();
         _transparency();
+        _addDragAndDrop();
     };
 
     var _addDragAndDrop = function(){
@@ -55,10 +43,6 @@ var Base = (function () {
         Transparency.set(percent);
     };
 
-    var _hide = function(){
-        Transparency.hide();
-    };
-
     var _position = function (pos) {
         Position.set(pos);
     };
@@ -81,10 +65,10 @@ var Base = (function () {
         trigger: function (event, params) {
             switch (event) {
                 case 'loadMainImage':
-                    _loadMainImage(params);
+                    _loadMainImage();
                     break;
                 case 'loadWatermark':
-                    _loadWaterMark(params);
+                    _loadWaterMark();
                     break;
                 case 'transparency':
                     _transparency(params);
