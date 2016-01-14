@@ -1,7 +1,7 @@
 var Transparency = (function () {
     var lastPercent = globalParameters.defaults.transparency;
 
-    var _setTransparency = function (percent) {
+    var setTransparency = function (percent) {
         if (percent === undefined)percent = lastPercent;
 
         var $image = $('.' + globalParameters.classWatermarkImage),
@@ -13,6 +13,12 @@ var Transparency = (function () {
     };
 
     return {
-        set: _setTransparency
+        set: setTransparency,
+
+        hide: function(){
+            var opacity = lastPercent;
+            setTransparency(0);
+            lastPercent = opacity;
+        }
     }
 }());

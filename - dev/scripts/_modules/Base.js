@@ -11,6 +11,7 @@ var Base = (function () {
     };
 
     var _loadMainImage = function (image) {
+        _hide(); //  скрываем watermark для плавности
         _inputWatermarkEnable();
         Scale.mainImage(image, function(){
             //_positionAdd([0,0]); // обновляем позицию watermark
@@ -18,16 +19,17 @@ var Base = (function () {
         if(watermakImage){
             var pos = Position.get();
             Scale.watermark(watermakImage,function(){
-                _position(pos)
+                _position(pos);
+                _transparency();
             });
         }
     };
 
     var _loadWaterMark = function (image) {
+        _addDragAndDrop();
         Scale.watermark(image);
         watermakImage = image;
         _transparency();
-        _addDragAndDrop();
     };
 
     var _addDragAndDrop = function(){
@@ -51,6 +53,10 @@ var Base = (function () {
 
     var _transparency = function (percent) {
         Transparency.set(percent);
+    };
+
+    var _hide = function(){
+        Transparency.hide();
     };
 
     var _position = function (pos) {

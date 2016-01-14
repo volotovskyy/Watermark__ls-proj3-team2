@@ -14,14 +14,16 @@ var Scale = (function () {
             }
         };
 
-    var setScaleWaterMark = function (image,callback) {
+    var setScaleWaterMark = function (image, callback) {
         var $container = globalParameters.watermarkContainer,
             $image = $('.' + globalParameters.classWatermarkImage),
-            img = document.createElement('img');
+            img = document.createElement('img'),
+            noDisplay = globalParameters.classNoDisplay;
 
         $container.append(img);
 
         $(img)
+            .addClass(noDisplay)
             .one('load', function () {
                 var $this = $(this),
                     size = {
@@ -39,10 +41,11 @@ var Scale = (function () {
                         $image.css('top')
                     ];
 
-                    $image.width(size.width * rate.width);
-                    $image.height(size.height * rate.height);
+                    $image
+                        .width(size.width * rate.width)
+                        .height(size.height * rate.height);
 
-                    if(callback)callback();
+                    if (callback)callback();
                 });
             })
             .attr('src', image);
@@ -81,39 +84,52 @@ var Scale = (function () {
 
         var $container = globalParameters.mainContainer,
             class_ = globalParameters.classMainImage,
+            class_1 = globalParameters.classNoDisplay,
+            sizeContainer = {
+                width: $container.width(),
+                height: $container.height()
+            };
 
-            img = document.createElement('img'), // для определения размеров
+        img = document.createElement('img'), // для определения размеров
             img1 = document.createElement('img'); // для определения размеров;
-
-        $(img)
-            .one('load', function () {
-                var $this = $(this);
-
-                images.size.scale.width = $this.width();
-                images.size.scale.height = $this.height();
-
-                $this.remove();
-
-                $(img1)
-                    .one('load', function () {
-
-                        var $this = $(this);
-
-                        images.size.original.width = $this.width();
-                        images.size.original.height = $this.height();
-
-                        $this.remove();
-                        _setScalewatermarkContainer(callback);
-                    })
-                    .attr('src', image);
-            })
-            .attr('src', image)
-            .addClass(class_);
-
 
         $container
             .append(img)
             .append(img1);
+
+        $(img1)
+            .one('load', function () {
+
+                var $this = $(this);
+
+                images.size.original.width = $this.width();
+                images.size.original.height = $this.height();
+
+                $this.remove();
+
+                $(img)
+                    .one('load', function () {
+                        var $this = $(this),
+                            width = $this.width(),
+                            height = $this.height();
+
+                        //if(width < sizeContainer.width) width = sizeContainer.width;
+                        //else if(height < sizeContainer.height) width = sizeContainer.height;
+
+                        images.size.scale.width = width;
+                        images.size.scale.height = height;
+
+                        console.log(sizeContainer);
+                        console.log(images);
+                        $this.remove();
+                        _setScalewatermarkContainer(callback);
+
+                    })
+                    .attr('src', image)
+                    .addClass(class_);
+            })
+            .attr('src', image)
+            .addClass(class_1);
 
     };
 
@@ -136,7 +152,7 @@ var Scale = (function () {
         mainImage: setScaleMainImage,
         watermark: setScaleWaterMark,
 
-        getSizeMainImage: function(){
+        getSizeMainImage: function () {
             return images.size.scale;
         }
     }

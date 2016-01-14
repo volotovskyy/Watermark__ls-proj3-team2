@@ -32,3 +32,8 @@
     background-position: center;
     overflow: hidden;
 }
+
+.nodisplay {
+    position: absolute;
+    opacity: 0;
+}

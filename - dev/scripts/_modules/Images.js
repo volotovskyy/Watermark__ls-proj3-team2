@@ -68,19 +68,23 @@ var Images = (function () {
     };
 
     var _setImage = function (image, $container, class_) {
-        var img = document.createElement('img');
-
-        $container
-            .append(img)
-            .find('.' + class_)
-            .remove(); // удаляем предыдущие watermark
+        var img = document.createElement('img'),
+            noDisplay = globalParameters.classNoDisplay;
 
         $(img)
+            .addClass(class_)
+            .css('opacity',0)
             .one('load', function () {
                 Base.trigger('loadWatermark',image);
             })
             .attr('src', image)
-            .addClass(class_);
+        ;
+
+        $container
+            .find('.' + class_)
+            .remove(); // удаляем предыдущие watermark
+
+        $container.append(img);
 
     };
 
