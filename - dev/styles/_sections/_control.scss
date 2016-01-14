@@ -1,4 +1,5 @@
 $common-sprite: sprite-map("../img/icons/*.png", $spacing: 70px);
+
 .control{
 	height: 100%;
 	min-height: 675px;
@@ -25,7 +26,15 @@ $common-sprite: sprite-map("../img/icons/*.png", $spacing: 70px);
 		margin-bottom: 26px;
 		@include clearfix;
 	}
-	
+	&__watermark-input-disabled{
+		position: absolute;
+		background-color: rgba(241,241,245,0.64);
+		width: 260px;
+		height: 72px;
+		top: 23%;
+		left: 73%;
+		z-index: 1;
+	}
 	&__title{
 		font-size: 14px;
 		font-family: $rob-med;
@@ -89,15 +98,63 @@ $common-sprite: sprite-map("../img/icons/*.png", $spacing: 70px);
     position: absolute;
     height: 10px;
     background-size: 100%;
-    width: 262px;
+    width: 260px;
     right: 0;
 	margin-top: 10px; //?????????????????????
 }
 
 
 .position{
+	&__tessel{
+		display: none;
+		
+		&-map{
+			display: none;
+		}
+	}
 	@include clearfix;
 	margin-bottom: 32px;
+	&-disabled{
+		position: absolute;
+		background-color: rgba(241,241,245,0.64);
+		width: 260px;
+		height: 203px;
+		top: 36%;
+		left: 73%;
+	}
+	&__btns{
+		float: right;
+		width: 50px;
+		margin-right: -4px;
+    	margin-top: -4px;
+		
+		&-location{
+			@include get-sprite($common-sprite, waterposition);
+			outline: none;
+    		border: none;
+			float: right;
+			
+			&-active{
+				@include get-sprite($common-sprite, waterposition-active);
+			}
+		}
+		
+		&-tessel{
+			@include get-sprite($common-sprite, tessel);
+			outline: none;
+    		border: none;
+			margin-right: 5px;
+			float: left;
+			
+			&-active{
+				@include get-sprite($common-sprite, tessel-active);
+			}
+			&:hover{
+				@include get-sprite($common-sprite, tessel-active);
+			}
+		}
+	}
+	
 	&__title{
 		margin-bottom: 24px;
 	}
@@ -131,10 +188,12 @@ $common-sprite: sprite-map("../img/icons/*.png", $spacing: 70px);
 	}
 	
 	&__custom{
+		
 		float: right;
 		width: 80px;
 		height: 100px;
 		display: inline-block;
+		
 	}
 	&__select{
 		margin-bottom: 12px;
@@ -192,6 +251,15 @@ $common-sprite: sprite-map("../img/icons/*.png", $spacing: 70px);
 	}
 }
 .opacity{
+	&-disabled{
+		position: absolute;
+		background-color: rgba(241,241,245,0.64);
+		width: 260px;
+		height: 123px;
+		top: 67%;
+		left: 73%;
+		z-index: 1;	
+	}
 	&-wrap{
 		margin-bottom: 60px;
 	}
@@ -201,7 +269,15 @@ $common-sprite: sprite-map("../img/icons/*.png", $spacing: 70px);
 }
 
 .form{
-	
+	&__btn-disabled{
+		position: absolute;
+		background-color: rgba(241,241,245,0.64);
+		width: 260px;
+		height: 97px;
+		top: 86%;
+		left: 73%;
+		z-index: 1;
+	}
 	&__btn-wrap{
 		height: 40px;
 		width: 220px;
@@ -242,6 +318,6 @@ $common-sprite: sprite-map("../img/icons/*.png", $spacing: 70px);
 	}
 }
 
-
+@import "../_views/_tessel.scss"
 
 	

@@ -52,51 +52,84 @@
 											<input type="file" id="main_img" name="fileupload" class="form__fileupload">
 										</label>
 									</div>
+									<!--.form__watermark-input-disabled-->
 									<label class="form__title">Водяной знак</label>
 									<div class="form__file-box">
-										<input type="text" id="watermark-name" name="filename" placeholder="  Image.png" readonly class="form__input-img form__input-img-watermark">
+										<input type="text" id="watermark-name" name="filename" placeholder="  Image.png" readonly disabled class="form__input-img form__input-img-watermark">
 										<label class="form__box-btn">
-											<input type="file" id="watermark" name="fileupload" class="form__fileupload">
+											<input type="file" id="watermark" name="fileupload" disabled class="form__fileupload">
 										</label>
 									</div>
 									<div class="next-arrow"></div>
 								</div>
 								<div class="form__group-wrap position">
+									<!--.position-disabled-->
+									<div class="position__btns">
+										<button type="radio" id="tessel" data-view="tessel" class="position__btns position__btns-tessel"></button>
+										<button type="radio" id="location" data-view="" class="position__btns position__btns-location position__btns position__btns-location-active"></button>
+									</div>
 									<div class="position__title">
 										<label class="form__title">Положение	</label>
 									</div>
-									<div class="position__map">
-										<div class="position__point"></div>
-										<div class="position__point"></div>
-										<div class="position__point"></div>
-										<div class="position__point"></div>
-										<div class="position__point"></div>
-										<div class="position__point"></div>
-										<div class="position__point"></div>
-										<div class="position__point"></div>
-										<div class="position__point"></div>
-									</div>
-									<div class="position__custom">
-										<div class="position__select">
-											<label class="position__axis">X</label>
-											<input type="number" id="moveX" class="position__move moveX">
-											<div class="position__move-btn-wrap">
-												<div id="upX" class="position__move-btn position__move-btn-up"></div>
-												<div id="downX" class="position__move-btn position__move-btn-down"></div>
+									<div class="switch">
+										<div class="position__map">
+											<div class="position__tessel-map">
+												<div class="position__tessel-wrap">
+													<div class="position__tessel-vertical"></div>
+													<div class="position__tessel-horizontal"></div>
+												</div>
+											</div>
+											<div class="position__point"></div>
+											<div class="position__point"></div>
+											<div class="position__point"></div>
+											<div class="position__point"></div>
+											<div class="position__point"></div>
+											<div class="position__point"></div>
+											<div class="position__point"></div>
+											<div class="position__point"></div>
+											<div class="position__point"></div>
+										</div>
+										<div class="position__custom">
+											<div class="position__select">
+												<label class="position__axis">X</label>
+												<input type="number" id="moveX" class="position__move moveX">
+												<div class="position__move-btn-wrap">
+													<div id="upX" class="position__move-btn position__move-btn-up"></div>
+													<div id="downX" class="position__move-btn position__move-btn-down"></div>
+												</div>
+											</div>
+											<div class="position__select">
+												<label class="position__axis">Y</label>
+												<input type="number" id="moveY" class="position__move moveY">
+												<div class="position__move-btn-wrap">
+													<div id="upY" class="position__move-btn position__move-btn-up"></div>
+													<div id="downY" class="position__move-btn position__move-btn-down"></div>
+												</div>
 											</div>
 										</div>
-										<div class="position__select">
-											<label class="position__axis">Y</label>
-											<input type="number" id="moveY" class="position__move moveY">
-											<div class="position__move-btn-wrap">
-												<div id="upY" class="position__move-btn position__move-btn-up"></div>
-												<div id="downY" class="position__move-btn position__move-btn-down"></div>
+										<div class="position__tessel">
+											<div class="position__select">
+												<label class="position__axis position__axis-vertical"></label>
+												<input type="number" id="vertical" class="position__move vertical">
+												<div class="position__move-btn-wrap">
+													<div id="UpVertical" class="position__move-btn position__move-btn-up"></div>
+													<div id="DownVertical" class="position__move-btn position__move-btn-down"></div>
+												</div>
+											</div>
+											<div class="position__select">
+												<label class="position__axis position__axis-horizontal"></label>
+												<input type="number" id="horizontal" class="position__move horizontal">
+												<div class="position__move-btn-wrap">
+													<div id="upHorizontal" class="position__move-btn position__move-btn-up"></div>
+													<div id="downHorizontal" class="position__move-btn position__move-btn-down"></div>
+												</div>
 											</div>
 										</div>
 									</div>
 									<div class="next-arrow"></div>
 								</div>
 								<div class="form__group-wrap opacity-wrap">
+									<!--.opacity-disabled-->
 									<div class="opacity__title">
 										<label class="form__title">Прозрачность</label>
 									</div>
@@ -106,8 +139,9 @@
 									<div class="next-arrow"></div>
 								</div>
 								<div class="form__btn-wrap">
-									<button id="reset" type="reset" class="form__btn form__btn-reset">Сброс</button>
-									<button id="submit" type="submit" class="form__btn form__btn-download">Скачать</button>
+									<!--.form__btn-disabled-->
+									<button id="reset" type="reset" disabled class="form__btn form__btn-reset">Сброс</button>
+									<button id="submit" type="submit" disabled class="form__btn form__btn-download">Скачать</button>
 								</div>
 							</div>
 						</form>

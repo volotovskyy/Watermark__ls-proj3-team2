@@ -23,41 +23,70 @@ block content
 				input(type="hidden" name="mode")
 				.form__group
 					.form__group-wrap
+						
 						label.form__title Исходное изображение
 						.form__file-box
 							input(type="text" id="main_img_name" class="form__input-img form__input-img-main" name="filename" placeholder="  Image.png" readonly)
 							label.form__box-btn
 								input(type="file" class="form__fileupload" id="main_img" name="fileupload")
-								
+						
+						//.form__watermark-input-disabled
 						label.form__title Водяной знак
 						.form__file-box
-							input(type="text" id="watermark-name" class="form__input-img form__input-img-watermark" name="filename" placeholder="  Image.png" readonly)
+							input(type="text" id="watermark-name" class="form__input-img form__input-img-watermark" name="filename" placeholder="  Image.png" readonly disabled)
 							label.form__box-btn
-								input(type="file" class="form__fileupload" id="watermark" name="fileupload")
+								input(type="file" class="form__fileupload" id="watermark" name="fileupload" disabled)
 						.next-arrow
+						
 					.form__group-wrap.position
+						//.position-disabled
+						.position__btns
+							button(type="radio" class="position__btns position__btns-tessel" id="tessel" data-view="tessel")
+							button(type="radio" class="position__btns position__btns-location position__btns position__btns-location-active" id="location" data-view="")
 						.position__title
 							label.form__title Положение	
-						.position__map
-							- for (var i = 0; i < 9; i++)
-								.position__point
-								
-						.position__custom
-							.position__select
-								label.position__axis X
-								input(type="number" class="position__move moveX" id="moveX")
-								.position__move-btn-wrap
-									.position__move-btn.position__move-btn-up#upX
-									.position__move-btn.position__move-btn-down#downX
-							.position__select
-								label.position__axis Y
-								input(type="number" class="position__move moveY" id="moveY")
-								.position__move-btn-wrap
-									.position__move-btn.position__move-btn-up#upY
-									.position__move-btn.position__move-btn-down#downY
+						
+						.switch
+							.position__map
+								.position__tessel-map
+									.position__tessel-wrap
+											.position__tessel-vertical
+											.position__tessel-horizontal
+								- for (var i = 0; i < 9; i++)
+									.position__point
+
+
+							.position__custom
+								.position__select
+									label.position__axis X
+									input(type="number" class="position__move moveX" id="moveX")
+									.position__move-btn-wrap
+										.position__move-btn.position__move-btn-up#upX
+										.position__move-btn.position__move-btn-down#downX
+								.position__select
+									label.position__axis Y
+									input(type="number" class="position__move moveY" id="moveY")
+									.position__move-btn-wrap
+										.position__move-btn.position__move-btn-up#upY
+										.position__move-btn.position__move-btn-down#downY
+
+							.position__tessel
+								.position__select
+									label.position__axis.position__axis-vertical
+									input(type="number" class="position__move vertical" id="vertical")
+									.position__move-btn-wrap
+										.position__move-btn.position__move-btn-up#UpVertical
+										.position__move-btn.position__move-btn-down#DownVertical
+								.position__select
+									label.position__axis.position__axis-horizontal
+									input(type="number" class="position__move horizontal" id="horizontal")
+									.position__move-btn-wrap
+										.position__move-btn.position__move-btn-up#upHorizontal
+										.position__move-btn.position__move-btn-down#downHorizontal
 						.next-arrow
 
 					.form__group-wrap.opacity-wrap
+						//.opacity-disabled
 						.opacity__title
 							label.form__title Прозрачность
 						.opacity__slider-wrap
@@ -65,6 +94,7 @@ block content
 						.next-arrow
 						
 					.form__btn-wrap
-						button.form__btn.form__btn-reset#reset(type="reset") Сброс
-						button.form__btn.form__btn-download#submit(type="submit") Скачать
+						//.form__btn-disabled
+						button.form__btn.form__btn-reset#reset(type="reset" disabled) Сброс
+						button.form__btn.form__btn-download#submit(type="submit" disabled) Скачать
 				
