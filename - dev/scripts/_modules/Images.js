@@ -145,6 +145,10 @@ var Images = (function () {
             success: function (data) {
                 console.log('success');
                 console.log(data);
+
+                if(data.status === 'error'){
+                    alert(data.message);
+                }
             },
             error: function (e) {
                 console.log('error');
