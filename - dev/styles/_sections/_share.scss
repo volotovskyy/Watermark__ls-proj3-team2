@@ -1,0 +1,80 @@
+.share{
+	position: fixed;
+	width: 43px;
+	height: 124px;
+	top: 270px;
+	left: -42px;
+	box-sizing: border-box;
+	transition: (0.3s);
+	&:hover{
+		transition: (0.3s);
+		left: 0;
+	}
+	&-box{
+		background-color: rgba(255, 255, 255, 0.6);
+		padding: 4px 5px;
+    	box-sizing: border-box;
+		width: 43px;
+		height: 41px;
+	}
+	&-btn{
+		height: 100%;
+		width: 100%;
+		display: block;
+		margin: auto;
+		cursor: pointer;		
+	}
+	
+	&__like{
+		float: right;
+		margin-right: -42px;
+		width: 42px;
+		&_btn{
+			@include get-sprite($common-sprite, like);
+
+			&:hover{
+				@include get-sprite($common-sprite, like-hover);
+			}
+		}
+	}
+	&__fb{
+		padding-top: 5px;
+		&_btn{
+			@include get-sprite($common-sprite, fb);
+			background: url('../img/../img/icons-s04ebfe5b1f.png') 0 -516px no-repeat;
+    		height: 34px;
+    		width: 15px;
+			
+			&:hover{
+				@include get-sprite($common-sprite, fb-hover);
+				background: url('../img/../img/icons-s04ebfe5b1f.png') 0 -419px no-repeat;
+    			height: 30px;
+    			width: 18px;
+			}
+		}
+	}
+	&__tw{
+		padding-top: 10px;
+		&_btn{
+			@include get-sprite($common-sprite, tw);
+			&:hover{
+				@include get-sprite($common-sprite, tw-hover);
+			}
+		}
+	}
+	&__vk{
+		padding-top: 10px;
+		&_btn{
+			@include get-sprite($common-sprite, vk);
+			background: url('../img/../img/icons-s04ebfe5b1f.png') 0 -1959px no-repeat;
+			height: 22px;
+			width: 32px;
+			&:hover{
+				@include get-sprite($common-sprite, vk-hover);
+			    background: url('../img/../img/icons-s04ebfe5b1f.png') 0 -1871px no-repeat;
+				height: 20px;
+				width: 32px;
+			}
+		}		
+	}
+}

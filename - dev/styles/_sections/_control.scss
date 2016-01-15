@@ -137,6 +137,9 @@ $common-sprite: sprite-map("../img/icons/*.png", $spacing: 70px);
 			&-active{
 				@include get-sprite($common-sprite, waterposition-active);
 			}
+            &:hover{
+				@include get-sprite($common-sprite, waterposition-active);
+			}
 		}
 		
 		&-tessel{
