@@ -60,40 +60,6 @@ var width = Base = (function () {
         };
     };
 
-    var _loadMainImage = function () {
-        _inputWatermarkEnable();
-        Scale.mainImage();
-    };
-
-    var _loadWaterMark = function () {
-        Scale.watermark();
-        _transparency();
-        _addDragAndDrop();
-    };
-
-    var _addDragAndDrop = function () {
-        $('.watermark-image').draggable({
-            stop: function () {
-                var pos = Position.get();
-
-                Base.trigger('position:set', pos);
-            }
-        });
-    };
-
-    var _inputWatermarkEnable = function () {
-        var
-            input = globalParameters.watermarkImageInput,
-            wrapper = globalParameters.watermarkImageInputWrapper;
-
-        input.prop('disabled', false);
-        wrapper.prop('disabled', false);
-    };
-
-    var _transparency = function (percent) {
-        Transparency.set(percent);
-    };
-
     var _position = function (pos) {
         Position.set(pos);
     };
@@ -119,12 +85,12 @@ var width = Base = (function () {
 
         trigger: function (event, params) {
             switch (event) {
-                case 'loadMainImage':
-                    _loadMainImage();
-                    break;
-                case 'loadWatermark':
-                    _loadWaterMark();
-                    break;
+                //case 'loadMainImage':
+                //    _loadMainImage();
+                //    break;
+                //case 'loadWatermark':
+                //    _loadWaterMark();
+                //    break;
                 case 'transparency':
                     _transparency(params);
                     break;

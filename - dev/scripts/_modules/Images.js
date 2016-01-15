@@ -77,6 +77,33 @@ var Images = (function () {
         Scale.watermark(image, function () {
             $img.attr('src', image);
         });
+
+        _setWatermarkSettings($img);
+    };
+
+    function _setWatermarkSettings($img){
+        Transparency.init($img);
+        _addDragAndDrop($img);
+        _inputWatermarkEnable();
+    }
+
+    function _addDragAndDrop($img) {
+        $img.draggable({
+            stop: function () {
+                var pos = Position.get();
+
+                Base.trigger('position:set', pos);
+            }
+        });
+    };
+
+    function _inputWatermarkEnable () {
+        var
+            input = globalParameters.watermarkImageInput,
+            wrapper = globalParameters.watermarkImageInputWrapper;
+
+        input.prop('disabled', false);
+        wrapper.prop('disabled', false);
     };
 
     function _loadMainImage(e) {
