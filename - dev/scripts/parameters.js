@@ -16,7 +16,7 @@ globalParameters = {
     classMainImage: 'main-image',
     classWatermarkImage: 'watermark-image',
 
-    buttonResetId: '#reset',
+    buttonResetId: $('#reset'),
     buttonSubmit: $('#submit'),
 
     gridClass: '.position__point',

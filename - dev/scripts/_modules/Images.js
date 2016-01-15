@@ -6,13 +6,40 @@ var Images = (function () {
         $inputImage1 = globalParameters.mainImageInput,
         $inputImage2 = globalParameters.watermarkImageInput,
 
-        $submit = globalParameters.buttonSubmit;
+        $reset = globalParameters.buttonResetId;
+        $submit = globalParameters.buttonSubmit
+
+        first = true;
+
+
+    // -------- performed once
+    var  _firstSelection = function(){
+        $submit.prop('disabled', false);
+        $reset.prop('disabled', false);
+        $('.panel').hide();
+
+        _firstSelection = function(){};
+    };
+    var  _inputWatermarkEnable = function () {
+        var
+            input = globalParameters.watermarkImageInput,
+            wrapper = globalParameters.watermarkImageInputWrapper;
+
+        input.prop('disabled', false);
+        wrapper.prop('disabled', false);
+        $('.form__watermark-input-disabled').hide();
+
+        _inputWatermarkEnable = function(){};
+    };
+
+    // --------
+
 
     function _eventListener() {
         $inputImage1.on('change', _loadMainImage);
         $inputImage2.on('change', _loadWatermark);
 
-        $submit.on('click', _save);
+        $submit.on('click', _upload);
     }
 
     function _changeFileUploadImage() {
@@ -29,7 +56,7 @@ var Images = (function () {
         $watermarkName.val(filepath)
     }
 
-    var _loadImg = function (e, callback) {
+    function _loadImg (e, callback) {
         if (window.File && window.FileReader && window.FileList && window.Blob) {
             var file = e.target.files[0];
 
@@ -80,7 +107,10 @@ var Images = (function () {
         });
 
         _setWatermarkSettings($img);
+        _firstSelection();
     }
+
+
 
     function _setWatermarkSettings($img) {
         Transparency.init($img);
@@ -96,15 +126,7 @@ var Images = (function () {
         });
     }
 
-    function _inputWatermarkEnable() {
-        var
-            input = globalParameters.watermarkImageInput,
-            wrapper = globalParameters.watermarkImageInputWrapper;
 
-        input.prop('disabled', false);
-        wrapper.prop('disabled', false);
-        $('.panel').hide();
-    }
 
     function _loadMainImage(e) {
         _loadImg(e, function (e) {
@@ -127,7 +149,7 @@ var Images = (function () {
         _changeFileUploadWatermark();
     }
 
-    function _save(e) {
+    function _upload(e) {
         e.preventDefault();
         var fd = new FormData,
             url = globalParameters.url,
@@ -154,14 +176,22 @@ var Images = (function () {
             contentType: false,
             type: 'POST',
             success: function (data) {
-                console.log('success');
-                console.log(data);
+                _save(data);
             },
             error: function (e) {
                 console.log('error');
                 console.log(e);
             }
         })
+    }
+
+    function _save(data){
+        //var url = 'http://dz3/' + url;
+        var link = document.createElement('a');
+        link.target = "_blank";
+        link.download = "img.jpg";
+        link.href = data.result;
+        link.click();
     }
 
     return {

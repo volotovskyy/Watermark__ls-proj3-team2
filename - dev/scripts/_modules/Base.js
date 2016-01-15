@@ -41,7 +41,7 @@ var Base = (function () {
                 }
             }
         },
-        $reset = $(globalParameters.buttonResetId),
+        $reset = globalParameters.buttonResetId,
         $mainContainer = globalParameters.mainContainer;
 
     function _initModules () {
@@ -66,25 +66,17 @@ var Base = (function () {
         Slider.set(transparency);
     }
 
-    var _setSettings = function () {
+    function _setSettings () {
         settings.window.size = {
             width: $mainContainer.width(),
             height: $mainContainer.height()
         };
-    };
+    }
 
     function _position(pos) {
         Position.set(pos);
     }
 
-    var _positionAdd = function (pos) {
-        Position.add(pos);
-    };
-
-    var _positionChange = function (pos) {
-        var position = pos || Position.get();
-        Inputs.set(position);
-    };
 
     return {
         init: function () {
