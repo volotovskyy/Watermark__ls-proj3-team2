@@ -7,12 +7,13 @@ var Inputs = (function () {
 
         $x.on('keyup',function(){
             var position = [$x.val()];
-            Base.trigger('position:set',position);
+            Position.set(position);
+
         });
 
         $y.on('keyup',function(){
             var position = [undefined, $y.val()];
-            Base.trigger('position:set',position);
+            Position.set(position);
         });
 
     };

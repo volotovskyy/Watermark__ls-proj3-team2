@@ -9,15 +9,13 @@
 }
 
 .work__workplace{
-
+    background-repeat: no-repeat;
+    background-position: center;
+    overflow: hidden;
 }
 .work__img{
     position: relative;
     overflow: hidden;
-}
-
-.main-image{
-    display: none;
 }
 
 .work__img-block {

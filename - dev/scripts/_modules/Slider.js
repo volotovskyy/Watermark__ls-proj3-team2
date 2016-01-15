@@ -8,16 +8,11 @@ var Slider = (function () {
             range: "min",
             value: globalParameters.defaults.transparency,
             min: 1,
-            change: _change,
             max: 100,
             slide: function (event, ui) {
-                $("#amount").val("$" + ui.value);
+                Transparency.set(ui.value);
             }
         });
-    };
-
-    var _change = function (e, slider) {
-        Base.trigger('transparency', slider.value)
     };
 
     return {

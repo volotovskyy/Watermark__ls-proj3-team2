@@ -1,9 +1,6 @@
 var Images = (function () {
     var
-        $image = globalParameters.mainImageInput,
         $imageName = globalParameters.mainImageInputWrapper,
-
-        $watermark = globalParameters.watermarkImageInput,
         $watermarkName = globalParameters.watermarkImageInputWrapper,
 
         $inputImage1 = globalParameters.mainImageInput,
@@ -11,31 +8,28 @@ var Images = (function () {
 
         $submit = globalParameters.buttonSubmit;
 
-    var _eventListener = function () {
-        $image.on('change', _changeFileUploadImage);
-        $watermark.on('change', _changeFileUploadWatermark);
-
+    function _eventListener() {
         $inputImage1.on('change', _loadMainImage);
         $inputImage2.on('change', _loadWatermark);
 
         $submit.on('click', _save);
-    };
+    }
 
-    var _changeFileUploadImage = function () {
-        var filepath = $image.val();
+    function _changeFileUploadImage() {
+        var filepath = $inputImage1.val();
 
         filepath = filepath.replace(/c:\\fakepath\\/gmi, "");
         $imageName.val(filepath);
-    };
+    }
 
-    var _changeFileUploadWatermark = function () {
-        var filepath = $watermark.val();
+    function _changeFileUploadWatermark() {
+        var filepath = $inputImage2.val();
 
         filepath = filepath.replace(/c:\\fakepath\\/gmi, "");
         $watermarkName.val(filepath)
-    };
+    }
 
-    var _loadImg = function (e, func) {
+    var _loadImg = function (e, callback) {
         if (window.File && window.FileReader && window.FileList && window.Blob) {
             var file = e.target.files[0];
 
@@ -48,7 +42,7 @@ var Images = (function () {
             var reader = new FileReader();
 
             reader.onload = (function (f) {
-                return func;
+                return callback;
             })(file);
 
             reader.readAsDataURL(file);
@@ -60,81 +54,98 @@ var Images = (function () {
 
 
     var _setBackGround = function (image, $contaitener, class_) {
-        var img = document.createElement('img'),
+        var
             url = 'url(' + image + ')';
 
-        $contaitener
-            .css('background-image', url)
-            .append(img)
-            .find('.' + class_)
-            .remove();
+        Scale.mainImage(image, function () {
+            $contaitener.css('background-image', url);
+            Scale.scaleWatermark();
+            Position.refresh();
+        });
 
-        $(img)
-            .one('load', function () {
-                Base.trigger('loadMainImage');
-            })
-            .attr('src', image)
-            .addClass(class_);
 
     };
 
-    var _setImage = function (image, $contaitener, class_) {
-        var img = document.createElement('img');
+    function _setImageWatermark(image, $contaitener, class_) {
+        var $img = $('<img class="' + class_ + '">');
 
         $contaitener
-            .append(img)
             .find('.' + class_)
             .remove();
 
-        $(img)
-            .one('load', function () {
-                Base.trigger('loadWatermark');
-            })
-            .attr('src', image)
-            .addClass(class_);
+        $contaitener.append($img);
 
-    };
+        Scale.watermark(image, function () {
+            $img.attr('src', image);
+        });
 
-    var _loadMainImage = function (e) {
+        _setWatermarkSettings($img);
+    }
+
+    function _setWatermarkSettings($img){
+        Transparency.init($img);
+        _addDragAndDrop($img);
+        _inputWatermarkEnable();
+    }
+
+    function _addDragAndDrop($img) {
+        $img.draggable({
+            drag: function (e,drag) {
+                Position.set([drag.position.left,drag.position.top]);
+            },
+            containment: "parent"
+        });
+    }
+
+    function _inputWatermarkEnable () {
+        var
+            input = globalParameters.watermarkImageInput,
+            wrapper = globalParameters.watermarkImageInputWrapper;
+
+        input.prop('disabled', false);
+        wrapper.prop('disabled', false);
+    }
+
+    function _loadMainImage(e) {
         _loadImg(e, function (e) {
             var $container = globalParameters.mainContainer,
                 class_ = globalParameters.classMainImage,
                 image = e.target.result;
-
             _setBackGround(image, $container, class_);
         });
+        _changeFileUploadImage();
+    }
 
-    };
+    function _loadWatermark(e) {
+        _loadImg(e, function (e) {
+            var $container = globalParameters.watermarkContainer,
+                class_ = globalParameters.classWatermarkImage,
+                image = e.target.result;
 
-    var
-        _loadWatermark = function (e) {
-            _loadImg(e, function (e) {
-                var $container = globalParameters.watermarkContainer,
-                    class_ = globalParameters.classWatermarkImage,
-                    image = e.target.result;
+            _setImageWatermark(image, $container, class_);
+        });
+        _changeFileUploadWatermark();
+    }
 
-                _setImage(image, $container, class_);
-            });
-        };
-
-    var _save = function (e) {
+    function _save (e) {
         e.preventDefault();
         var fd = new FormData,
             url = globalParameters.url,
             opacity = Slider.get(),
-            position = Position.get();
+            position = Position.get()
+            x = Math.floor(position[0]*Base.settings.scale),
+            y = Math.floor(position[1]*Base.settings.scale);
 
         if ($inputImage1.prop('files').length === 0 || $inputImage2.prop('files').length === 0) {
             alert('Сначала выберите изображение');
             //TODO print message
             return;
         }
-
         fd.append('img1', $inputImage1.prop('files')[0]);
         fd.append('img2', $inputImage2.prop('files')[0]);
         fd.append('opacity', opacity);
-        fd.append('positionX', position[0]);
-        fd.append('positionY', position[1]);
+        fd.append('positionX', x);
+        fd.append('positionY', y);
 
         $.ajax({
             url: url,
@@ -151,7 +162,7 @@ var Images = (function () {
                 console.log(e);
             }
         })
-    };
+    }
 
     return {
 
@@ -160,18 +171,16 @@ var Images = (function () {
         },
 
         getSizeMainImage: function () {
-            var $image = $('.' + globalParameters.classMainImage);
             return {
-                width: $image.width(),
-                height: $image.height()
+                width: Base.settings.wrapper.size.width,
+                height: Base.settings.wrapper.size.height
             }
         },
 
         getSizeWatermark: function(){
-            var $image = $('.' + globalParameters.classWatermarkImage);
             return {
-                width: $image.width(),
-                height: $image.height()
+                width: Base.settings.watermark.scaleSize.width,
+                height: Base.settings.watermark.scaleSize.height
             }
         }
 

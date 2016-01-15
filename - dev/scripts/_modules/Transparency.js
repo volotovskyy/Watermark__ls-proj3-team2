@@ -1,5 +1,6 @@
 var Transparency = (function () {
-    var lastPercent = globalParameters.defaults.transparency;
+    var lastPercent = globalParameters.defaults.transparency,
+        $img;
 
     var _setTransparency = function (percent) {
         if (percent === undefined)percent = lastPercent;
@@ -13,6 +14,10 @@ var Transparency = (function () {
     };
 
     return {
-        set: _setTransparency
+        set: _setTransparency,
+        init: function($image){
+            $img = $image;
+            _setTransparency();
+        }
     }
 }());

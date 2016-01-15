@@ -83,6 +83,10 @@ var Position = (function () {
             this.set([x, y]);
         },
 
+        refresh: function(){
+          this.add([0,0]);
+        },
+
         get: function () {
             var
                 $image = $(imageClass),
