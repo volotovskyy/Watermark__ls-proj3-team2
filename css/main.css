@@ -2,7 +2,6 @@
 
 
 
-
 .main-image,.watermark-image{
   max-width: 100%;
   max-height: 100%;
@@ -14,7 +13,6 @@
 
 .work__workplace{
   background-repeat: no-repeat;
-  /*background-size: contain;*/
   background-position: center;
   overflow: hidden;
 }
@@ -22,8 +20,6 @@
   position: relative;
   overflow: hidden;
 }
-
-
 
 .work__img-block {
     position: relative;
