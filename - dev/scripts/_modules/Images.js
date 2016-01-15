@@ -60,6 +60,7 @@ var Images = (function () {
         Scale.mainImage(image, function () {
             $contaitener.css('background-image', url);
             Scale.scaleWatermark();
+            Position.refresh();
         });
 
 
@@ -92,7 +93,7 @@ var Images = (function () {
             stop: function () {
                 var pos = Position.get();
 
-                Base.trigger('position:set', pos);
+                Position.set(pos);
             }
         });
     };

@@ -42,15 +42,28 @@ var width = Base = (function () {
                 }
             }
         },
+        $reset = globalParameters.buttonReset,
         mainContainer = globalParameters.mainContainer;
 
     var _initModules = function () {
         Images.init();
-        ControlPanel.init();
+        Slider.init();
+        Spiners.init();
+        Inputs.init();
     };
 
-    var _setDefault = function () {
-        //TODO set default
+    var _eventListener = function () {
+        $reset.on('click', _setDefault);
+    };
+
+    var _setDefault = function (e) {
+        e.preventDefault();
+
+        var
+            pos = globalParameters.defaults.position,
+            transparency = globalParameters.defaults.transparency;
+        _position(pos);
+        Slider.set(transparency);
     };
 
     var _setSettings = function () {
@@ -76,7 +89,7 @@ var width = Base = (function () {
     return {
         init: function () {
             _initModules();
-            _setDefault();
+            _eventListener();
             _setSettings();
         },
 
@@ -85,18 +98,6 @@ var width = Base = (function () {
 
         trigger: function (event, params) {
             switch (event) {
-                //case 'loadMainImage':
-                //    _loadMainImage();
-                //    break;
-                //case 'loadWatermark':
-                //    _loadWaterMark();
-                //    break;
-                case 'transparency':
-                    _transparency(params);
-                    break;
-                case 'position:set':
-                    _position(params);
-                    break;
                 case 'position:add':
                     _positionAdd(params);
                     break;
