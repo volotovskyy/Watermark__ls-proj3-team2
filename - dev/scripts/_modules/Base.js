@@ -94,18 +94,6 @@ var Base = (function () {
         },
 
         event: event,
-        settings: settings,
-
-        trigger: function (event, params) {
-            switch (event) {
-                case 'position:add':
-                    _positionAdd(params);
-                    break;
-                case 'position:change':
-                    _positionChange(params);
-                    //TODO inputs change
-                    break;
-            }
-        }
+        settings: settings
     }
 }());

@@ -53,7 +53,7 @@ var Images = (function () {
     };
 
 
-    var _setBackGround = function (image, $contaitener, class_) {
+    function _setBackGround(image, $contaitener, class_) {
         var
             url = 'url(' + image + ')';
 
@@ -61,10 +61,10 @@ var Images = (function () {
             $contaitener.css('background-image', url);
             Scale.scaleWatermark();
             Position.refresh();
+            _inputWatermarkEnable();
         });
 
-
-    };
+    }
 
     function _setImageWatermark(image, $contaitener, class_) {
         var $img = $('<img class="' + class_ + '">');
@@ -82,28 +82,28 @@ var Images = (function () {
         _setWatermarkSettings($img);
     }
 
-    function _setWatermarkSettings($img){
+    function _setWatermarkSettings($img) {
         Transparency.init($img);
         _addDragAndDrop($img);
-        _inputWatermarkEnable();
     }
 
     function _addDragAndDrop($img) {
         $img.draggable({
-            drag: function (e,drag) {
-                Position.set([drag.position.left,drag.position.top]);
+            drag: function (e, drag) {
+                Position.set([drag.position.left, drag.position.top]);
             },
             containment: "parent"
         });
     }
 
-    function _inputWatermarkEnable () {
+    function _inputWatermarkEnable() {
         var
             input = globalParameters.watermarkImageInput,
             wrapper = globalParameters.watermarkImageInputWrapper;
 
         input.prop('disabled', false);
         wrapper.prop('disabled', false);
+        $('.panel').hide();
     }
 
     function _loadMainImage(e) {
@@ -127,14 +127,14 @@ var Images = (function () {
         _changeFileUploadWatermark();
     }
 
-    function _save (e) {
+    function _save(e) {
         e.preventDefault();
         var fd = new FormData,
             url = globalParameters.url,
             opacity = Slider.get(),
             position = Position.get()
-            x = Math.floor(position[0]*Base.settings.scale),
-            y = Math.floor(position[1]*Base.settings.scale);
+        x = Math.floor(position[0] * Base.settings.scale),
+            y = Math.floor(position[1] * Base.settings.scale);
 
         if ($inputImage1.prop('files').length === 0 || $inputImage2.prop('files').length === 0) {
             alert('Сначала выберите изображение');
@@ -177,7 +177,7 @@ var Images = (function () {
             }
         },
 
-        getSizeWatermark: function(){
+        getSizeWatermark: function () {
             return {
                 width: Base.settings.watermark.scaleSize.width,
                 height: Base.settings.watermark.scaleSize.height

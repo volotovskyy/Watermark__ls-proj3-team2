@@ -61,7 +61,8 @@ var Position = (function () {
                 $image.css('top', y);
             }
 
-            Base.trigger('position:change', pos);
+            Inputs.set(this.get());
+            Grid.setNoActivePoints();
         },
 
         add: function (pos) {

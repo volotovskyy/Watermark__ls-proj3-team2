@@ -9,22 +9,22 @@ var Spiners = (function () {
     var _eventListener = function () {
 
         $xu.on('click', function(){
-            Base.trigger('position:add', [1, 0]);
+            Position.add([1, 0]);
 
         });
 
         $xd.on('click', function(){
-            Base.trigger('position:add', [-1, 0]);
+                Position.add([-1, 0]);
 
         });
 
         $yu.on('click', function(){
-            Base.trigger('position:add', [0, 1]);
+                Position.add([0, 1]);
 
         });
 
         $yd.on('click', function(){
-            Base.trigger('position:add', [0, -1]);
+                Position.add([0, -1]);
 
         });
     };

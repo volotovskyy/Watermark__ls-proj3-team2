@@ -1,10 +1,10 @@
 var globalParameters;
 globalParameters = {
-    mainContainer: $('.work__workplace'),
-    watermarkContainer: $('.work__img'),
+    //mainContainer: $('.work__workplace'),
+    //watermarkContainer: $('.work__img'),
 
-    //mainContainer: $('.work__img-block'),
-    //watermarkContainer: $('.work__watermark-block'),
+    mainContainer: $('.work__img-block'),
+    watermarkContainer: $('.work__watermark-block'),
 
 
     mainImageInput: $('#main_img'),

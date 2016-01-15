@@ -188,6 +188,10 @@ $common-sprite: sprite-map("../img/icons/*.png", $spacing: 70px);
 			background-color: #f97e76;
 			cursor: pointer;
 		}
+	  &.active{
+		background-color: #f97e76;
+		cursor: pointer;
+	  }
 	}
 	
 	&__custom{

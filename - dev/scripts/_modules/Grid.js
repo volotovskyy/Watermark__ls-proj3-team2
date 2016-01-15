@@ -3,7 +3,8 @@ var Grid = (function () {
         sizeGrid = {
             col:    3,
             row:    3
-        };
+        },
+        $activePoint = null;
 
     var _setSizeGrid = function(size){
         if(size != undefined && size[0] !== undefined)sizeGrid.col = size[0];
@@ -15,10 +16,15 @@ var Grid = (function () {
     };
 
     var _click = function (e) {
-        var index = $(this).index(),
+        var $this = $(this),
+            index = $this.index(),
             centerBlockPosition = _getCenterPositionBlockByIndex(index),
             pos = _watermarkCenterByPosition(centerBlockPosition);
+
         Position.set(pos);
+        setNoActivePoints();
+        $this.addClass('active');
+        $activePoint = $this;
     };
 
     var _getCenterPositionBlockByIndex = function (index) {
@@ -36,7 +42,7 @@ var Grid = (function () {
         ];
     };
 
-    var _watermarkCenterByPosition = function(pos){
+    function _watermarkCenterByPosition (pos){
         var size = Images.getSizeWatermark();
 
         return [
@@ -45,11 +51,18 @@ var Grid = (function () {
         ]
     };
 
-
+    function setNoActivePoints(){
+        if($activePoint){
+            $activePoint.removeClass('active');
+            $activePoint = null;
+        }
+    }
     return {
         init: function (sizeGrid) {
             _eventListener();
             _setSizeGrid(sizeGrid);
-        }
+        },
+
+        setNoActivePoints: setNoActivePoints
     }
 }());
