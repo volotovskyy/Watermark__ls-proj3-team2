@@ -14,7 +14,7 @@
 
 .work__workplace{
   background-repeat: no-repeat;
-  background-size: contain;
+  /*background-size: contain;*/
   background-position: center;
   overflow: hidden;
 }

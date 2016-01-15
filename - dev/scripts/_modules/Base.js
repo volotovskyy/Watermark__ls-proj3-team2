@@ -1,4 +1,49 @@
-var Base = (function () {
+var width = Base = (function () {
+    var event = $('<div></div>'),
+        settings = {
+            window: {
+                size: null
+            },
+
+            image: {
+                originalSize: {
+                    width: 0,
+                    height: 0
+                },
+                scaleSize: {
+                    width: 0,
+                    height: 0
+                },
+            },
+            scale: 1,
+
+            watermark: {
+                originalSize: {
+                    width: 0,
+                    height: 0
+                },
+                scaleSize: {
+                    width: 0,
+                    height: 0
+                },
+                position: {
+                    left: 0,
+                    top: 0
+                }
+            },
+            wrapper: {
+                size: {
+                    width: 0,
+                    height: 0
+                },
+                position: {
+                    left: 0,
+                    top: 0
+                }
+            }
+        },
+        mainContainer = globalParameters.mainContainer;
+
     var _initModules = function () {
         Images.init();
         ControlPanel.init();
@@ -6,6 +51,13 @@ var Base = (function () {
 
     var _setDefault = function () {
         //TODO set default
+    };
+
+    var _setSettings = function () {
+        settings.window.size = {
+            width: mainContainer.width(),
+            height: mainContainer.height()
+        };
     };
 
     var _loadMainImage = function () {
@@ -19,12 +71,12 @@ var Base = (function () {
         _addDragAndDrop();
     };
 
-    var _addDragAndDrop = function(){
+    var _addDragAndDrop = function () {
         $('.watermark-image').draggable({
-            stop: function(){
+            stop: function () {
                 var pos = Position.get();
 
-                Base.trigger('position:set',pos);
+                Base.trigger('position:set', pos);
             }
         });
     };
@@ -59,7 +111,11 @@ var Base = (function () {
         init: function () {
             _initModules();
             _setDefault();
+            _setSettings();
         },
+
+        event: event,
+        settings: settings,
 
         trigger: function (event, params) {
             switch (event) {

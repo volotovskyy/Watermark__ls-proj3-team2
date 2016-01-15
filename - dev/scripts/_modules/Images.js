@@ -1,9 +1,6 @@
 var Images = (function () {
     var
-        $image = globalParameters.mainImageInput,
         $imageName = globalParameters.mainImageInputWrapper,
-
-        $watermark = globalParameters.watermarkImageInput,
         $watermarkName = globalParameters.watermarkImageInputWrapper,
 
         $inputImage1 = globalParameters.mainImageInput,
@@ -11,31 +8,28 @@ var Images = (function () {
 
         $submit = globalParameters.buttonSubmit;
 
-    var _eventListener = function () {
-        $image.on('change', _changeFileUploadImage);
-        $watermark.on('change', _changeFileUploadWatermark);
-
+    function _eventListener() {
         $inputImage1.on('change', _loadMainImage);
         $inputImage2.on('change', _loadWatermark);
 
         $submit.on('click', _save);
     };
 
-    var _changeFileUploadImage = function () {
-        var filepath = $image.val();
+    function _changeFileUploadImage() {
+        var filepath = $inputImage1.val();
 
         filepath = filepath.replace(/c:\\fakepath\\/gmi, "");
         $imageName.val(filepath);
     };
 
-    var _changeFileUploadWatermark = function () {
-        var filepath = $watermark.val();
+    function _changeFileUploadWatermark() {
+        var filepath = $inputImage2.val();
 
         filepath = filepath.replace(/c:\\fakepath\\/gmi, "");
         $watermarkName.val(filepath)
     };
 
-    var _loadImg = function (e, func) {
+    var _loadImg = function (e, callback) {
         if (window.File && window.FileReader && window.FileList && window.Blob) {
             var file = e.target.files[0];
 
@@ -48,7 +42,7 @@ var Images = (function () {
             var reader = new FileReader();
 
             reader.onload = (function (f) {
-                return func;
+                return callback;
             })(file);
 
             reader.readAsDataURL(file);
@@ -60,61 +54,51 @@ var Images = (function () {
 
 
     var _setBackGround = function (image, $contaitener, class_) {
-        var img = document.createElement('img'),
+        var
             url = 'url(' + image + ')';
 
-        $contaitener
-            .css('background-image', url)
-            .append(img)
-            .find('.' + class_)
-            .remove();
+        Scale.mainImage(image, function () {
+            $contaitener.css('background-image', url);
+            Scale.scaleWatermark();
+        });
 
-        $(img)
-            .one('load', function () {
-                Base.trigger('loadMainImage');
-            })
-            .attr('src', image)
-            .addClass(class_);
-    };
-
-    var _setImage = function (image, $contaitener, class_) {
-        var img = document.createElement('img');
-
-        $contaitener
-            .append(img)
-            .find('.' + class_)
-            .remove();
-
-        $(img)
-            .one('load', function () {
-                Base.trigger('loadWatermark');
-            })
-            .attr('src', image)
-            .addClass(class_);
 
     };
 
-    var _loadMainImage = function (e) {
+    function _setImageWatermark(image, $contaitener, class_) {
+        var $img = $('<img class="' + class_ + '">');
+
+        $contaitener
+            .find('.' + class_)
+            .remove();
+
+        $contaitener.append($img);
+
+        Scale.watermark(image, function () {
+            $img.attr('src', image);
+        });
+    };
+
+    function _loadMainImage(e) {
         _loadImg(e, function (e) {
             var $container = globalParameters.mainContainer,
                 class_ = globalParameters.classMainImage,
                 image = e.target.result;
-
             _setBackGround(image, $container, class_);
         });
-
+        _changeFileUploadImage();
     };
 
-    var
-        _loadWatermark = function (e) {
-            _loadImg(e, function (e) {
-                var $container = globalParameters.watermarkContainer,
-                    class_ = globalParameters.classWatermarkImage,
-                    image = e.target.result;
+    function _loadWatermark(e) {
+        _loadImg(e, function (e) {
+            var $container = globalParameters.watermarkContainer,
+                class_ = globalParameters.classWatermarkImage,
+                image = e.target.result;
 
-                _setImage(image, $container, class_);
-            });
-        };
+            _setImageWatermark(image, $container, class_);
+        });
+        _changeFileUploadWatermark();
+    };
 
     var _save = function (e) {
         e.preventDefault();
@@ -156,6 +140,7 @@ var Images = (function () {
 
         init: function () {
             _eventListener();
+
         }
 
     }
