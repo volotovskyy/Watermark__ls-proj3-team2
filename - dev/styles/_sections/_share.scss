@@ -6,10 +6,12 @@
 	left: -42px;
 	box-sizing: border-box;
 	transition: (0.3s);
+
 	&:hover{
 		transition: (0.3s);
 		left: 0;
 	}
+
 	&-box{
 		background-color: rgba(255, 255, 255, 0.6);
 		padding: 4px 5px;
@@ -17,6 +19,7 @@
 		width: 43px;
 		height: 41px;
 	}
+
 	&-btn{
 		height: 100%;
 		width: 100%;
@@ -29,6 +32,7 @@
 		float: right;
 		margin-right: -42px;
 		width: 42px;
+
 		&_btn{
 			@include get-sprite($common-sprite, like);
 
@@ -37,8 +41,10 @@
 			}
 		}
 	}
+
 	&__fb{
 		padding-top: 5px;
+
 		&_btn{
 			@include get-sprite($common-sprite, fb);
 			background: url('../img/../img/icons-s04ebfe5b1f.png') 0 -516px no-repeat;
@@ -53,22 +59,28 @@
 			}
 		}
 	}
+
 	&__tw{
 		padding-top: 10px;
+
 		&_btn{
 			@include get-sprite($common-sprite, tw);
+
 			&:hover{
 				@include get-sprite($common-sprite, tw-hover);
 			}
 		}
 	}
+
 	&__vk{
 		padding-top: 10px;
+
 		&_btn{
 			@include get-sprite($common-sprite, vk);
 			background: url('../img/../img/icons-s04ebfe5b1f.png') 0 -1959px no-repeat;
 			height: 22px;
 			width: 32px;
+
 			&:hover{
 				@include get-sprite($common-sprite, vk-hover);
 			    background: url('../img/../img/icons-s04ebfe5b1f.png') 0 -1871px no-repeat;
