@@ -1,38 +1,45 @@
-var globalParameters = {
-    mainContainer:              $('.work__workplace'),
-    watermarkContainer:         $('.work__img'),
+var globalParameters;
+globalParameters = {
+    mainContainer: $('.work__workplace'),
+    watermarkContainer: $('.work__img'),
 
-    mainImageInput:             $('#main_img'),
-    mainImageInputWrapper:      $('#main_img_name'),
+    //mainContainer: $('.work__img-block'),
+    //watermarkContainer: $('.work__watermark-block'),
 
-    watermarkImageInput:        $('#watermark'),
+
+    mainImageInput: $('#main_img'),
+    mainImageInputWrapper: $('#main_img_name'),
+
+    watermarkImageInput: $('#watermark'),
     watermarkImageInputWrapper: $('#watermark-name'),
 
-    classMainImage:             'main-image',
-    classWatermarkImage:        'watermark-image',
+    classMainImage: 'main-image',
+    classWatermarkImage: 'watermark-image',
 
-    buttonReset:                $('#reset'),
-    buttonSubmit:                $('#submit'),
+    buttonResetId: '#reset',
+    buttonSubmit: $('#submit'),
 
-    controlPanel:{
+    gridClass: '.position__point',
 
-        spiners:{
-            $xu:                $('#upX'),
-            $xd:                $('#downX'),
-            $yu:                $('#upY'),
-            $yd:                $('#downY')
+    controlPanel: {
+
+        spiners: {
+            $xu: $('#upX'),
+            $xd: $('#downX'),
+            $yu: $('#upY'),
+            $yd: $('#downY')
         },
 
-        inputs:{
-            $x:                 $('#moveX'),
-            $y:                 $('#moveY')
+        inputs: {
+            $x: $('#moveX'),
+            $y: $('#moveY')
         }
     },
 
-    defaults:   {
+    defaults: {
         transparency: 50,        // persents
-        position:     [10,10]
+        position: [10, 10]
     },
 
-    url : 'php/watermark.php'
+    url: 'php/watermark.php'
 };

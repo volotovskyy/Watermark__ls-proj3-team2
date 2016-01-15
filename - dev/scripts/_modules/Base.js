@@ -1,6 +1,5 @@
-var width = Base = (function () {
-    var event = $('<div></div>'),
-        settings = {
+var Base = (function () {
+    var settings = {
             window: {
                 size: null
             },
@@ -42,21 +41,22 @@ var width = Base = (function () {
                 }
             }
         },
-        $reset = globalParameters.buttonReset,
-        mainContainer = globalParameters.mainContainer;
+        $reset = $(globalParameters.buttonResetId),
+        $mainContainer = globalParameters.mainContainer;
 
-    var _initModules = function () {
+    function _initModules () {
         Images.init();
         Slider.init();
         Spiners.init();
         Inputs.init();
-    };
+        Grid.init();
+    }
 
-    var _eventListener = function () {
+    function _eventListener() {
         $reset.on('click', _setDefault);
-    };
+    }
 
-    var _setDefault = function (e) {
+    function _setDefault (e) {
         e.preventDefault();
 
         var
@@ -64,18 +64,18 @@ var width = Base = (function () {
             transparency = globalParameters.defaults.transparency;
         _position(pos);
         Slider.set(transparency);
-    };
+    }
 
     var _setSettings = function () {
         settings.window.size = {
-            width: mainContainer.width(),
-            height: mainContainer.height()
+            width: $mainContainer.width(),
+            height: $mainContainer.height()
         };
     };
 
-    var _position = function (pos) {
+    function _position(pos) {
         Position.set(pos);
-    };
+    }
 
     var _positionAdd = function (pos) {
         Position.add(pos);

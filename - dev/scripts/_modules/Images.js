@@ -13,21 +13,21 @@ var Images = (function () {
         $inputImage2.on('change', _loadWatermark);
 
         $submit.on('click', _save);
-    };
+    }
 
     function _changeFileUploadImage() {
         var filepath = $inputImage1.val();
 
         filepath = filepath.replace(/c:\\fakepath\\/gmi, "");
         $imageName.val(filepath);
-    };
+    }
 
     function _changeFileUploadWatermark() {
         var filepath = $inputImage2.val();
 
         filepath = filepath.replace(/c:\\fakepath\\/gmi, "");
         $watermarkName.val(filepath)
-    };
+    }
 
     var _loadImg = function (e, callback) {
         if (window.File && window.FileReader && window.FileList && window.Blob) {
@@ -80,7 +80,7 @@ var Images = (function () {
         });
 
         _setWatermarkSettings($img);
-    };
+    }
 
     function _setWatermarkSettings($img){
         Transparency.init($img);
@@ -96,7 +96,7 @@ var Images = (function () {
                 Position.set(pos);
             }
         });
-    };
+    }
 
     function _inputWatermarkEnable () {
         var
@@ -105,7 +105,7 @@ var Images = (function () {
 
         input.prop('disabled', false);
         wrapper.prop('disabled', false);
-    };
+    }
 
     function _loadMainImage(e) {
         _loadImg(e, function (e) {
@@ -115,7 +115,7 @@ var Images = (function () {
             _setBackGround(image, $container, class_);
         });
         _changeFileUploadImage();
-    };
+    }
 
     function _loadWatermark(e) {
         _loadImg(e, function (e) {
@@ -126,9 +126,9 @@ var Images = (function () {
             _setImageWatermark(image, $container, class_);
         });
         _changeFileUploadWatermark();
-    };
+    }
 
-    var _save = function (e) {
+    function _save (e) {
         e.preventDefault();
         var fd = new FormData,
             url = globalParameters.url,
@@ -162,13 +162,26 @@ var Images = (function () {
                 console.log(e);
             }
         })
-    };
+    }
 
     return {
 
         init: function () {
             _eventListener();
+        },
 
+        getSizeMainImage: function () {
+            return {
+                width: Base.settings.wrapper.size.width,
+                height: Base.settings.wrapper.size.height
+            }
+        },
+
+        getSizeWatermark: function(){
+            return {
+                width: Base.settings.watermark.scaleSize.width,
+                height: Base.settings.watermark.scaleSize.height
+            }
         }
 
     }

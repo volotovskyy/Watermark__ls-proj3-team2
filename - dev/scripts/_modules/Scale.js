@@ -1,5 +1,5 @@
 var Scale = (function () {
-    var setScaleWaterMark = function (image, callback) {
+    function setScaleWaterMark(image, callback) {
         var img = new Image();
 
         img.onload = function () {
@@ -59,15 +59,14 @@ var Scale = (function () {
         };
 
         img.src = image;
+    }
 
-    };
 
     function center(wrapp, inner) {
         return Math.floor((wrapp - inner) / 2);
     }
 
     function setScaleMainImage(image, callback) {
-
         var
             $watermarkContainer = globalParameters.watermarkContainer,
             $mainContainer = globalParameters.mainContainer,
@@ -88,7 +87,7 @@ var Scale = (function () {
             callback();
         });
 
-    };
+    }
 
 
     return {

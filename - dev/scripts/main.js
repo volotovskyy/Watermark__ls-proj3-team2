@@ -1,6 +1,5 @@
-// opacity slider
-$(function () {
 
+$(function () {
     Base.init();
 
 });
