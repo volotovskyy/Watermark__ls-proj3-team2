@@ -18,7 +18,6 @@ var Grid = (function () {
         var index = $(this).index(),
             centerBlockPosition = _getCenterPositionBlockByIndex(index),
             pos = _watermarkCenterByPosition(centerBlockPosition);
-
         Position.set(pos);
     };
 

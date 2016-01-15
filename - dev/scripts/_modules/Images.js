@@ -90,11 +90,10 @@ var Images = (function () {
 
     function _addDragAndDrop($img) {
         $img.draggable({
-            stop: function () {
-                var pos = Position.get();
-
-                Position.set(pos);
-            }
+            drag: function (e,drag) {
+                Position.set([drag.position.left,drag.position.top]);
+            },
+            containment: "parent"
         });
     }
 

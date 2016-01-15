@@ -50,6 +50,7 @@ var Position = (function () {
             if (position === undefined) return;
 
             pos = _validPosition(pos);
+
             var x = pos[0],
                 y = pos[1];
 
