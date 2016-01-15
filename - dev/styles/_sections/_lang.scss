@@ -1,0 +1,52 @@
+.lang{
+    position: fixed;
+    width: 43px;
+    height: 69px;
+    top: 180px;
+    left: 0;
+
+    &__ru{
+        height: 35px;
+        width: 43px;
+        background-color: rgba(241, 241, 245, 0.7);
+		margin-bottom: 1px;
+		padding: 10px 5px;
+    	box-sizing: border-box;
+		
+        &_btn{
+            @include get-sprite($common-sprite, ru);
+			height: 18px;
+    		width: 34px;
+			display: block;
+			margin: auto;
+			cursor: pointer;
+            
+			&:hover{
+            @include get-sprite($common-sprite, ru-hover);
+			background: url('../img/../img/icons-s04ebfe5b1f.png') 0 -898px no-repeat;
+			height: 16px;
+			width: 31px;
+            }
+        }
+    }
+
+    &__en{
+        height: 35px;
+        width: 43px;
+        background-color: rgba(241, 241, 245, 0.7);
+		padding: 9px 4px;
+    	box-sizing: border-box;
+        &_btn{
+            @include get-sprite($common-sprite, en);
+			height: 100%;
+			width: 100%;
+			display: block;
+			margin: auto;
+			cursor: pointer;
+            
+			&:hover{
+            @include get-sprite($common-sprite, en-hover);
+            }
+        }
+    }
+}

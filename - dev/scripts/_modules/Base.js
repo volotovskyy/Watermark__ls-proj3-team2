@@ -1,51 +1,81 @@
 var Base = (function () {
-    var _initModules = function () {
-        Images.init();
-        ControlPanel.init();
-    };
+    var settings = {
+            window: {
+                size: null
+            },
 
-    var _setDefault = function () {
-        //TODO set default
-    };
+            image: {
+                originalSize: {
+                    width: 0,
+                    height: 0
+                },
+                scaleSize: {
+                    width: 0,
+                    height: 0
+                },
+            },
+            scale: 1,
 
-    var _loadMainImage = function () {
-        _inputWatermarkEnable();
-        Scale.mainImage();
-        _positionAdd([0,0]); // обновляем позицию watermark
-    };
-
-    var _loadWaterMark = function () {
-        Scale.watermark();
-        _transparency();
-        _addDragAndDrop();
-    };
-
-    var _addDragAndDrop = function(){
-        $('.watermark-image').draggable({
-            stop: function(){
-                var pos = Position.get();
-
-                Base.trigger('position:set',pos);
+            watermark: {
+                originalSize: {
+                    width: 0,
+                    height: 0
+                },
+                scaleSize: {
+                    width: 0,
+                    height: 0
+                },
+                position: {
+                    left: 0,
+                    top: 0
+                }
+            },
+            wrapper: {
+                size: {
+                    width: 0,
+                    height: 0
+                },
+                position: {
+                    left: 0,
+                    top: 0
+                }
             }
-        });
-    };
+        },
+        $reset = $(globalParameters.buttonResetId),
+        $mainContainer = globalParameters.mainContainer;
 
-    var _inputWatermarkEnable = function () {
+    function _initModules () {
+        Images.init();
+        Slider.init();
+        Spiners.init();
+        Inputs.init();
+        Grid.init();
+    }
+
+    function _eventListener() {
+        $reset.on('click', _setDefault);
+    }
+
+    function _setDefault (e) {
+        e.preventDefault();
+
         var
-            input = globalParameters.watermarkImageInput,
-            wrapper = globalParameters.watermarkImageInputWrapper;
+            pos = globalParameters.defaults.position,
+            transparency = globalParameters.defaults.transparency;
+        _position(pos);
+        Slider.set(transparency);
+    }
 
-        input.prop('disabled', false);
-        wrapper.prop('disabled', false);
+    var _setSettings = function () {
+        settings.window.size = {
+            width: $mainContainer.width(),
+            height: $mainContainer.height()
+        };
     };
 
-    var _transparency = function (percent) {
-        Transparency.set(percent);
-    };
-
-    var _position = function (pos) {
+    function _position(pos) {
         Position.set(pos);
-    };
+    }
 
     var _positionAdd = function (pos) {
         Position.add(pos);
@@ -59,23 +89,15 @@ var Base = (function () {
     return {
         init: function () {
             _initModules();
-            _setDefault();
+            _eventListener();
+            _setSettings();
         },
+
+        event: event,
+        settings: settings,
 
         trigger: function (event, params) {
             switch (event) {
-                case 'loadMainImage':
-                    _loadMainImage();
-                    break;
-                case 'loadWatermark':
-                    _loadWaterMark();
-                    break;
-                case 'transparency':
-                    _transparency(params);
-                    break;
-                case 'position:set':
-                    _position(params);
-                    break;
                 case 'position:add':
                     _positionAdd(params);
                     break;

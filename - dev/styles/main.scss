@@ -16,7 +16,6 @@
 
 @import "_misc/adjustment";
 
-
 /* --------- sections --------- */
 
 @import "_sections/_common.scss";
@@ -27,6 +26,14 @@
 
 @import "_sections/_footer.scss";
 
+@import "_sections/_lang.scss";
+
+@import "_sections/_share.scss";
+
 /* --------- widgets --------- */
 
 @import "_widgets/_slider.scss";
+
+/* ---------- fix ---------- */
+
+@import "_misc/_scripts.scss";
