@@ -85,7 +85,7 @@ var Base = (function () {
             _setSettings();
         },
 
-        event: event,
+        //event: event,
         settings: settings
     }
 }());

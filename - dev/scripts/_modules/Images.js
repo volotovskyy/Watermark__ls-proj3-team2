@@ -6,10 +6,13 @@ var Images = (function () {
         $inputImage1 = globalParameters.mainImageInput,
         $inputImage2 = globalParameters.watermarkImageInput,
 
-        $reset = globalParameters.buttonResetId;
-        $submit = globalParameters.buttonSubmit
+        $reset = globalParameters.buttonResetId,
+        $submit = globalParameters.buttonSubmit,
 
-        first = true;
+        first = true,
+
+        img1,
+        img2;
 
 
     // -------- performed once
@@ -77,7 +80,7 @@ var Images = (function () {
             alert('The File APIs are not fully supported in this browser.');
             //TODO  exit message
         }
-    };
+    }
 
 
     function _setBackGround(image, $contaitener, class_) {
@@ -129,24 +132,61 @@ var Images = (function () {
 
 
     function _loadMainImage(e) {
-        _loadImg(e, function (e) {
-            var $container = globalParameters.mainContainer,
-                class_ = globalParameters.classMainImage,
-                image = e.target.result;
-            _setBackGround(image, $container, class_);
-        });
+        _loadImg(e, ajaxMainImage);
         _changeFileUploadImage();
     }
 
     function _loadWatermark(e) {
-        _loadImg(e, function (e) {
-            var $container = globalParameters.watermarkContainer,
-                class_ = globalParameters.classWatermarkImage,
-                image = e.target.result;
-
-            _setImageWatermark(image, $container, class_);
-        });
+        _loadImg(e, ajaxWatermark);
         _changeFileUploadWatermark();
+    }
+
+    function ajaxMainImage(){
+        var fd = new FormData;
+
+        fd.append('img', $inputImage1.prop('files')[0]);
+
+        $.ajax({
+            url: 'php/image_load.php',
+            data: fd,
+            processData: false,
+            contentType: false,
+            type: 'POST',
+            success: function (data) {
+                if(data.status === 'ok'){
+                    _setBackGround(data.result, globalParameters.mainContainer, globalParameters.classMainImage);
+                    img1 = data.result;
+                }
+            },
+            error: function (e) {
+                console.log('error');
+                console.log(e);
+            }
+        })
+    }
+
+    function ajaxWatermark(){
+        var fd = new FormData;
+
+        fd.append('img', $inputImage2.prop('files')[0]);
+
+        $.ajax({
+            url: 'php/image_load.php',
+            data: fd,
+            processData: false,
+            contentType: false,
+            type: 'POST',
+            success: function (data) {
+                if(data.status === 'ok'){
+                    _setImageWatermark(data.result, globalParameters.watermarkContainer, globalParameters.classWatermarkImage);
+                    img2 = data.result;
+                }
+            },
+            error: function (e) {
+                console.log('error');
+                console.log(e);
+            }
+        })
     }
 
     function _upload(e) {
@@ -163,8 +203,8 @@ var Images = (function () {
             //TODO print message
             return;
         }
-        fd.append('img1', $inputImage1.prop('files')[0]);
-        fd.append('img2', $inputImage2.prop('files')[0]);
+        fd.append('img1', img1);
+        fd.append('img2', img2);
         fd.append('opacity', opacity);
         fd.append('positionX', x);
         fd.append('positionY', y);
