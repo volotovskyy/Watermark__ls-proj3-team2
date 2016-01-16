@@ -25,7 +25,10 @@
 	&__workplace{
 		height: 534px;
 		width: 651px;
-		background: #ffffff;
+		background-color: #ffffff;
+		background: url("../img/cats.jpeg");
+		background-size: 100%;
+		opacity: 1;
 		padding: 0 !important;
 		box-sizing: border-box;
 	}

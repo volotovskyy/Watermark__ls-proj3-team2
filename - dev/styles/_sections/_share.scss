@@ -1,11 +1,12 @@
 .share{
-	position: fixed;
+	position: absolute;
 	width: 43px;
 	height: 124px;
 	top: 270px;
-	left: -42px;
+	left: -43px;
 	box-sizing: border-box;
 	transition: (0.3s);
+	z-index: 1;
 
 	&:hover{
 		transition: (0.3s);

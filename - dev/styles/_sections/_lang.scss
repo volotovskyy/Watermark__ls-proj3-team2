@@ -1,9 +1,10 @@
 .lang{
-    position: fixed;
+    position: absolute;
     width: 43px;
     height: 69px;
     top: 180px;
     left: 0;
+	z-index: 1;
 
     &__ru{
         height: 35px;
