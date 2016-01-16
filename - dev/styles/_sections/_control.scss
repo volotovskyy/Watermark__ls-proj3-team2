@@ -135,7 +135,7 @@ $common-sprite: sprite-map("../img/icons/*.png", $spacing: 70px);
     		border: none;
 			float: right;
 			
-			&-active{
+			&.active{
 				@include get-sprite($common-sprite, waterposition-active);
 			}
             &:hover{
@@ -150,7 +150,7 @@ $common-sprite: sprite-map("../img/icons/*.png", $spacing: 70px);
 			margin-right: 5px;
 			float: left;
 			
-			&-active{
+			&.active{
 				@include get-sprite($common-sprite, tessel-active);
 			}
 			&:hover{
@@ -189,6 +189,10 @@ $common-sprite: sprite-map("../img/icons/*.png", $spacing: 70px);
 			background-color: #f97e76;
 			cursor: pointer;
 		}
+	  &.active{
+		background-color: #f97e76;
+		cursor: pointer;
+	  }
 	}
 	
 	&__custom{

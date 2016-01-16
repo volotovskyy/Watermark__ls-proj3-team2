@@ -11,7 +11,8 @@ block content
 			.work__workplace
 				.work__img-block
 					.work__watermark-block
-				
+						.work__watermark-wrapper
+
 		.control
 			.control__title
 				h3.control__header Настройки
@@ -41,19 +42,19 @@ block content
 					.form__group-wrap.position
 						.position-disabled.panel.panel
 						.position__btns
-							button(type="radio" class="position__btns position__btns-tessel" id="tessel" data-view="tessel")
-							button(type="radio" class="position__btns position__btns-location position__btns position__btns-location-active" id="location" data-view="")
+							button(type="radio" class="position__btns position__btns-tessel" id="tessel" data-view="grid-mode")
+							button(type="radio" class="position__btns position__btns-location position__btns active" id="location" data-view="single-mode")
 						.position__title
 							label.form__title Положение	
 						
 						.switch
 							.position__map
+								- for (var i = 0; i < 9; i++)
+									.position__point
 								.position__tessel-map
 									.position__tessel-wrap
 											.position__tessel-vertical
 											.position__tessel-horizontal
-								- for (var i = 0; i < 9; i++)
-									.position__point
 
 
 							.position__custom

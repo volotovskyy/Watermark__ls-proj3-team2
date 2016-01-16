@@ -2,21 +2,33 @@ var Inputs = (function () {
     var
         $x = globalParameters.controlPanel.inputs.$x,
         $y = globalParameters.controlPanel.inputs.$y;
+        $px = globalParameters.controlPanel.inputs.$px;
+        $py = globalParameters.controlPanel.inputs.$py;
 
     var _eventListener = function () {
 
         $x.on('keyup',function(){
-            var position = [$x.val()];
-            Position.set(position);
-
+            var vals = [$x.val()];
+            Position.set(vals);
         });
 
         $y.on('keyup',function(){
-            var position = [undefined, $y.val()];
-            Position.set(position);
+            var vals = [undefined, $y.val()];
+            Position.set(vals);
+
+        });
+        $px.on('keyup',function(){
+            var vals = [$px.val()];
+            Position.paddingSet(vals);
+        });
+
+        $py.on('keyup',function(){
+            var vals = [undefined, $py.val()];
+            Position.paddingSet(vals);
         });
 
     };
+
 
     return {
 
@@ -28,7 +40,11 @@ var Inputs = (function () {
         set: function (position) {
             if(position[0] !== undefined)$x.val(position[0]);
             if(position[1] !== undefined)$y.val(position[1]);
-        }
+        },
 
+        paddingSet: function(padding){
+            if(padding[0] !== undefined)$px.val(padding[0]);
+            if(padding[1] !== undefined)$py.val(padding[1]);
+        }
     }
 }());

@@ -12,8 +12,9 @@ var Base = (function () {
                 scaleSize: {
                     width: 0,
                     height: 0
-                },
+                }
             },
+
             scale: 1,
 
             watermark: {
@@ -24,12 +25,9 @@ var Base = (function () {
                 scaleSize: {
                     width: 0,
                     height: 0
-                },
-                position: {
-                    left: 0,
-                    top: 0
                 }
             },
+
             wrapper: {
                 size: {
                     width: 0,
@@ -39,13 +37,43 @@ var Base = (function () {
                     left: 0,
                     top: 0
                 }
-            }
+            },
+
+            grid: {
+                size: {
+                    width: 0,
+                    height: 0
+                },
+
+                position: {
+                    left: 0,
+                    top: 0
+                },
+
+                padding: {
+                    left: globalParameters.defaults.gridPadding[0],
+                    top: globalParameters.defaults.gridPadding[1]
+                }
+            },
+
+            single: {
+                position: {
+                    left: 0,
+                    top: 0
+                }
+            },
+
+            mode: globalParameters.singleMode
         },
-        $reset = $(globalParameters.buttonResetId),
+
+        $reset = globalParameters.buttonResetId,
+        $buttonGrid = globalParameters.buttonGridMode,
+        $buttonSingle = globalParameters.buttonSingleMode,
         $mainContainer = globalParameters.mainContainer;
 
-    function _initModules () {
+    function _initModules() {
         Images.init();
+        Position.init();
         Slider.init();
         Spiners.init();
         Inputs.init();
@@ -54,37 +82,42 @@ var Base = (function () {
 
     function _eventListener() {
         $reset.on('click', _setDefault);
+        $buttonGrid.on('click', _clickMode);
+        $buttonSingle.on('click', _clickMode);
     }
 
-    function _setDefault (e) {
+    function _clickMode(e) {
+        var $this = $(this);
+        e.preventDefault();
+
+        settings.mode = $this.attr('data-view');
+        $('.position__btns').removeClass('active');
+        $this.addClass('active');
+
+        Images.refresh(settings.mode);
+    }
+
+    function _setDefault(e) {
         e.preventDefault();
 
         var
             pos = globalParameters.defaults.position,
+            padding = globalParameters.defaults.gridPadding,
             transparency = globalParameters.defaults.transparency;
-        _position(pos);
+
+        Position.set(pos);
+        Position.paddingSet(padding);
+
+
         Slider.set(transparency);
     }
 
-    var _setSettings = function () {
+    function _setSettings() {
         settings.window.size = {
             width: $mainContainer.width(),
             height: $mainContainer.height()
         };
-    };
-
-    function _position(pos) {
-        Position.set(pos);
     }
-
-    var _positionAdd = function (pos) {
-        Position.add(pos);
-    };
-
-    var _positionChange = function (pos) {
-        var position = pos || Position.get();
-        Inputs.set(position);
-    };
 
     return {
         init: function () {
@@ -94,18 +127,6 @@ var Base = (function () {
         },
 
         event: event,
-        settings: settings,
-
-        trigger: function (event, params) {
-            switch (event) {
-                case 'position:add':
-                    _positionAdd(params);
-                    break;
-                case 'position:change':
-                    _positionChange(params);
-                    //TODO inputs change
-                    break;
-            }
-        }
+        settings: settings
     }
 }());

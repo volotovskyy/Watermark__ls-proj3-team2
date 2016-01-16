@@ -1,11 +1,14 @@
 var Position = (function () {
     var
-        imageClass = '.' + globalParameters.classWatermarkImage,
+        $imageWrapper = $('.' + globalParameters.watermarkWrapperClass),
+        class_= globalParameters.classWatermarkImage,
         defPosition = globalParameters.defaults.position,
-        $container = globalParameters.watermarkContainer;
+
+        SINGLE_MODE = globalParameters.singleMode,
+        $container;
 
     var _getBorderPosition = function () {
-        var $image = $(imageClass),
+        var $image = $imageWrapper,
             width = $image.width(),
             heigth = $image.height(),
             widthContainer = $container.width(),
@@ -22,29 +25,36 @@ var Position = (function () {
             x = pos[0],
             y = pos[1];
 
-        if (x !== undefined){
-            x = parseInt(x);
-            x = x > borders[0] ? borders[0] : x;
-            x = x > 0 ? x : 0;
-        }
+        if (Base.settings.mode == SINGLE_MODE) {
+            if (x !== undefined) {
+                x = parseInt(x);
+                x = x > borders[0] ? borders[0] : x;
+                x = x > 0 ? x : 0;
+            }
 
-        if (y !== undefined){
-            y = parseInt(y);
-            y = y > borders[1] ? borders[1] : y;
-            y = y > 0 ? y : 0;
+            if (y !== undefined) {
+                y = parseInt(y);
+                y = y > borders[1] ? borders[1] : y;
+                y = y > 0 ? y : 0;
+            }
         }
 
         return [x, y];
     };
 
     return {
+        init: function () {
+            $container = globalParameters.watermarkContainer;
+        },
+
         setDefault: function () {
             this.set(defPosition[0], defPosition[1]);
         },
 
         set: function (pos) {
+
             var
-                $image = $(imageClass),
+                $image = $imageWrapper,
                 position = $image.position();
 
             if (position === undefined) return;
@@ -54,19 +64,24 @@ var Position = (function () {
             var x = pos[0],
                 y = pos[1];
 
-            if (x !== undefined){
+            if (x !== undefined) {
                 $image.css('left', x);
             }
-            if (y !== undefined){
+            if (y !== undefined) {
                 $image.css('top', y);
             }
 
-            Base.trigger('position:change', pos);
+            if (Base.settings.mode == SINGLE_MODE) {
+                Inputs.set(this.get());
+            }
+
+            Grid.setNoActivePoints();
+
         },
 
         add: function (pos) {
             var
-                $image = $(imageClass),
+                $image = $imageWrapper,
                 addX = pos[0],
                 addY = pos[1],
                 position = $image.position();
@@ -81,18 +96,45 @@ var Position = (function () {
             if (addY)y += addY;
 
             this.set([x, y]);
+
+
         },
 
-        refresh: function(){
-          this.add([0,0]);
+        refresh: function () {
+            this.add([0, 0]);
         },
 
         get: function () {
             var
-                $image = $(imageClass),
+                $image = $imageWrapper,
                 position = $image.position();
 
-            return [position.left,position.top];
+            return [position.left, position.top];
+        },
+
+        paddingSet: function (pos) {
+            var
+                l = Base.settings.grid.padding.left = parseInt(pos[0]),
+                t = Base.settings.grid.padding.top = parseInt(pos[1]);
+
+
+            $('.' + class_).css({
+                'margin-left': l,
+                'margin-top': t
+            });
+
+            $('.position__tessel-vertical').width(l);
+            $('.position__tessel-horizontal').height(t);
+
+            Inputs.paddingSet(pos);
+        },
+
+        paddingAdd: function (pos) {
+            var
+                l = Base.settings.grid.padding.left + parseInt(pos[0]),
+                t = Base.settings.grid.padding.top + parseInt(pos[1]);
+
+            this.paddingSet([l, t]);
         }
     }
 }());
