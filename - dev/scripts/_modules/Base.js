@@ -56,7 +56,7 @@ var Base = (function () {
                 }
             },
 
-            single:{
+            single: {
                 position: {
                     left: 0,
                     top: 0
@@ -102,8 +102,13 @@ var Base = (function () {
 
         var
             pos = globalParameters.defaults.position,
+            padding = globalParameters.defaults.gridPadding,
             transparency = globalParameters.defaults.transparency;
-        _position(pos);
+
+        Position.set(pos);
+        Position.paddingSet(padding);
+
+
         Slider.set(transparency);
     }
 
@@ -113,11 +118,6 @@ var Base = (function () {
             height: $mainContainer.height()
         };
     }
-
-    function _position(pos) {
-        Position.set(pos);
-    }
-
 
     return {
         init: function () {

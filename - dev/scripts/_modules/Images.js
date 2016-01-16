@@ -188,7 +188,7 @@ var Images = (function () {
 
     function _loadMainImage(e) {
         _loadImg(e, function (e) {
-            var $container = globalParameters.mainContainer,
+            var $container = globalParameters.watermarkContainer,
                 class_ = globalParameters.classMainImage,
                 image = e.target.result;
             _setBackGround(image, $container, class_);

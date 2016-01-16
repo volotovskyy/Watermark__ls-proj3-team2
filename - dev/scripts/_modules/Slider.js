@@ -1,7 +1,7 @@
 var Slider = (function () {
     var $slider;
 
-    var _initPlugin = function () {
+    function _initPlugin() {
         $slider = $(".opacity__slider");
 
         $slider.slider({
@@ -9,11 +9,14 @@ var Slider = (function () {
             value: globalParameters.defaults.transparency,
             min: 1,
             max: 100,
-            slide: function (event, ui) {
-                Transparency.set(ui.value);
-            }
+            change: change,
+            slide: change
         });
     };
+
+    function change(event, ui) {
+        Transparency.set(ui.value);
+    }
 
     return {
         init: function () {
@@ -24,7 +27,7 @@ var Slider = (function () {
             $slider.slider('value', val);
         },
 
-        get: function(){
+        get: function () {
             return $slider.slider('value');
         }
     }
