@@ -1,4 +1,5 @@
 var Scale = (function () {
+    var class_ = globalParameters.classWatermarkImage;
     function setScaleWaterMark(image, callback) {
         var img = new Image();
 
@@ -10,8 +11,18 @@ var Scale = (function () {
         };
 
         img.src = image;
+    }
 
-    };
+    function setScaleWatermark($img){
+        var
+            width = Base.settings.watermark.scaleSize.width,
+            height = Base.settings.watermark.scaleSize.height;
+
+        $img = $img || $('.' + class_);
+
+        $img.width(width);
+        $img.height(height);
+    }
 
     function scaleWatermark(callback){
         var
@@ -21,13 +32,13 @@ var Scale = (function () {
             height = Base.settings.watermark.originalSize.height;
 
         if(width > 0 && height > 0){
-            width = Base.settings.watermark.scaleSize.width = Math.floor(width/scale);
-            height = Base.settings.watermark.scaleSize.height = Math.floor(height/scale);
+            Base.settings.watermark.scaleSize.width = Math.floor(width/scale);
+            Base.settings.watermark.scaleSize.height = Math.floor(height/scale);
 
-            $image.width(width);
-            $image.height(height);
         }
         if(callback)callback();
+
+        return this;
     }
 
     function _Scale(image, name, containerSize, callback) {
@@ -93,6 +104,7 @@ var Scale = (function () {
     return {
         mainImage: setScaleMainImage,
         watermark: setScaleWaterMark,
-        scaleWatermark: scaleWatermark
+        scaleWatermark: scaleWatermark,
+        refresh:setScaleWatermark
     }
 }());
