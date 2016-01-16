@@ -1,7 +1,8 @@
 <?php
 require_once "functions.php";
-require_once "../composer/vendor/autoload.php";
-use \WideImage\WideImage as WideImage;
+include('../abeautifulsite/SimpleImage.php');
+
+use abeautifulsite\SimpleImage as SimpleImage;
 
 //Статус и сообщение
 $data['status'] = 'ok';
@@ -12,8 +13,8 @@ $main_image = $_FILES['img1'];
 $watermark = $_FILES['img2'];
 $pos_x = $_POST['positionX'];
 $pos_y = $_POST['positionY'];
-$opacity = $_POST['opacity'];
-$watermark_type = $_POST['$watermark-type'];
+$opacity = $_POST['opacity'] / 100;
+$watermark_mode = $_POST['$watermark-type'];
 
 //Ограничения
 $max_file_size = 5 * 1024 * 1024; //Максимальный размер файла в байтах
@@ -177,31 +178,31 @@ if ($data['status'] == 'ok') {
     $data['result'] = $result_src_loc;
 
     //Склеивание изображений
-    $main_image = WideImage::loadFromFile($main_image_src);
-    $main_image_width = $main_image->getWidth();
-    $main_image_height = $main_image->getHeight();
+    $main_image = new SimpleImage($main_image_src);
+    $main_image_width = $main_image->get_width();
+    $main_image_height = $main_image->get_height();
 
-    $watermark = WideImage::loadFromFile($watermark_src);
-    $watermark_width = $watermark->getWidth();
-    $watermark_height = $watermark->getHeight();
+    $watermark = new SimpleImage($watermark_src);
+    $watermark_width = $watermark->get_width();
+    $watermark_height = $watermark->get_height();
 
     //Масштабирование ватермарка
     if ($main_image_width / $watermark_width < 1) {
-        $watermark = $watermark->resize($main_image_width);
-        $watermark_height = $watermark->getHeight();
+        $watermark = $watermark->fit_to_width($main_image_width);
+        $watermark_height = $watermark->get_height();
     }
 
     if ($main_image_height / $watermark_height < 1) {
-        $watermark = $watermark->resize(null, $main_image_height);
+        $watermark = $watermark->fit_to_height($main_image_height);
     }
 
     //Замощение ватермарка
-    if ($watermark_type == 'tile') {
+    if ($watermark_mode == 'tile') {
         $margin_x = $_POST['$margin_x'];
         $margin_y = $_POST['$margin_y'];
 
-        $watermark_width += $watermark_width * $margin_x;
-        $watermark_height += $watermark_height * $margin_y;
+        $watermark_width += $margin_x;
+        $watermark_height += $margin_y;
 
         $ratio_x = ceil($main_image_width / $watermark_width);
         $ratio_y = ceil($main_image_height / $watermark_height);
@@ -221,15 +222,15 @@ if ($data['status'] == 'ok') {
                 $x = $pos_x + $watermark_width * $j;
                 $y = $pos_y + $watermark_height * $i;
 
-                $main_image = $main_image->merge($watermark, $x, $y, $opacity);
+                $main_image = $main_image->overlay($watermark, 'top left', $opacity, $x, $y);
             }
         }
 
         //Сохранение результата
-        $main_image->saveToFile($result_src);
+        $main_image->save($result_src);
     } else {
         //Сохранение результата
-        $main_image->merge($watermark, $pos_x, $pos_y, $opacity)->saveToFile($result_src);
+        $main_image->overlay($watermark, 'top left', $opacity, $pos_x, $pos_y)->save($result_src);
     }
 }
 
