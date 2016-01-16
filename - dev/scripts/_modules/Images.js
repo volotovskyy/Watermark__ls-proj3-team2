@@ -11,11 +11,12 @@ var Images = (function () {
 
         class_ = globalParameters.classWatermarkImage,
 
+        img1,
+        img2,
         SINGLE_MODE = globalParameters.singleMode,
 
         watermarkImage,
-        $wrapper
-        ;
+        $wrapper;
 
 
     // -------- performed once
@@ -187,31 +188,77 @@ var Images = (function () {
 
 
     function _loadMainImage(e) {
-        _loadImg(e, function (e) {
-            var $container = globalParameters.watermarkContainer,
-                class_ = globalParameters.classMainImage,
-                image = e.target.result;
-            _setBackGround(image, $container, class_);
-        });
+        _loadImg(e, _ajaxMainImage);
         _changeFileUploadImage();
     }
 
     function _loadWatermark(e) {
-        _loadImg(e, function (e) {
-            watermarkImage = e.target.result;
-
-            _setImageWatermark();
-        });
+        _loadImg(e, _ajaxWatermark);
         _changeFileUploadWatermark();
     }
 
+    function _ajaxMainImage(){
+        var fd = new FormData;
+
+        fd.append('img', $inputImage1.prop('files')[0]);
+
+        $.ajax({
+            url: 'php/image_load.php',
+            data: fd,
+            processData: false,
+            contentType: false,
+            type: 'POST',
+            success: function (data) {
+                if(data.status === 'ok'){
+                    _setBackGround(data.result, globalParameters.mainContainer, globalParameters.classMainImage);
+                    img1 = data.result;
+                } else {
+                    alert(data.message);
+                }
+            },
+            error: function (e) {
+                console.log('error');
+                console.log(e);
+            }
+        })
+    }
+
+    //Подгрузка главного изображения
+    function _ajaxWatermark(){
+        var fd = new FormData;
+
+        fd.append('img', $inputImage2.prop('files')[0]);
+
+        $.ajax({
+            url: 'php/image_load.php',
+            data: fd,
+            processData: false,
+            contentType: false,
+            type: 'POST',
+            success: function (data) {
+                if(data.status === 'ok'){
+                    watermarkImage = data.result;
+                    _setImageWatermark();
+                    img2 = data.result;
+                } else {
+                    alert(data.message);
+                }
+            },
+            error: function (e) {
+                console.log('error');
+                console.log(e);
+            }
+        })
+    }
+
+    //Подгрузка знака
     function _upload(e) {
         e.preventDefault();
         var fd = new FormData,
             url = globalParameters.url,
             opacity = Slider.get(),
-            position = Position.get()
-        x = Math.floor(position[0] * Base.settings.scale),
+            position = Position.get(),
+            x = Math.floor(position[0] * Base.settings.scale),
             y = Math.floor(position[1] * Base.settings.scale);
 
         if ($inputImage1.prop('files').length === 0 || $inputImage2.prop('files').length === 0) {
@@ -219,8 +266,8 @@ var Images = (function () {
             //TODO print message
             return;
         }
-        fd.append('img1', $inputImage1.prop('files')[0]);
-        fd.append('img2', $inputImage2.prop('files')[0]);
+        fd.append('img1', img1);
+        fd.append('img2', img2);
         fd.append('opacity', opacity);
         fd.append('positionX', x);
         fd.append('positionY', y);
