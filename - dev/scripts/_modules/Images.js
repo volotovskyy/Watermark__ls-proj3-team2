@@ -9,21 +9,26 @@ var Images = (function () {
         $reset = globalParameters.buttonResetId,
         $submit = globalParameters.buttonSubmit,
 
-        first = true,
+        class_ = globalParameters.classWatermarkImage,
 
         img1,
-        img2;
+        img2,
+        SINGLE_MODE = globalParameters.singleMode,
+
+        watermarkImage,
+        $wrapper;
 
 
     // -------- performed once
-    var  _firstSelection = function(){
+    var _firstSelection = function () {
         $submit.prop('disabled', false);
         $reset.prop('disabled', false);
         $('.panel').hide();
 
-        _firstSelection = function(){};
+        _firstSelection = function () {
+        };
     };
-    var  _inputWatermarkEnable = function () {
+    var _inputWatermarkEnable = function () {
         var
             input = globalParameters.watermarkImageInput,
             wrapper = globalParameters.watermarkImageInputWrapper;
@@ -32,7 +37,8 @@ var Images = (function () {
         wrapper.prop('disabled', false);
         $('.form__watermark-input-disabled').hide();
 
-        _inputWatermarkEnable = function(){};
+        _inputWatermarkEnable = function () {
+        };
     };
 
     // --------
@@ -59,7 +65,7 @@ var Images = (function () {
         $watermarkName.val(filepath)
     }
 
-    function _loadImg (e, callback) {
+    function _loadImg(e, callback) {
         if (window.File && window.FileReader && window.FileList && window.Blob) {
             var file = e.target.files[0];
 
@@ -89,59 +95,109 @@ var Images = (function () {
 
         Scale.mainImage(image, function () {
             $contaitener.css('background-image', url);
-            Scale.scaleWatermark();
+
+            if (watermarkImage)_setImageWatermark();
+
             Position.refresh();
             _inputWatermarkEnable();
-        });
 
+        });
     }
 
-    function _setImageWatermark(image, $contaitener, class_) {
-        var $img = $('<img class="' + class_ + '">');
+    function _insertWatermark() {
+        var $img;
 
-        $contaitener
+        $wrapper
             .find('.' + class_)
             .remove();
 
-        $contaitener.append($img);
+        if (Base.settings.mode == SINGLE_MODE) {
+            $img = $('<img class="' + class_ + '">');
+            $wrapper.append($img)
+                .width('auto')
+                .height('auto');
+            $wrapper.draggable('option', 'containment', 'parent');
+        } else {
+            $wrapper.draggable('option', 'containment', '');
+            $img = _setGridMode();
+        }
 
-        Scale.watermark(image, function () {
-            $img.attr('src', image);
-        });
+        $img.attr('src', watermarkImage);
 
         _setWatermarkSettings($img);
-        _firstSelection();
+
+        return $img;
     }
 
+    function _setImageWatermark() {
+        Scale.watermark(watermarkImage, function () {
+            _insertWatermark();
+            _firstSelection();
+        });
+    }
 
+    function _setGridMode() {
+        var img = '<img class="' + class_ + '">',
+            widthW = Base.settings.wrapper.size.width,
+            heightW = Base.settings.wrapper.size.height,
+
+            widthI = Base.settings.watermark.scaleSize.width,
+            heightI = Base.settings.watermark.scaleSize.height,
+
+            countW = Math.ceil(widthW / widthI),
+            countH = Math.ceil(heightW / heightI),
+
+            paddingTop = Base.settings.grid.padding.top,
+            paddingLeft = Base.settings.grid.padding.left,
+
+            width = Base.settings.grid.size.width = (widthI + paddingLeft) * countW,
+            height = Base.settings.grid.size.height = (heightI + paddingTop) * countH
+            ;
+
+        $wrapper.width(width);
+        $wrapper.height(height);
+
+        for (i = 0, end = countH * countW; i < end; i++) {
+            $img = $(img);
+
+            $img.css({
+                'margin-left': paddingLeft,
+                'margin-top': paddingTop
+            });
+
+            $wrapper.append($img);
+        }
+        Inputs.paddingSet([paddingLeft,paddingTop]);
+        return $('.' + class_);
+    }
 
     function _setWatermarkSettings($img) {
         Transparency.init($img);
-        _addDragAndDrop($img);
+        Scale.refresh($img);
     }
 
-    function _addDragAndDrop($img) {
-        $img.draggable({
+    function _addDragAndDrop($block) {
+        $block.draggable({
             drag: function (e, drag) {
                 Position.set([drag.position.left, drag.position.top]);
             },
-            containment: "parent"
+            cursor: 'move',
+            containment: 'parent'
         });
     }
 
 
-
     function _loadMainImage(e) {
-        _loadImg(e, ajaxMainImage);
+        _loadImg(e, _ajaxMainImage);
         _changeFileUploadImage();
     }
 
     function _loadWatermark(e) {
-        _loadImg(e, ajaxWatermark);
+        _loadImg(e, _ajaxWatermark);
         _changeFileUploadWatermark();
     }
 
-    function ajaxMainImage(){
+    function _ajaxMainImage(){
         var fd = new FormData;
 
         fd.append('img', $inputImage1.prop('files')[0]);
@@ -156,6 +212,8 @@ var Images = (function () {
                 if(data.status === 'ok'){
                     _setBackGround(data.result, globalParameters.mainContainer, globalParameters.classMainImage);
                     img1 = data.result;
+                } else {
+                    alert(data.message);
                 }
             },
             error: function (e) {
@@ -165,7 +223,8 @@ var Images = (function () {
         })
     }
 
-    function ajaxWatermark(){
+    //Подгрузка главного изображения
+    function _ajaxWatermark(){
         var fd = new FormData;
 
         fd.append('img', $inputImage2.prop('files')[0]);
@@ -178,8 +237,11 @@ var Images = (function () {
             type: 'POST',
             success: function (data) {
                 if(data.status === 'ok'){
-                    _setImageWatermark(data.result, globalParameters.watermarkContainer, globalParameters.classWatermarkImage);
+                    watermarkImage = data.result;
+                    _setImageWatermark();
                     img2 = data.result;
+                } else {
+                    alert(data.message);
                 }
             },
             error: function (e) {
@@ -189,13 +251,14 @@ var Images = (function () {
         })
     }
 
+    //Подгрузка знака
     function _upload(e) {
         e.preventDefault();
         var fd = new FormData,
             url = globalParameters.url,
             opacity = Slider.get(),
-            position = Position.get()
-        x = Math.floor(position[0] * Base.settings.scale),
+            position = Position.get(),
+            x = Math.floor(position[0] * Base.settings.scale),
             y = Math.floor(position[1] * Base.settings.scale);
 
         if ($inputImage1.prop('files').length === 0 || $inputImage2.prop('files').length === 0) {
@@ -208,6 +271,9 @@ var Images = (function () {
         fd.append('opacity', opacity);
         fd.append('positionX', x);
         fd.append('positionY', y);
+        fd.append('mode', Base.settings.mode);
+        fd.append('paddingLeft', Base.settings.grid.padding.left);
+        fd.append('paddingTop', Base.settings.grid.padding.top);
 
         $.ajax({
             url: url,
@@ -225,7 +291,7 @@ var Images = (function () {
         })
     }
 
-    function _save(data){
+    function _save(data) {
         //var url = 'http://dz3/' + url;
         var link = document.createElement('a');
         link.target = "_blank";
@@ -238,6 +304,9 @@ var Images = (function () {
 
         init: function () {
             _eventListener();
+            //$wrapper = $('.' + globalParameters.watermarkWrapperClass);
+            $wrapper = $('.' + globalParameters.watermarkWrapperClass);
+            _addDragAndDrop($wrapper);
         },
 
         getSizeMainImage: function () {
@@ -252,7 +321,35 @@ var Images = (function () {
                 width: Base.settings.watermark.scaleSize.width,
                 height: Base.settings.watermark.scaleSize.height
             }
-        }
+        },
 
+        refresh: function (mode) {
+            var pos = Position.get();
+
+            if (mode == SINGLE_MODE) {
+                Base.settings.grid.position = {
+                    left: pos[0],
+                    top: pos[1]
+                };
+                Base.settings.wrapper.position = Base.settings.single.position;
+                $('.switch').removeClass('switch-tessel');
+
+            } else {
+                Base.settings.single.position = {
+                    left: pos[0],
+                    top: pos[1]
+                };
+                Base.settings.wrapper.position = Base.settings.grid.position;
+
+                $('.switch').addClass('switch-tessel');
+            }
+
+            _insertWatermark();
+            Position.set([
+                Base.settings.wrapper.position.left,
+                Base.settings.wrapper.position.top
+            ]);
+
+        }
     }
 }());

@@ -14,7 +14,8 @@ $watermark_src = $_POST['img2'];
 $pos_x = $_POST['positionX'];
 $pos_y = $_POST['positionY'];
 $opacity = $_POST['opacity'] / 100;
-$watermark_mode = $_POST['$watermark-mode'];
+$watermark_mode = $_POST['mode'];
+
 
 //Задаем индекс файла
 $img_index = date("U") . "-" . mt_rand(0, 1000);
@@ -51,9 +52,9 @@ if ($main_image_height / $watermark_height < 1) {
 }
 
 //Замощение ватермарка
-if ($watermark_mode == 'tile') {
-    $margin_x = $_POST['$margin_x'];
-    $margin_y = $_POST['$margin_y'];
+if ($watermark_mode == 'grid-mode') {
+    $margin_x = $_POST['paddingLeft'];
+    $margin_y = $_POST['paddingTop'];
 
     $watermark_width += $margin_x;
     $watermark_height += $margin_y;

@@ -21,8 +21,15 @@
     position: relative;
     width: 100%;
     height: 100%;
+    overflow: hidden;
+}
+
+.work__watermark-block {
     background-repeat: no-repeat;
     background-size: contain;
     background-position: center;
-    overflow: hidden;
+}
+
+.work__watermark-wrapper{
+    display: inline-block;
 }
