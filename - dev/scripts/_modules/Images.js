@@ -25,6 +25,7 @@ var Images = (function () {
         $reset.prop('disabled', false);
         $('.panel').hide();
 
+        Position.set([0,0]);
         _firstSelection = function () {
         };
     };
@@ -144,8 +145,8 @@ var Images = (function () {
             widthI = Base.settings.watermark.scaleSize.width,
             heightI = Base.settings.watermark.scaleSize.height,
 
-            countW = Math.ceil(widthW / widthI),
-            countH = Math.ceil(heightW / heightI),
+            countW = Math.ceil(widthW / widthI) + 2,
+            countH = Math.ceil(heightW / heightI) + 2,
 
             paddingTop = Base.settings.grid.padding.top,
             paddingLeft = Base.settings.grid.padding.left,
@@ -161,8 +162,8 @@ var Images = (function () {
             $img = $(img);
 
             $img.css({
-                'margin-left': paddingLeft,
-                'margin-top': paddingTop
+                'margin-right': paddingLeft,
+                'margin-bottom': paddingTop
             });
 
             $wrapper.append($img);
@@ -292,10 +293,9 @@ var Images = (function () {
     }
 
     function _save(data) {
-        //var url = 'http://dz3/' + url;
         var link = document.createElement('a');
         link.target = "_blank";
-        link.download = "img.jpg";
+        link.download = data.filename;
         link.href = data.result;
         link.click();
     }

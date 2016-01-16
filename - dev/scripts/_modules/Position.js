@@ -8,15 +8,9 @@ var Position = (function () {
         $container;
 
     var _getBorderPosition = function () {
-        var $image = $imageWrapper,
-            width = $image.width(),
-            heigth = $image.height(),
-            widthContainer = $container.width(),
-            heightContainer = $container.height();
-
         return [
-            widthContainer - width,
-            heightContainer - heigth
+            Base.settings.wrapper.size.width - Base.settings.watermark.scaleSize.width,
+            Base.settings.wrapper.size.height - Base.settings.watermark.scaleSize.height,
         ]
     };
 
@@ -52,7 +46,6 @@ var Position = (function () {
         },
 
         set: function (pos) {
-
             var
                 $image = $imageWrapper,
                 position = $image.position();
@@ -119,8 +112,8 @@ var Position = (function () {
 
 
             $('.' + class_).css({
-                'margin-left': l,
-                'margin-top': t
+                'margin-right': l,
+                'margin-bottom': t
             });
 
             $('.position__tessel-vertical').width(l);

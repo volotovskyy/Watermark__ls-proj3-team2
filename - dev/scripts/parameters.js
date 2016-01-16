@@ -49,7 +49,7 @@ var globalParameters = {
 
     defaults: {
         transparency: 50,        // persents
-        position: [10, 10],
+        position: [0, 0],
         gridPadding:[18,19]
     },
 

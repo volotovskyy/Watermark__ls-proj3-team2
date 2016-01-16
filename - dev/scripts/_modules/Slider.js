@@ -3,7 +3,6 @@ var Slider = (function () {
 
     function _initPlugin() {
         $slider = $(".opacity__slider");
-
         $slider.slider({
             range: "min",
             value: globalParameters.defaults.transparency,

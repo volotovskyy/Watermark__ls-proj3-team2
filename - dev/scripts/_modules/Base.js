@@ -3,19 +3,8 @@ var Base = (function () {
             window: {
                 size: null
             },
-
-            image: {
-                originalSize: {
-                    width: 0,
-                    height: 0
-                },
-                scaleSize: {
-                    width: 0,
-                    height: 0
-                }
-            },
-
             scale: 1,
+            scaleWatermark: 1,
 
             watermark: {
                 originalSize: {

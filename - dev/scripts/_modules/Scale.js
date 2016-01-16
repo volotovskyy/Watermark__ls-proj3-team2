@@ -95,7 +95,8 @@ var Scale = (function () {
             $watermarkContainer.css('left', image.position.left);
             $watermarkContainer.css('top', image.position.top);
 
-            callback();
+            scaleWatermark(callback);
+            //callback();
         });
 
     }
