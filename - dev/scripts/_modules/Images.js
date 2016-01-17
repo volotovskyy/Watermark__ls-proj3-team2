@@ -292,7 +292,7 @@ var Images = (function () {
             _addDragAndDrop($wrapper);
         },
 
-        getWrapper: function(){
+        getWrapper: function () {
             return $wrapper;
         },
 
@@ -320,7 +320,10 @@ var Images = (function () {
                 };
                 Base.settings.wrapper.position = Base.settings.single.position;
                 $('.switch').removeClass('switch-tessel');
-
+                $('class_').css({
+                    'margin-right': 0,
+                    'margin-bottom': 0
+                });
             } else {
                 Base.settings.single.position = {
                     left: pos[0],

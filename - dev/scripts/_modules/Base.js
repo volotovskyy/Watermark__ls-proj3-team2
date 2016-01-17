@@ -71,6 +71,8 @@ var Base = (function () {
         Spiners.init();
         Inputs.init();
         Grid.init();
+        Language.init();
+        Social.init();
         Transparency.init(Images.getWrapper());
     }
 
