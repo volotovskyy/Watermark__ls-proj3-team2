@@ -13,7 +13,7 @@ var Scale = (function () {
         img.src = image;
     }
 
-    function setScaleWatermark($img){
+    function refreshWatermark($img){
         var
             width = Base.settings.watermark.scaleSize.width,
             height = Base.settings.watermark.scaleSize.height;
@@ -26,16 +26,32 @@ var Scale = (function () {
 
     function scaleWatermark(callback){
         var
-            $image = $('.' + globalParameters.classWatermarkImage),
             scale = Base.settings.scale,
-            width = Base.settings.watermark.originalSize.width,
-            height = Base.settings.watermark.originalSize.height;
+            wOrigin = Base.settings.watermark.originalSize.width,
+            hOrigin = Base.settings.watermark.originalSize.height,
+            wBack = Base.settings.wrapper.scaleSize.width,
+            hBack = Base.settings.wrapper.scaleSize.height,
+            w,
+            h;
 
-        if(width > 0 && height > 0){
-            Base.settings.watermark.scaleSize.width = Math.floor(width/scale);
-            Base.settings.watermark.scaleSize.height = Math.floor(height/scale);
+        w = Math.floor(wOrigin/scale);
+        h = Math.floor(hOrigin/scale);
 
+        if(w > wBack || h > hBack){
+            var
+                scaleW = w / wBack,
+                scaleH = h / hBack;
+
+            scale *= scaleW > scaleH ? scaleW : scaleH;
+
+            w = Math.floor(wOrigin/scale);
+            h = Math.floor(hOrigin/scale);
         }
+
+            Base.settings.watermark.scaleSize.width = w;
+            Base.settings.watermark.scaleSize.height = h;
+            Base.settings.scaleWatermark = scale;
+
         if(callback)callback();
 
         return this;
@@ -48,7 +64,8 @@ var Scale = (function () {
             var width = this.width,
                 height = this.height,
                 scale = 1;
-
+            Base.settings[name].originalSize.width = width;
+            Base.settings[name].originalSize.height = height;
 
             if (containerSize.width < width || containerSize.height < height) {
                 var scaleW = width / containerSize.width,
@@ -61,8 +78,9 @@ var Scale = (function () {
             var
                 widthS = Math.floor(width / scale),
                 heightS = Math.floor(height / scale);
-            Base.settings[name].size.width = widthS;
-            Base.settings[name].size.height = heightS;
+
+            Base.settings[name].scaleSize.width = widthS;
+            Base.settings[name].scaleSize.height = heightS;
             Base.settings[name].position.left = center(containerSize.width, widthS);
             Base.settings[name].position.top = center(containerSize.height, heightS);
 
@@ -85,7 +103,7 @@ var Scale = (function () {
 
         _Scale(image, name, Base.settings.window.size, function (image) {
             var
-                size = image.size,
+                size = image.scaleSize,
                 bs = size.width + 'px ' + size.height + 'px';
 
             $mainContainer.css('background-size', bs);
@@ -95,7 +113,8 @@ var Scale = (function () {
             $watermarkContainer.css('left', image.position.left);
             $watermarkContainer.css('top', image.position.top);
 
-            callback();
+            scaleWatermark(callback);
+            //callback();
         });
 
     }
@@ -105,6 +124,6 @@ var Scale = (function () {
         mainImage: setScaleMainImage,
         watermark: setScaleWaterMark,
         scaleWatermark: scaleWatermark,
-        refresh:setScaleWatermark
+        refresh:refreshWatermark
     }
 }());

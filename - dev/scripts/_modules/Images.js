@@ -11,10 +11,9 @@ var Images = (function () {
 
         class_ = globalParameters.classWatermarkImage,
 
-        img1,
-        img2,
         SINGLE_MODE = globalParameters.singleMode,
 
+        backgroundImage,
         watermarkImage,
         $wrapper;
 
@@ -25,6 +24,7 @@ var Images = (function () {
         $reset.prop('disabled', false);
         $('.panel').hide();
 
+        Position.set([0, 0]);
         _firstSelection = function () {
         };
     };
@@ -93,10 +93,12 @@ var Images = (function () {
         var
             url = 'url(' + image + ')';
 
+        backgroundImage = image;
+
         Scale.mainImage(image, function () {
             $contaitener.css('background-image', url);
 
-            if (watermarkImage)_setImageWatermark();
+            if (watermarkImage)_setImageWatermark(watermarkImage);
 
             Position.refresh();
             _inputWatermarkEnable();
@@ -129,7 +131,8 @@ var Images = (function () {
         return $img;
     }
 
-    function _setImageWatermark() {
+    function _setImageWatermark(watermarkImage_) {
+        watermarkImage = watermarkImage_;
         Scale.watermark(watermarkImage, function () {
             _insertWatermark();
             _firstSelection();
@@ -138,14 +141,14 @@ var Images = (function () {
 
     function _setGridMode() {
         var img = '<img class="' + class_ + '">',
-            widthW = Base.settings.wrapper.size.width,
-            heightW = Base.settings.wrapper.size.height,
+            widthW = Base.settings.wrapper.scaleSize.width,
+            heightW = Base.settings.wrapper.scaleSize.height,
 
             widthI = Base.settings.watermark.scaleSize.width,
             heightI = Base.settings.watermark.scaleSize.height,
 
-            countW = Math.ceil(widthW / widthI),
-            countH = Math.ceil(heightW / heightI),
+            countW = Math.ceil(widthW / widthI) + 2,
+            countH = Math.ceil(heightW / heightI) + 2,
 
             paddingTop = Base.settings.grid.padding.top,
             paddingLeft = Base.settings.grid.padding.left,
@@ -161,18 +164,18 @@ var Images = (function () {
             $img = $(img);
 
             $img.css({
-                'margin-left': paddingLeft,
-                'margin-top': paddingTop
+                'margin-right': paddingLeft,
+                'margin-bottom': paddingTop
             });
 
             $wrapper.append($img);
         }
-        Inputs.paddingSet([paddingLeft,paddingTop]);
+        Inputs.paddingSet([paddingLeft, paddingTop]);
         return $('.' + class_);
     }
 
     function _setWatermarkSettings($img) {
-        Transparency.init($img);
+        Transparency.set();
         Scale.refresh($img);
     }
 
@@ -186,21 +189,34 @@ var Images = (function () {
         });
     }
 
-
     function _loadMainImage(e) {
-        _loadImg(e, _ajaxMainImage);
+        var file = $inputImage1.prop('files')[0];
+        _uploadImage(file, function (data) {
+            if (data.status === 'ok') {
+                _setBackGround(data.result, globalParameters.mainContainer, globalParameters.classMainImage);
+            } else {
+                alert(data.message);
+            }
+        });
         _changeFileUploadImage();
     }
 
     function _loadWatermark(e) {
-        _loadImg(e, _ajaxWatermark);
+        var file = $inputImage2.prop('files')[0];
+        _uploadImage(file, function (data) {
+            if (data.status === 'ok') {
+                _setImageWatermark(data.result);
+            } else {
+                alert(data.message);
+            }
+        });
         _changeFileUploadWatermark();
     }
 
-    function _ajaxMainImage(){
+    function _uploadImage(file, callback) {
         var fd = new FormData;
 
-        fd.append('img', $inputImage1.prop('files')[0]);
+        fd.append('img', file);
 
         $.ajax({
             url: 'php/image_load.php',
@@ -208,14 +224,7 @@ var Images = (function () {
             processData: false,
             contentType: false,
             type: 'POST',
-            success: function (data) {
-                if(data.status === 'ok'){
-                    _setBackGround(data.result, globalParameters.mainContainer, globalParameters.classMainImage);
-                    img1 = data.result;
-                } else {
-                    alert(data.message);
-                }
-            },
+            success: callback,
             error: function (e) {
                 console.log('error');
                 console.log(e);
@@ -223,33 +232,6 @@ var Images = (function () {
         })
     }
 
-    //Подгрузка главного изображения
-    function _ajaxWatermark(){
-        var fd = new FormData;
-
-        fd.append('img', $inputImage2.prop('files')[0]);
-
-        $.ajax({
-            url: 'php/image_load.php',
-            data: fd,
-            processData: false,
-            contentType: false,
-            type: 'POST',
-            success: function (data) {
-                if(data.status === 'ok'){
-                    watermarkImage = data.result;
-                    _setImageWatermark();
-                    img2 = data.result;
-                } else {
-                    alert(data.message);
-                }
-            },
-            error: function (e) {
-                console.log('error');
-                console.log(e);
-            }
-        })
-    }
 
     //Подгрузка знака
     function _upload(e) {
@@ -259,21 +241,23 @@ var Images = (function () {
             opacity = Slider.get(),
             position = Position.get(),
             x = Math.floor(position[0] * Base.settings.scale),
-            y = Math.floor(position[1] * Base.settings.scale);
+            y = Math.floor(position[1] * Base.settings.scale),
+            scaleWaterMark = Base.settings.scaleWatermark / Base.settings.scale;
 
         if ($inputImage1.prop('files').length === 0 || $inputImage2.prop('files').length === 0) {
             alert('Сначала выберите изображение');
             //TODO print message
             return;
         }
-        fd.append('img1', img1);
-        fd.append('img2', img2);
+        fd.append('img1', backgroundImage);
+        fd.append('img2', watermarkImage);
         fd.append('opacity', opacity);
         fd.append('positionX', x);
         fd.append('positionY', y);
         fd.append('mode', Base.settings.mode);
         fd.append('paddingLeft', Base.settings.grid.padding.left);
         fd.append('paddingTop', Base.settings.grid.padding.top);
+        fd.append('scaleWatermark', scaleWaterMark);
 
         $.ajax({
             url: url,
@@ -292,10 +276,9 @@ var Images = (function () {
     }
 
     function _save(data) {
-        //var url = 'http://dz3/' + url;
         var link = document.createElement('a');
         link.target = "_blank";
-        link.download = "img.jpg";
+        link.download = data.filename;
         link.href = data.result;
         link.click();
     }
@@ -309,10 +292,14 @@ var Images = (function () {
             _addDragAndDrop($wrapper);
         },
 
+        getWrapper: function(){
+            return $wrapper;
+        },
+
         getSizeMainImage: function () {
             return {
-                width: Base.settings.wrapper.size.width,
-                height: Base.settings.wrapper.size.height
+                width: Base.settings.wrapper.scaleSize.width,
+                height: Base.settings.wrapper.scaleSize.height
             }
         },
 

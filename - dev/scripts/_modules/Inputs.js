@@ -18,17 +18,21 @@ var Inputs = (function () {
 
         });
         $px.on('keyup',function(){
-            var vals = [$px.val()];
-            Position.paddingSet(vals);
+            _paddingSet();
+
         });
 
         $py.on('keyup',function(){
-            var vals = [undefined, $py.val()];
-            Position.paddingSet(vals);
+            _paddingSet();
         });
 
     };
 
+    function _paddingSet(){
+
+        var vals = [$px.val(), $py.val()];
+        Position.paddingSet(vals);
+    }
 
     return {
 

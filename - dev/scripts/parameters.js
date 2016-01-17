@@ -33,23 +33,23 @@ var globalParameters = {
             $yu: $('#upY'),
             $yd: $('#downY'),
 
-            $wu: $('#UpVertical'),
-            $wd: $('#DownVertical'),
-            $hu: $('#upHorizontal'),
-            $hd: $('#downHorizontal')
+            $wu: $('#upHorizontal'),
+            $wd: $('#downHorizontal'),
+            $hu: $('#UpVertical'),
+            $hd: $('#DownVertical')
         },
 
         inputs: {
             $x: $('#moveX'),
             $y: $('#moveY'),
-            $px: $('#vertical'),
-            $py: $('#horizontal'),
+            $px: $('#horizontal'),
+            $py: $('#vertical')
         }
     },
 
     defaults: {
         transparency: 50,        // persents
-        position: [10, 10],
+        position: [0, 0],
         gridPadding:[18,19]
     },
 

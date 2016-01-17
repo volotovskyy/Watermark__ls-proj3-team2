@@ -3,19 +3,8 @@ var Base = (function () {
             window: {
                 size: null
             },
-
-            image: {
-                originalSize: {
-                    width: 0,
-                    height: 0
-                },
-                scaleSize: {
-                    width: 0,
-                    height: 0
-                }
-            },
-
             scale: 1,
+            scaleWatermark: 1,
 
             watermark: {
                 originalSize: {
@@ -29,7 +18,11 @@ var Base = (function () {
             },
 
             wrapper: {
-                size: {
+                scaleSize: {
+                    width: 0,
+                    height: 0
+                },
+                originalSize: {
                     width: 0,
                     height: 0
                 },
@@ -78,6 +71,7 @@ var Base = (function () {
         Spiners.init();
         Inputs.init();
         Grid.init();
+        Transparency.init(Images.getWrapper());
     }
 
     function _eventListener() {
