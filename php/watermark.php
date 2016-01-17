@@ -17,7 +17,6 @@ $pos_y = $_POST['positionY'];
 $opacity = $_POST['opacity'] / 100;
 $watermark_mode = $_POST['mode'];
 
-
 //Задаем индекс файла
 $img_index = date("U") . "-" . mt_rand(0, 1000);
 
@@ -55,6 +54,9 @@ if ($main_image_height / $watermark_height < 1) {
 
 //Замощение ватермарка
 if ($watermark_mode == 'grid-mode') {
+    //Ограничение по соотношению изображений
+    $max_ratio = 100;
+
     $margin_x = $_POST['paddingLeft'];
     $margin_y = $_POST['paddingTop'];
 
@@ -63,6 +65,11 @@ if ($watermark_mode == 'grid-mode') {
 
     $ratio_x = ceil($main_image_width / $watermark_width);
     $ratio_y = ceil($main_image_height / $watermark_height);
+
+    if($ratio_x > $max_ratio || $ratio_y > $max_ratio){
+        $data['status'] = 'error';
+        $data['message'] = 'Слишком маленкий водяной знак!';
+    }
 
     if ($pos_x > $margin_x) {
         $pos_x = $pos_x % $watermark_width - $watermark_width;
