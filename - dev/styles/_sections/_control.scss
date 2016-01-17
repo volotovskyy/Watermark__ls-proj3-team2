@@ -297,7 +297,6 @@ $common-sprite: sprite-map("../img/icons/*.png", $spacing: 70px);
 		border: 0;
 		outline: none;
 		
-		
 		&-reset{
 			background: #c1cfd9;
 			float: left;
@@ -324,5 +323,3 @@ $common-sprite: sprite-map("../img/icons/*.png", $spacing: 70px);
 }
 
 @import "../_views/_tessel.scss"
-
-	
