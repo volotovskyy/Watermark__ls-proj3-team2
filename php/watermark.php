@@ -69,7 +69,7 @@ if ($watermark_mode == 'grid-mode') {
         $ratio_x++;
     } else if ($pos_x < 0) {
         $pos_x = $pos_x % $watermark_width;
-        $ratio_y++;
+        $ratio_x++;
     }
 
     if ($pos_y > $margin_y) {
