@@ -175,7 +175,7 @@ var Images = (function () {
     }
 
     function _setWatermarkSettings($img) {
-        Transparency.init($img);
+        Transparency.set();
         Scale.refresh($img);
     }
 
@@ -290,6 +290,10 @@ var Images = (function () {
             //$wrapper = $('.' + globalParameters.watermarkWrapperClass);
             $wrapper = $('.' + globalParameters.watermarkWrapperClass);
             _addDragAndDrop($wrapper);
+        },
+
+        getWrapper: function(){
+            return $wrapper;
         },
 
         getSizeMainImage: function () {
