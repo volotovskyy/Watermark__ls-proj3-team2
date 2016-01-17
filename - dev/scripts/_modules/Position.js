@@ -9,8 +9,8 @@ var Position = (function () {
 
     var _getBorderPosition = function () {
         return [
-            Base.settings.wrapper.size.width - Base.settings.watermark.scaleSize.width,
-            Base.settings.wrapper.size.height - Base.settings.watermark.scaleSize.height,
+            Base.settings.wrapper.scaleSize.width - Base.settings.watermark.scaleSize.width,
+            Base.settings.wrapper.scaleSize.height - Base.settings.watermark.scaleSize.height,
         ]
     };
 

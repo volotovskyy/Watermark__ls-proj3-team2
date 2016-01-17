@@ -18,7 +18,11 @@ var Base = (function () {
             },
 
             wrapper: {
-                size: {
+                scaleSize: {
+                    width: 0,
+                    height: 0
+                },
+                originalSize: {
                     width: 0,
                     height: 0
                 },
