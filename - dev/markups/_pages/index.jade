@@ -26,14 +26,14 @@ block content
 				.form__group
 					.form__group-wrap
 						
-						label.form__title Исходное изображение
+						label.form__title#original-image Исходное изображение
 						.form__file-box
 							input(type="text" id="main_img_name" class="form__input-img form__input-img-main" name="filename" placeholder="Image.png" readonly)
 							label.form__box-btn
 								input(type="file" class="form__fileupload" id="main_img" name="fileupload")
 						
 						.form__watermark-input-disabled.panel
-						label.form__title Водяной знак
+						label.form__title#watermark-image Водяной знак
 						.form__file-box
 							input(type="text" id="watermark-name" class="form__input-img form__input-img-watermark" name="filename" placeholder="Image.png" readonly disabled)
 							label.form__box-btn
@@ -46,7 +46,7 @@ block content
 							button(type="radio" class="position__btns position__btns-tessel" id="tessel" data-view="grid-mode")
 							button(type="radio" class="position__btns position__btns-location position__btns active" id="location" data-view="single-mode")
 						.position__title
-							label.form__title Положение	
+							label.form__title#position Положение
 						
 						.switch
 							.position__map
@@ -90,7 +90,7 @@ block content
 					.form__group-wrap.opacity-wrap
 						.opacity-disabled.panel
 						.opacity__title
-							label.form__title Прозрачность
+							label.form__title#transparency Прозрачность
 						.opacity__slider-wrap
 							.opacity__slider
 						.next-arrow

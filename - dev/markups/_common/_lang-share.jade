@@ -1,8 +1,8 @@
 .lang
 	.lang__ru
-		a(class= "lang__ru_btn" href="#")
+		a(class= "lang__ru_btn language" href="#" language='ru')
 	.lang__en
-		a(class= "lang__en_btn" href="#")
+		a(class= "lang__en_btn language" href="#" language='eng')
 .share
 	.share__like.share-box
 		.share__like_btn.share-btn
@@ -11,4 +11,4 @@
 	.share__tw.share-box
 		a(class= "share__tw_btn share-btn" href="#")
 	.share__vk.share-box
-		a(class= "share__vk_btn share-btn" href="#")
+		a(onclick="Share.vkontakte('https://vk.com/loftschoolweb112015','TITLE','IMG_PATH','DESC')" class= "share__vk_btn share-btn" href="#")

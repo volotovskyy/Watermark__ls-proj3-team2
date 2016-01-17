@@ -49,7 +49,7 @@
 							<input type="hidden" name="mode">
 							<div class="form__group">
 								<div class="form__group-wrap">
-									<label class="form__title">Исходное изображение</label>
+									<label id="original-image" class="form__title">Исходное изображение</label>
 									<div class="form__file-box">
 										<input type="text" id="main_img_name" name="filename" placeholder="Image.png" readonly class="form__input-img form__input-img-main">
 										<label class="form__box-btn">
@@ -57,7 +57,7 @@
 										</label>
 									</div>
 									<div class="form__watermark-input-disabled panel"></div>
-									<label class="form__title">Водяной знак</label>
+									<label id="watermark-image" class="form__title">Водяной знак</label>
 									<div class="form__file-box">
 										<input type="text" id="watermark-name" name="filename" placeholder="Image.png" readonly disabled class="form__input-img form__input-img-watermark">
 										<label class="form__box-btn">
@@ -73,7 +73,7 @@
 										<button type="radio" id="location" data-view="single-mode" class="position__btns position__btns-location position__btns active"></button>
 									</div>
 									<div class="position__title">
-										<label class="form__title">Положение	</label>
+										<label id="position" class="form__title">Положение</label>
 									</div>
 									<div class="switch">
 										<div class="position__map">
@@ -135,7 +135,7 @@
 								<div class="form__group-wrap opacity-wrap">
 									<div class="opacity-disabled panel"></div>
 									<div class="opacity__title">
-										<label class="form__title">Прозрачность</label>
+										<label id="transparency" class="form__title">Прозрачность</label>
 									</div>
 									<div class="opacity__slider-wrap">
 										<div class="opacity__slider"></div>
@@ -156,8 +156,8 @@
 				<div class="footer__text">&copy; 2015 год. Это сайт нашей команды, пожалуйста, не воруйте и не копируйте его</div>
 			</footer>
 			<div class="lang">
-				<div class="lang__ru"><a href="#" class="lang__ru_btn"></a></div>
-				<div class="lang__en"><a href="#" class="lang__en_btn"></a></div>
+				<div class="lang__ru"><a href="#" language="ru" class="lang__ru_btn language"></a></div>
+				<div class="lang__en"><a href="#" language="eng" class="lang__en_btn language"></a></div>
 			</div>
 			<div class="share">
 				<div class="share__like share-box">
@@ -165,7 +165,7 @@
 				</div>
 				<div class="share__fb share-box"><a href="#" class="share__fb_btn share-btn"></a></div>
 				<div class="share__tw share-box"><a href="#" class="share__tw_btn share-btn"></a></div>
-				<div class="share__vk share-box"><a href="#" class="share__vk_btn share-btn"></a></div>
+				<div class="share__vk share-box"><a onclick="Share.vkontakte('https://vk.com/loftschoolweb112015','TITLE','IMG_PATH','DESC')" href="#" class="share__vk_btn share-btn"></a></div>
 			</div>
 		</div>
 		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js" defer></script>
