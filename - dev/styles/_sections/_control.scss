@@ -323,4 +323,8 @@ $common-sprite: sprite-map("../img/icons/*.png", $spacing: 70px);
 	}
 }
 
+#download-link{
+  display: none;
+}
+
 @import "../_views/_tessel.scss";

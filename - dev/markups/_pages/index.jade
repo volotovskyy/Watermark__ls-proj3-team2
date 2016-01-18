@@ -15,10 +15,11 @@ block content
 
 
 		.control
+			a#download-link download
 			.control__title
 				h3.control__header Настройки
 			
-			form.form#form
+			form.form#form(method="post" action="php/watermark.php")
 				input(type="hidden" id="fileurl" name="fileurl" class="fileurl")
 				input(type="hidden" name="watermark")
 				input(type="hidden" name="opacity" id="opacity__input")
@@ -98,6 +99,4 @@ block content
 					.form__btn-wrap
 						.form__btn-disabled.panel
 						button.form__btn.form__btn-reset#reset(type="reset" disabled) Сброс
-						button.form__btn.form__btn-download#submit(type="submit" disabled) Скачать   
-
-
+						button.form__btn.form__btn-download#submit(type="submit" disabled) Скачать

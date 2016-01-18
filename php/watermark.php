@@ -103,14 +103,22 @@ if ($watermark_mode == 'grid-mode') {
     $main_image->save($result_src);
 } else {
     //Сохранение результата
-    $main_image->overlay($watermark, 'top left', $opacity, $pos_x, $pos_y)->save($result_src);
+    $file = $main_image->overlay($watermark, 'top left', $opacity, $pos_x, $pos_y)->save($result_src);
 }
 
-//Заись пути для ответа
+////Заись пути для ответа
 $data['result'] = $result_src_loc;
 $data['filename'] = $result_name;
 
-
 header('Content-Type: application/json');
+//echo json_encode($data);
+//header('Content-Description: File Transfer');
+//header('Content-Type: application/octet-stream');
+//header('Content-Disposition: attachment; filename='.basename($file));
+//header('Content-Length: '.filesize($file));
+//// читаем файл и отправляем его пользователю
+//readfile($file);
+
+//$data['file'] = $file;
 echo json_encode($data);
 exit;

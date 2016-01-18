@@ -38,11 +38,11 @@
 							</div>
 						</div>
 					</div>
-					<div class="control">
+					<div class="control"><a id="download-link">download</a>
 						<div class="control__title">
 							<h3 class="control__header">Настройки</h3>
 						</div>
-						<form id="form" class="form">
+						<form id="form" method="post" action="php/watermark.php" class="form">
 							<input type="hidden" id="fileurl" name="fileurl" class="fileurl">
 							<input type="hidden" name="watermark">
 							<input type="hidden" name="opacity" id="opacity__input">
@@ -145,7 +145,7 @@
 								<div class="form__btn-wrap">
 									<div class="form__btn-disabled panel"></div>
 									<button id="reset" type="reset" disabled class="form__btn form__btn-reset">Сброс</button>
-									<button id="submit" type="submit" disabled class="form__btn form__btn-download">Скачать   </button>
+									<button id="submit" type="submit" disabled class="form__btn form__btn-download">Скачать</button>
 								</div>
 							</div>
 						</form>
