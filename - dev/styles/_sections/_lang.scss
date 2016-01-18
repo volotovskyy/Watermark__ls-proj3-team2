@@ -22,10 +22,10 @@
 			margin: auto;
 			cursor: pointer;
             
-			&:hover{
+			&:hover, &-active{
             @include get-sprite($common-sprite, ru-hover);
-			background: url('../img/../img/icons-s04ebfe5b1f.png') 0 -898px no-repeat;
-			height: 16px;
+			background: url('../img/../img/icons-s04ebfe5b1f.png') -1px -898px no-repeat;
+			height: 18px;
 			width: 31px;
             }
         }
@@ -45,7 +45,7 @@
 			margin: auto;
 			cursor: pointer;
             
-			&:hover{
+			&:hover, &-active{
             @include get-sprite($common-sprite, en-hover);
             }
         }
