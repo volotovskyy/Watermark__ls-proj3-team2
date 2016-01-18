@@ -1,9 +1,10 @@
 var Inputs = (function () {
     var
         $x = globalParameters.controlPanel.inputs.$x,
-        $y = globalParameters.controlPanel.inputs.$y;
-        $px = globalParameters.controlPanel.inputs.$px;
-        $py = globalParameters.controlPanel.inputs.$py;
+        $y = globalParameters.controlPanel.inputs.$y,
+        $px = globalParameters.controlPanel.inputs.$px,
+        $py = globalParameters.controlPanel.inputs.$py,
+        $imgInputs = globalParameters.imgInputs;
 
     var _eventListener = function () {
 
@@ -24,6 +25,10 @@ var Inputs = (function () {
 
         $py.on('keyup',function(){
             _paddingSet();
+        });
+
+        $imgInputs.on('click', function(){
+            $(this).siblings().click();
         });
 
     };

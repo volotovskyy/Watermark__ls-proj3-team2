@@ -8,6 +8,7 @@ var globalParameters = {
 
     mainImageInput: $('#main_img'),
     mainImageInputWrapper: $('#main_img_name'),
+    imgInputs: $('.form__input-img'),
 
     watermarkImageInput: $('#watermark'),
     watermarkImageInputWrapper: $('#watermark-name'),
@@ -50,7 +51,7 @@ var globalParameters = {
     defaults: {
         transparency: 50,        // persents
         position: [0, 0],
-        gridPadding:[18,19]
+        gridPadding:[0,0]
     },
 
     url: 'php/watermark.php'

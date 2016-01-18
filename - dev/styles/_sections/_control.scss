@@ -61,6 +61,7 @@ $common-sprite: sprite-map("../img/icons/*.png", $spacing: 70px);
 		font-size: 12px;
 		font-family: $rob-light;
 		padding-left: 10px;
+        cursor: pointer;
 	}
 	&__box-btn{
 		padding: 0;
@@ -322,4 +323,4 @@ $common-sprite: sprite-map("../img/icons/*.png", $spacing: 70px);
 	}
 }
 
-@import "../_views/_tessel.scss"
+@import "../_views/_tessel.scss";
