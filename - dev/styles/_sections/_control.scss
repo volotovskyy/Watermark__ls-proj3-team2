@@ -161,16 +161,17 @@ $common-sprite: sprite-map("../img/icons/*.png", $spacing: 70px);
 		margin-bottom: 24px;
 	}
 	&__map{
-		margin-bottom: 19px;
-		display: inline-block;
-		box-sizing: border-box;
-		height: 102px;
-		width: 105px;
-		font-size: 0;
-		letter-spacing: 0;
-		word-spacing: 0;
-		border-radius: 3px;
-		overflow: hidden;
+        margin-bottom: 19px;
+      display: inline-block;
+      box-sizing: border-box;
+      height: 102px;
+      width: 102px;
+      font-size: 0;
+      letter-spacing: 0;
+      word-spacing: 0;
+      border-radius: 3px;
+      overflow: hidden;
+      position: relative;
 	}
 	&__point{
 		

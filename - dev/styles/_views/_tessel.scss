@@ -10,39 +10,41 @@
 			width: 95px;
 
 			&-map{
-				display: block;
-				position: absolute;
-				height: 101px;
-				width: 101px;
-				border-radius: 3px;
-				top: 314px;
-				background-color: rgba(219,225,232,0.65);
-				z-index: 1;
-				border: 1px solid #9eb2c0;
+                display: block;
+                box-sizing: border-box;
+                position: absolute;
+                height: 100%;
+                width: 100%;
+                border-radius: 3px;
+                top: 0;
+                background-color: rgba(219,225,232,0.65);
+                z-index: 1;
+                border: 1px solid #9eb2c0;
 			}
 			&-wrap{
-				position: relative;
+				position: absolute;
 				display: inline-block;
 				height: 100%;
 				width: 100%;
 				vertical-align: middle;
 				text-align: center;
+			}
+			&-vertical, &-horizontal{
+                background-color: #f97e76;
+                position: absolute;
+                left: 0;
+                right: 0;
+                top: 0;
+                bottom: 0;
+                margin: auto;
 			}
 			&-vertical{
-				background-color: #f97e76;
-				display: flex;
-				margin: auto;
-				height: 100%;
-				width: 19px;
+                min-width: 2px;
+                width: 2px;
 			}
 			&-horizontal{
-				background-color: #f97e76;
-				text-align: center;
-				height: 18px;
-				width: 100%;
-				margin-top: -104px;
-				display: inline-block;
-				vertical-align: middle;
+                min-height: 2px;
+                height: 2px;
 			}
 		}
 
