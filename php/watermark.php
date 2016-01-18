@@ -69,6 +69,9 @@ if ($watermark_mode == 'grid-mode') {
     if($ratio_x > $max_ratio || $ratio_y > $max_ratio){
         $data['status'] = 'error';
         $data['message'] = 'Слишком маленкий водяной знак!';
+        header('Content-Type: application/json');
+        echo json_encode($data);
+        exit;
     }
 
     if ($pos_x > $margin_x) {
