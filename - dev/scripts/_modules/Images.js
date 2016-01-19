@@ -195,7 +195,7 @@ var Images = (function () {
             if (data.status === 'ok') {
                 _setBackGround(data.result, globalParameters.mainContainer, globalParameters.classMainImage);
             } else {
-                alert(data.message);
+                mscAlert(data.message);
             }
         });
         _changeFileUploadImage();
@@ -207,7 +207,7 @@ var Images = (function () {
             if (data.status === 'ok') {
                 _setImageWatermark(data.result);
             } else {
-                alert(data.message);
+                mscAlert(data.message);
             }
         });
         _changeFileUploadWatermark();

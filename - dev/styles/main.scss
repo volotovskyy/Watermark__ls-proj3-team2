@@ -4,6 +4,10 @@
 
 @import "_misc/normalize";
 
+/* --------- plugins --------- */
+@import "_plugins/msc-style";
+
+
 /* --------- fonts --------- */
 
 @import "_misc/_fonts.scss";
@@ -18,7 +22,7 @@
 
 /* --------- sections --------- */
 
-@import "_sections/_common.scss";
+@import "_sections/common.scss";
 
 @import "_sections/_work.scss";
 

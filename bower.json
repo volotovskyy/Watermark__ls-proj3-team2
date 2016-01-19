@@ -1,0 +1,21 @@
+{
+  "name": "Watermark-site",
+  "description": "Loftschool. Team 2. Hw 3",
+  "main": "gulpfile.js",
+  "authors": [
+    "Leo Verkhovtsev"
+  ],
+  "license": "ISC",
+  "homepage": "https://github.com/volotovskyy/Watermark__ls-proj3-team2",
+  "moduleType": [],
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "devDependencies": {
+    "medium-style-confirm": "~0.4.2"
+  }
+}

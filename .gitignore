@@ -44,3 +44,4 @@ Thumbs.db
 /composer/vendor
 /composer/composer.phar
 /exampleImages
+/bower_components
