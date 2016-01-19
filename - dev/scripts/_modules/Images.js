@@ -214,9 +214,12 @@ var Images = (function () {
     }
 
     function _uploadImage(file, callback) {
-        var fd = new FormData;
+        var fd = new FormData,
+            language = Language.getLanguage();
 
         fd.append('img', file);
+        fd.append('Language', language);
+
 
         $.ajax({
             url: 'php/image_load.php',
@@ -242,7 +245,8 @@ var Images = (function () {
             position = Position.get(),
             x = Math.floor(position[0] * Base.settings.scale),
             y = Math.floor(position[1] * Base.settings.scale),
-            scaleWaterMark = Base.settings.scaleWatermark / Base.settings.scale;
+            scaleWaterMark = Base.settings.scaleWatermark / Base.settings.scale,
+            language = Language.getLanguage();
 
         if ($inputImage1.prop('files').length === 0 || $inputImage2.prop('files').length === 0) {
             alert('Сначала выберите изображение');
@@ -258,6 +262,7 @@ var Images = (function () {
         fd.append('paddingLeft', Base.settings.grid.padding.left);
         fd.append('paddingTop', Base.settings.grid.padding.top);
         fd.append('scaleWatermark', scaleWaterMark);
+        fd.append('Language', language);
 
         $.ajax({
             url: url,

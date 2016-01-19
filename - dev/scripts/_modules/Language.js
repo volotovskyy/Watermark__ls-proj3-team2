@@ -23,13 +23,14 @@ var Language = (function () {
             '.form__btn-download' : 'Скачать',
             '.footer__text': '© 2015 год. Это сайт нашей команды, пожалуйста, не воруйте и не копируйте его'
         }
-    };
+    },
+        lang = 'ru';
 
     function _eventListener (){
         $('.language').on('click', function(e) {
             e.preventDefault();
 
-            var $this = $(this),
+            var $this = $(this);
             lang = $this.attr('language');
 
             if($this.hasClass('lang__ru_btn')){
@@ -53,6 +54,10 @@ var Language = (function () {
     return {
         init: function () {
             _eventListener();
+        },
+
+        getLanguage: function(){
+            return lang;
         }
     }
 }());
