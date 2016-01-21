@@ -41,9 +41,12 @@ var Language = (function () {
                 $('.lang__ru_btn').removeClass('lang__ru_btn-active');
             }
 
+            $('html').attr('lang', lang);
+
             changeLanguage(lang);
         })
     }
+
 
     function changeLanguage(lang){
         $.each(language[lang], function(key, val){
