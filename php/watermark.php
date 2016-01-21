@@ -1,13 +1,14 @@
 <?php
-ini_set(('display_errors'), 0);
+ini_set(('display_errors'),0);
 require_once "functions.php";
 include('../abeautifulsite/SimpleImage.php');
 
 use abeautifulsite\SimpleImage as SimpleImage;
 
 //Статус и сообщение
-$data['status'] = 'ok';
 $data['message'] = 'Все получилось!';
+
+//file_put_contents('post.txt',print_r($_POST,true));
 
 //Получение данных из формы
 $main_image_src = $_POST['img1'];
@@ -16,6 +17,19 @@ $pos_x = $_POST['positionX'];
 $pos_y = $_POST['positionY'];
 $opacity = $_POST['opacity'] / 100;
 $watermark_mode = $_POST['mode'];
+$lang= $_POST['Language'];
+
+//Сообщения
+$messages = [
+    'ru' => [
+        'small' => 'Слишком маленкий водяной знак!'
+    ],
+
+    'eng' => [
+        'small' => 'Too small watermark!'
+    ]
+];
+
 
 //Задаем индекс файла
 $img_index = date("U") . "-" . mt_rand(0, 1000);
@@ -67,10 +81,8 @@ if ($watermark_mode == 'grid-mode') {
     $ratio_y = ceil($main_image_height / $watermark_height);
 
     if($ratio_x > $max_ratio || $ratio_y > $max_ratio){
-        $data['status'] = 'error';
-        $data['message'] = 'Слишком маленкий водяной знак!';
-        header('Content-Type: application/json');
-        echo json_encode($data);
+        http_response_code(500);
+        echo $messages[$lang]['small'];
         exit;
     }
 
@@ -111,14 +123,7 @@ $data['result'] = $result_src_loc;
 $data['filename'] = $result_name;
 
 header('Content-Type: application/json');
-//echo json_encode($data);
-//header('Content-Description: File Transfer');
-//header('Content-Type: application/octet-stream');
-//header('Content-Disposition: attachment; filename='.basename($file));
-//header('Content-Length: '.filesize($file));
-//// читаем файл и отправляем его пользователю
-//readfile($file);
 
-//$data['file'] = $file;
+file_put_contents('server.txt',print_r($_POST,true));
 echo json_encode($data);
 exit;

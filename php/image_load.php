@@ -6,8 +6,28 @@ require_once "functions.php";
 $data['status'] = 'ok';
 $data['message'] = 'Все получилось!';
 
+//Сообщения
+$messages = [
+    'ru' => [
+        'no' => 'Иизображение не выбрано или превышает допустимый размер!',
+        'select' => 'Выберите изображение!',
+        'format' => 'Неверный формат изображения!',
+        'big' => 'Слишком большое изображение!',
+    ],
+
+    'eng' => [
+        'no' => 'Image is not selected, or exceeds the permitted size!',
+        'select' => 'Select the image!',
+        'format' => 'Invalid image format!',
+        'big' => 'Too large image!',
+    ]
+];
+
+
 //Получение данных изи формы
 $image = $_FILES['img'];
+$lang= $_POST['Language'];
+
 
 //Ограничения
 $max_file_size = 5 * 1024 * 1024; //Максимальный размер файла в байтах
@@ -22,11 +42,8 @@ $mage_size = $image['size'];
 $image_valid = $mage_size === 0 || $mage_size > $max_file_size;
 
 if ($image_valid) {
-    $data['status'] = 'error';
-    $data['message'] = 'Иизображение не выбрано или превышает допустимый размер!';
-
-    header('Content-Type: application/json');
-    echo json_encode($data);
+    http_response_code(500);
+    echo $messages[$lang]['no'];
     exit;
 } else {
     //Получаем тип файла
@@ -35,11 +52,8 @@ if ($image_valid) {
 
 //Проверка типа
 if ($image_type !== 'image') {
-    $data['status'] = 'error';
-    $data['message'] = 'Выберите изображение!';
-
-    header('Content-Type: application/json');
-    echo json_encode($data);
+    http_response_code(500);
+    echo $messages[$lang]['select'];
     exit;
 } else {
     //Получаем формат  файла
@@ -50,11 +64,8 @@ if ($image_type !== 'image') {
 $image_valid = array_search($image_format, $formats);
 
 if ($image_valid === false) {
-    $data['status'] = 'error';
-    $data['message'] = 'Неверный формат изображения!';
-
-    header('Content-Type: application/json');
-    echo json_encode($data);
+    http_response_code(500);
+    echo $messages[$lang]['format'];
     exit;
 } else {
     //Получаем размер изображений в пикселях
@@ -65,11 +76,8 @@ if ($image_valid === false) {
 $image_valid = $image_resolution[0] > $max_resolution || $image_resolution[1] > $max_resolution;
 
 if ($image_valid) {
-    $data['status'] = 'error';
-    $data['message'] = 'Слишком большое изображение!';
-
-    header('Content-Type: application/json');
-    echo json_encode($data);
+    http_response_code(500);
+    echo $messages[$lang]['big'];
     exit;
 } else {
     //Задаем индекс файла
