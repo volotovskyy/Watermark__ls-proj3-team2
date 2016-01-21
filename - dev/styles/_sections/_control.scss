@@ -120,6 +120,7 @@ $common-sprite: sprite-map("../img/icons/*.png", $spacing: 70px);
 		height: 203px;
 		top: 36%;
 		left: 73%;
+		z-index: 1;
 	}
 	&__btns{
 		float: right;
