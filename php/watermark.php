@@ -7,6 +7,7 @@ use abeautifulsite\SimpleImage as SimpleImage;
 
 //Статус и сообщение
 $data['message'] = 'Все получилось!';
+$data['status'] = 'ok';
 
 //file_put_contents('post.txt',print_r($_POST,true));
 
@@ -124,6 +125,5 @@ $data['filename'] = $result_name;
 
 header('Content-Type: application/json');
 
-file_put_contents('server.txt',print_r($_POST,true));
 echo json_encode($data);
 exit;

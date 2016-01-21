@@ -177,6 +177,7 @@ var Images = (function () {
     function _setWatermarkSettings($img) {
         Transparency.set();
         Scale.refresh($img);
+        Position.refresh();
     }
 
     function _addDragAndDrop($block) {
